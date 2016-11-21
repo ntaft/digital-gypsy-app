@@ -22,4 +22,4 @@ app.use(express.static(path.join(__dirname, 'dist')));
 // map our routes
 app.use('/gypsy', gypsyRouter);
 
-app.listen(PORT, () => { console.log('Show time!📽')});
+app.listen(PORT, () => { console.log('Wanderlust 🌍')});
