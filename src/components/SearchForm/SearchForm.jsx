@@ -26,9 +26,9 @@ const SearchForm = props => (
 
     <div id="cost-container">
       <button value="$" onClick={props.handleUpdateCost}>$</button>
-      <button value="$$">$$</button>
-      <button value="$$$">$$$</button>
-      <button value="$$$$">$$$$</button>
+      <button value="$$" onClick={props.handleUpdateCost}>$$</button>
+      <button value="$$$" onClick={props.handleUpdateCost}>$$$</button>
+      <button value="$$$$" onClick={props.handleUpdateCost}>$$$$</button>
     </div>
 
     <button
