@@ -1,11 +1,8 @@
 // adapted from user management code attributed to Rafa @ GA. Thanks!
-
-/* eslint no-multi-spaces: ["error", { exceptions: { "VariableDeclarator": true } }] */
-/* eslint no-param-reassign: ["error", { "props": false }] */
-
+// originally using mongo, modified for psql
 const pgp = require('pg-promise');
-const { config }    = require('../lib/dbConnect.js');
-const bcrypt       = require('bcryptjs');
+const { config } = require('../lib/dbConnect.js');
+const bcrypt = require('bcryptjs');
 
 const db = pgp(config);
 
