@@ -1,8 +1,8 @@
 const router = require('express').Router();
-const nomadService = require('../models/gypsy.js');
+const nomadService = require('../services/nomadlist.js');
 
 router.get('/', (req, res) => {
-  res.json('gypsy');
+  res.json('nomad');
 })
 
 module.exports = router;

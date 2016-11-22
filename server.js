@@ -10,6 +10,9 @@ const PORT = process.argv[2] || process.env.port || 3000;
 // import router for our API
 const gypsyRouter = require('./routes/gypsy');
 
+// import router for our external API
+const nomadRouter = require('./routes/nomadlist');
+
 // set up some logging
 app.use(logger('dev'));
 
@@ -21,5 +24,6 @@ app.use(express.static(path.join(__dirname, 'dist')));
 
 // map our routes
 app.use('/gypsy', gypsyRouter);
+app.use('/nomad', nomadRouter);
 
 app.listen(PORT, () => { console.log('Wanderlust 🌍')});
