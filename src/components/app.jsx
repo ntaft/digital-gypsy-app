@@ -81,6 +81,7 @@ class App extends Component {
   // fetch request that will get information for each specific city.
   // Each fetch request will return an object with information on that city
   // which will be pushed into the cityData array.
+  // Each iteration will increment a count and check to see if it has reached the laat item.
   // Then, the cityInfo state will be updated to match this array.
   searchCity() {
     console.log('search city');
