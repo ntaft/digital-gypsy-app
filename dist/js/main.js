@@ -47,7 +47,7 @@
   \**********************/
 /***/ function(module, exports, __webpack_require__) {
 
-	'use strict';var _react=__webpack_require__(/*! react */ 1);var _react2=_interopRequireDefault(_react);var _reactDom=__webpack_require__(/*! react-dom */ 32);var _reactDom2=_interopRequireDefault(_reactDom);var _App=__webpack_require__(/*! ./components/App.jsx */ 178);var _App2=_interopRequireDefault(_App);__webpack_require__(/*! ./index.css */ 182);function _interopRequireDefault(obj){return obj&&obj.__esModule?obj:{default:obj};}// mount our App at #root-container
+	'use strict';var _react=__webpack_require__(/*! react */ 1);var _react2=_interopRequireDefault(_react);var _reactDom=__webpack_require__(/*! react-dom */ 32);var _reactDom2=_interopRequireDefault(_reactDom);var _App=__webpack_require__(/*! ./components/App.jsx */ 178);var _App2=_interopRequireDefault(_App);__webpack_require__(/*! ./index.css */ 186);function _interopRequireDefault(obj){return obj&&obj.__esModule?obj:{default:obj};}// mount our App at #root-container
 	_reactDom2.default.render(_react2.default.createElement(_App2.default,null),document.querySelector('#root-container'));
 
 /***/ },
@@ -7512,16 +7512,71 @@
   \********************************/
 /***/ function(module, exports, __webpack_require__) {
 
-	'use strict';Object.defineProperty(exports,"__esModule",{value:true});var _createClass=function(){function defineProperties(target,props){for(var i=0;i<props.length;i++){var descriptor=props[i];descriptor.enumerable=descriptor.enumerable||false;descriptor.configurable=true;if("value"in descriptor)descriptor.writable=true;Object.defineProperty(target,descriptor.key,descriptor);}}return function(Constructor,protoProps,staticProps){if(protoProps)defineProperties(Constructor.prototype,protoProps);if(staticProps)defineProperties(Constructor,staticProps);return Constructor;};}();var _react=__webpack_require__(/*! react */ 1);var _react2=_interopRequireDefault(_react);var _SearchForm=__webpack_require__(/*! ./SearchForm/SearchForm.jsx */ 179);var _SearchForm2=_interopRequireDefault(_SearchForm);var _App=__webpack_require__(/*! ./App.css */ 181);var _App2=_interopRequireDefault(_App);function _interopRequireDefault(obj){return obj&&obj.__esModule?obj:{default:obj};}function _classCallCheck(instance,Constructor){if(!(instance instanceof Constructor)){throw new TypeError("Cannot call a class as a function");}}function _possibleConstructorReturn(self,call){if(!self){throw new ReferenceError("this hasn't been initialised - super() hasn't been called");}return call&&(typeof call==="object"||typeof call==="function")?call:self;}function _inherits(subClass,superClass){if(typeof superClass!=="function"&&superClass!==null){throw new TypeError("Super expression must either be null or a function, not "+typeof superClass);}subClass.prototype=Object.create(superClass&&superClass.prototype,{constructor:{value:subClass,enumerable:false,writable:true,configurable:true}});if(superClass)Object.setPrototypeOf?Object.setPrototypeOf(subClass,superClass):subClass.__proto__=superClass;}var App=function(_Component){_inherits(App,_Component);function App(){_classCallCheck(this,App);var _this=_possibleConstructorReturn(this,(App.__proto__||Object.getPrototypeOf(App)).call(this));_this.state={cities:[],cityInfo:[],month:'',type:'',limit:'',temp:''};return _this;}// This function will reset the state of month when a user selects a
+	'use strict';Object.defineProperty(exports,"__esModule",{value:true});var _createClass=function(){function defineProperties(target,props){for(var i=0;i<props.length;i++){var descriptor=props[i];descriptor.enumerable=descriptor.enumerable||false;descriptor.configurable=true;if("value"in descriptor)descriptor.writable=true;Object.defineProperty(target,descriptor.key,descriptor);}}return function(Constructor,protoProps,staticProps){if(protoProps)defineProperties(Constructor.prototype,protoProps);if(staticProps)defineProperties(Constructor,staticProps);return Constructor;};}();var _react=__webpack_require__(/*! react */ 1);var _react2=_interopRequireDefault(_react);var _SearchForm=__webpack_require__(/*! ./SearchForm/SearchForm.jsx */ 179);var _SearchForm2=_interopRequireDefault(_SearchForm);var _SearchList=__webpack_require__(/*! ./SearchList/SearchList.jsx */ 181);var _SearchList2=_interopRequireDefault(_SearchList);var _App=__webpack_require__(/*! ./App.css */ 185);var _App2=_interopRequireDefault(_App);function _interopRequireDefault(obj){return obj&&obj.__esModule?obj:{default:obj};}function _classCallCheck(instance,Constructor){if(!(instance instanceof Constructor)){throw new TypeError("Cannot call a class as a function");}}function _possibleConstructorReturn(self,call){if(!self){throw new ReferenceError("this hasn't been initialised - super() hasn't been called");}return call&&(typeof call==="object"||typeof call==="function")?call:self;}function _inherits(subClass,superClass){if(typeof superClass!=="function"&&superClass!==null){throw new TypeError("Super expression must either be null or a function, not "+typeof superClass);}subClass.prototype=Object.create(superClass&&superClass.prototype,{constructor:{value:subClass,enumerable:false,writable:true,configurable:true}});if(superClass)Object.setPrototypeOf?Object.setPrototypeOf(subClass,superClass):subClass.__proto__=superClass;}var App=function(_Component){_inherits(App,_Component);function App(){_classCallCheck(this,App);var _this=_possibleConstructorReturn(this,(App.__proto__||Object.getPrototypeOf(App)).call(this));_this.state={cities:[],topMatches:[],month:'',type:'',limit:'',temp:'',cost:''};// this.searchLocation = this.searchLocation.bind(this);
+	// this.searchCity = this.searchCity.bind(this);
+	return _this;}_createClass(App,[{key:'componentWillMount',value:function componentWillMount(){this.fetchAllCities();}// This function will hit our API route to fetch all the cities listed
+	// in the nomadlist api. Then, set our cities state to this response object.
+	},{key:'fetchAllCities',value:function fetchAllCities(){var _this2=this;fetch('nomad/cities').then(function(r){return r.json();}).then(function(cities){return _this2.setState({cities:cities});});}// This will check if the cities state is updated, it will fire the filterCities function
+	},{key:'componentDidUpdate',value:function componentDidUpdate(prevProps,prevState){if(prevState.cities!==this.state.cities){this.filterCities();}}// This function will push the top 20 cities from the cities object into a new array
+	// This reset the state of topMatches to this array of objects.
+	},{key:'filterCities',value:function filterCities(){console.log('filterCities');var topCities=[];for(var i=0;i<20;i++){topCities.push(this.state.cities.result[i]);}this.setState({topMatches:topCities});}// This function will reset the state of month when a user selects a
 	// month in the SearchForm component by grabbing the value stored in the button.
-	_createClass(App,[{key:'handleUpdateMonth',value:function handleUpdateMonth(e){this.setState({month:e.target.value});}// This function will check the value stored in the weather button and reset
+	},{key:'handleUpdateMonth',value:function handleUpdateMonth(e){this.setState({month:e.target.value});}// This function will check the value stored in the weather button and reset
 	// the state of the weather parameters accordingly.
-	},{key:'handleUpdateWeather',value:function handleUpdateWeather(e){if(e.target.value==='cold'){this.setState({type:'lt',limit:'max',temp:50});}else if(e.target.value==='warm'){this.setState({type:'gt',limit:'min',temp:65});}else{this.setState({type:'gt',limit:'min',temp:86});}}// This function will use the state set by user input to handle the
+	},{key:'handleUpdateWeather',value:function handleUpdateWeather(e){if(e.target.value==='cold'){this.setState({type:'lt',limit:'max',temp:50});}else if(e.target.value==='warm'){this.setState({type:'gt',limit:'min',temp:65});}else{this.setState({type:'gt',limit:'min',temp:86});}}},{key:'handleUpdateCost',value:function handleUpdateCost(e){this.setState({cost:e.target.value});}},{key:'searchByParams',value:function searchByParams(arr){console.log('hi');console.log(parseInt(this.state.month));console.log(this.state.cities.result[0].info.monthsToVisit);console.log(this.state.cities.result[0].info.monthsToVisit.includes(parseInt(this.state.month)));}// This function will use the state set by user input to handle the
 	// route to our exteral API to searchByParameters.
 	// Cities that match search results will be returned in an array.
 	// Reset the state of cities to the array of cities matching the filers.
-	},{key:'searchLocation',value:function searchLocation(){var _this2=this;console.log('search locations');fetch('/nomad/'+this.state.month+'/'+this.state.type+'/'+this.state.limit+'/'+this.state.temp).then(function(r){return r.json();}).then(function(nomadData){_this2.setState({cities:nomadData});})// .then(() => console.log(this.state.cities))
-	.catch(function(err){return console.log(err);});}},{key:'searchCity',value:function searchCity(){var _this3=this;console.log('search city');var cityData=[];this.state.cities.forEach(function(city){fetch('/nomad/city/'+city).then(function(r){return r.json();}).then(function(data){return cityData.push(data);});}).then(console.log(cityData)).then(function(){_this3.setState({cityInfo:cityData});}).catch(function(err){return console.log(err);});}},{key:'render',value:function render(){var _this4=this;return _react2.default.createElement('div',{className:'App'},_react2.default.createElement('header',null,'Header goes here'),_react2.default.createElement(_SearchForm2.default,{month:this.state.month,handleUpdateMonth:function handleUpdateMonth(event){return _this4.handleUpdateMonth(event);},handleUpdateWeather:function handleUpdateWeather(event){return _this4.handleUpdateWeather(event);},searchLocation:this.searchLocation.bind(this),searchCity:this.searchCity.bind(this)}),_react2.default.createElement('footer',null,'Footer goes here'));}}]);return App;}(_react.Component);exports.default=App;
+	// searchLocation() {
+	//   console.log('search locations');
+	//   fetch(`/nomad/${this.state.month}/${this.state.type}/${this.state.limit}/${this.state.temp}`)
+	//   .then(r => r.json())
+	//   .then((nomadData) => {
+	//     this.setState({
+	//       cities: nomadData,
+	//     });
+	//   })
+	//   // .catch(err => console.log(err));
+	// }
+	// This function will check if the searchLocation function has run and
+	// reset the state of cities. Once the cities state has been reset, the searchCity
+	// function will fire.
+	// componentDidUpdate(prevProps, prevState) {
+	//   if (prevState.cities !== this.state.cities) {
+	//     this.searchCity();
+	//   }
+	// }
+	// This function will iterate through the cities state and make another
+	// fetch request that will get information for each specific city.
+	// Each fetch request will return an object with information on that city
+	// which will be pushed into the cityData array.
+	// Each iteration will increment a count and check to see if it has reached the laat item.
+	// Then, the cityInfo state will be updated to match this array.
+	// We limit the number of responses to 20 to increase speed and reduce the
+	// number of fetch calls
+	// searchCity() {
+	//   console.log('search city');
+	//   const cityData = [];
+	//   let i = 0;
+	//   // const count = this.state.cities.length;
+	//   for (let j = 0; j < 20; j++) {
+	//     fetch(`/nomad/city/${this.state.cities[j]}`)
+	//     .then(r => r.json())
+	//     .then(data => cityData.push(data.result))
+	//     .then(() => {
+	//       if (i === 19) {
+	//         console.log('last city');
+	//         this.setState({
+	//           cityInfo: cityData,
+	//         });
+	//       } else {
+	//         i+=1;
+	//       }
+	//     })
+	//     .catch(err => console.log(err));
+	//   }
+	// }
+	},{key:'render',value:function render(){var _this3=this;return _react2.default.createElement('div',{className:'App'},_react2.default.createElement('header',null,'Header goes here'),_react2.default.createElement(_SearchForm2.default,{month:this.state.month,handleUpdateMonth:function handleUpdateMonth(event){return _this3.handleUpdateMonth(event);},handleUpdateWeather:function handleUpdateWeather(event){return _this3.handleUpdateWeather(event);},handleUpdateCost:function handleUpdateCost(event){return _this3.handleUpdateCost(event);},searchByParams:this.searchByParams.bind(this)}),_react2.default.createElement(_SearchList2.default,{matches:this.state.topMatches}),_react2.default.createElement('footer',null,'Footer goes here'));}}]);return App;}(_react.Component);exports.default=App;
 
 /***/ },
 /* 179 */
@@ -7530,7 +7585,7 @@
   \**************************************************/
 /***/ function(module, exports, __webpack_require__) {
 
-	'use strict';Object.defineProperty(exports,"__esModule",{value:true});var _react=__webpack_require__(/*! react */ 1);var _react2=_interopRequireDefault(_react);__webpack_require__(/*! ./SearchForm.css */ 180);function _interopRequireDefault(obj){return obj&&obj.__esModule?obj:{default:obj};}var SearchForm=function SearchForm(props){return _react2.default.createElement('div',{id:'search-container'},_react2.default.createElement('div',{id:'month-container'},_react2.default.createElement('button',{value:'1',onClick:props.handleUpdateMonth},'January'),_react2.default.createElement('button',{value:'2',onClick:props.handleUpdateMonth},'February'),_react2.default.createElement('button',{value:'3',onClick:props.handleUpdateMonth},'March'),_react2.default.createElement('button',{value:'4',onClick:props.handleUpdateMonth},'April'),_react2.default.createElement('button',{value:'5',onClick:props.handleUpdateMonth},'May'),_react2.default.createElement('button',{value:'6',onClick:props.handleUpdateMonth},'June'),_react2.default.createElement('button',{value:'7',onClick:props.handleUpdateMonth},'July'),_react2.default.createElement('button',{value:'8',onClick:props.handleUpdateMonth},'August'),_react2.default.createElement('button',{value:'9',onClick:props.handleUpdateMonth},'September'),_react2.default.createElement('button',{value:'10',onClick:props.handleUpdateMonth},'October'),_react2.default.createElement('button',{value:'11',onClick:props.handleUpdateMonth},'November'),_react2.default.createElement('button',{value:'12',onClick:props.handleUpdateMonth},'December')),_react2.default.createElement('div',{id:'temperature-container'},_react2.default.createElement('button',{value:'cold',onClick:props.handleUpdateWeather},'Cold'),_react2.default.createElement('button',{value:'warm',onClick:props.handleUpdateWeather},'Warm'),_react2.default.createElement('button',{value:'hot',onClick:props.handleUpdateWeather},'Hot')),_react2.default.createElement('button',{id:'search-button',onClick:function onClick(){props.searchLocation();props.searchCity();}},'Search Locations'));};exports.default=SearchForm;
+	'use strict';Object.defineProperty(exports,"__esModule",{value:true});var _react=__webpack_require__(/*! react */ 1);var _react2=_interopRequireDefault(_react);__webpack_require__(/*! ./SearchForm.css */ 180);function _interopRequireDefault(obj){return obj&&obj.__esModule?obj:{default:obj};}var SearchForm=function SearchForm(props){return _react2.default.createElement('div',{id:'search-container'},_react2.default.createElement('div',{id:'month-container'},_react2.default.createElement('button',{value:'1',onClick:props.handleUpdateMonth},'January'),_react2.default.createElement('button',{value:'2',onClick:props.handleUpdateMonth},'February'),_react2.default.createElement('button',{value:'3',onClick:props.handleUpdateMonth},'March'),_react2.default.createElement('button',{value:'4',onClick:props.handleUpdateMonth},'April'),_react2.default.createElement('button',{value:'5',onClick:props.handleUpdateMonth},'May'),_react2.default.createElement('button',{value:'6',onClick:props.handleUpdateMonth},'June'),_react2.default.createElement('button',{value:'7',onClick:props.handleUpdateMonth},'July'),_react2.default.createElement('button',{value:'8',onClick:props.handleUpdateMonth},'August'),_react2.default.createElement('button',{value:'9',onClick:props.handleUpdateMonth},'September'),_react2.default.createElement('button',{value:'10',onClick:props.handleUpdateMonth},'October'),_react2.default.createElement('button',{value:'11',onClick:props.handleUpdateMonth},'November'),_react2.default.createElement('button',{value:'12',onClick:props.handleUpdateMonth},'December')),_react2.default.createElement('div',{id:'temperature-container'},_react2.default.createElement('button',{value:'cold',onClick:props.handleUpdateWeather},'Cold'),_react2.default.createElement('button',{value:'warm',onClick:props.handleUpdateWeather},'Warm'),_react2.default.createElement('button',{value:'hot',onClick:props.handleUpdateWeather},'Hot')),_react2.default.createElement('div',{id:'cost-container'},_react2.default.createElement('button',{value:'$',onClick:props.handleUpdateCost},'$'),_react2.default.createElement('button',{value:'$$',onClick:props.handleUpdateCost},'$$'),_react2.default.createElement('button',{value:'$$$',onClick:props.handleUpdateCost},'$$$'),_react2.default.createElement('button',{value:'$$$$',onClick:props.handleUpdateCost},'$$$$')),_react2.default.createElement('button',{id:'search-button',onClick:function onClick(){return props.searchByParams();}},'Search Locations'));};exports.default=SearchForm;
 
 /***/ },
 /* 180 */
@@ -7543,6 +7598,43 @@
 
 /***/ },
 /* 181 */
+/*!**************************************************!*\
+  !*** ./src/components/SearchList/SearchList.jsx ***!
+  \**************************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';Object.defineProperty(exports,"__esModule",{value:true});var _createClass=function(){function defineProperties(target,props){for(var i=0;i<props.length;i++){var descriptor=props[i];descriptor.enumerable=descriptor.enumerable||false;descriptor.configurable=true;if("value"in descriptor)descriptor.writable=true;Object.defineProperty(target,descriptor.key,descriptor);}}return function(Constructor,protoProps,staticProps){if(protoProps)defineProperties(Constructor.prototype,protoProps);if(staticProps)defineProperties(Constructor,staticProps);return Constructor;};}();var _react=__webpack_require__(/*! react */ 1);var _react2=_interopRequireDefault(_react);var _SearchListItem=__webpack_require__(/*! ../SearchListItem/SearchListItem.jsx */ 182);var _SearchListItem2=_interopRequireDefault(_SearchListItem);var _SearchList=__webpack_require__(/*! ./SearchList.css */ 184);var _SearchList2=_interopRequireDefault(_SearchList);function _interopRequireDefault(obj){return obj&&obj.__esModule?obj:{default:obj};}function _classCallCheck(instance,Constructor){if(!(instance instanceof Constructor)){throw new TypeError("Cannot call a class as a function");}}function _possibleConstructorReturn(self,call){if(!self){throw new ReferenceError("this hasn't been initialised - super() hasn't been called");}return call&&(typeof call==="object"||typeof call==="function")?call:self;}function _inherits(subClass,superClass){if(typeof superClass!=="function"&&superClass!==null){throw new TypeError("Super expression must either be null or a function, not "+typeof superClass);}subClass.prototype=Object.create(superClass&&superClass.prototype,{constructor:{value:subClass,enumerable:false,writable:true,configurable:true}});if(superClass)Object.setPrototypeOf?Object.setPrototypeOf(subClass,superClass):subClass.__proto__=superClass;}var SearchList=function(_Component){_inherits(SearchList,_Component);function SearchList(){_classCallCheck(this,SearchList);return _possibleConstructorReturn(this,(SearchList.__proto__||Object.getPrototypeOf(SearchList)).apply(this,arguments));}_createClass(SearchList,[{key:'componentDidUpdate',value:function componentDidUpdate(prevProps,prevState){if(prevProps.matches!==this.props.matches){this.renderSearchResults();}}},{key:'renderSearchResults',value:function renderSearchResults(){console.log('render search results');if(this.props.matches.length>0){return this.props.matches.map(function(city,i){return _react2.default.createElement(_SearchListItem2.default,{key:i,city:city.info.city.name,country:city.info.country.name,lat:city.info.location.latitude,lng:city.info.location.longitude,nomadScore:city.scores.nomadScore,wifi:city.scores.free_wifi_available,fun:city.scores.leisure,safety:city.scores.safety,forignerFriendly:city.scores.friendly_to_foreigners,cost:city.cost.longTerm.USD,img:city.media.image['250']});});}}},{key:'render',value:function render(){return _react2.default.createElement('div',null,'Search List',this.renderSearchResults());}}]);return SearchList;}(_react.Component);exports.default=SearchList;
+
+/***/ },
+/* 182 */
+/*!**********************************************************!*\
+  !*** ./src/components/SearchListItem/SearchListItem.jsx ***!
+  \**********************************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';Object.defineProperty(exports,"__esModule",{value:true});var _react=__webpack_require__(/*! react */ 1);var _react2=_interopRequireDefault(_react);__webpack_require__(/*! ./SearchListItem.css */ 183);function _interopRequireDefault(obj){return obj&&obj.__esModule?obj:{default:obj};}// const imagePath = 'https://nomadlist.com';
+	var SearchListItem=function SearchListItem(props){return _react2.default.createElement('div',{className:'search-list-item'},_react2.default.createElement('h4',null,props.city,', ',props.country),_react2.default.createElement('div',{className:'image-holder'},_react2.default.createElement('img',{src:'https://nomadlist.com'+props.img,alt:''})),_react2.default.createElement('p',null,'Nomad Score: ',Math.round(props.nomadScore*100)/10,'/10'),_react2.default.createElement('p',null,'Wifi: ',Math.round(props.wifi*100)/10,'/10'),_react2.default.createElement('p',null,'Fun: ',Math.round(props.fun*100)/10,'/10'),_react2.default.createElement('p',null,'Safety: ',Math.round(props.safety*100)/10,'/10'),_react2.default.createElement('button',{className:'save'},'Save'));};exports.default=SearchListItem;
+
+/***/ },
+/* 183 */
+/*!**********************************************************!*\
+  !*** ./src/components/SearchListItem/SearchListItem.css ***!
+  \**********************************************************/
+/***/ function(module, exports) {
+
+	// removed by extract-text-webpack-plugin
+
+/***/ },
+/* 184 */
+/*!**************************************************!*\
+  !*** ./src/components/SearchList/SearchList.css ***!
+  \**************************************************/
+/***/ function(module, exports) {
+
+	// removed by extract-text-webpack-plugin
+
+/***/ },
+/* 185 */
 /*!********************************!*\
   !*** ./src/components/App.css ***!
   \********************************/
@@ -7551,7 +7643,7 @@
 	// removed by extract-text-webpack-plugin
 
 /***/ },
-/* 182 */
+/* 186 */
 /*!***********************!*\
   !*** ./src/index.css ***!
   \***********************/

@@ -93,14 +93,13 @@ class App extends Component {
     });
   }
 
-  // componentDidUpdate(prevProps, prevState) {
-  //   if (prevState.month !== this.state.month) {
-  //     this.filterByMonth();
-  //   }
-  // }
-  // filerByMonth() {
+  searchByParams(arr) {
+    console.log('hi');
+    console.log(parseInt(this.state.month));
+    console.log(this.state.cities.result[0].info.monthsToVisit);
+    console.log(this.state.cities.result[0].info.monthsToVisit.includes(parseInt(this.state.month)))
+  }
 
-  // }
 
   // This function will use the state set by user input to handle the
   // route to our exteral API to searchByParameters.
@@ -169,6 +168,7 @@ class App extends Component {
           handleUpdateMonth={event => this.handleUpdateMonth(event)}
           handleUpdateWeather={event => this.handleUpdateWeather(event)}
           handleUpdateCost={event => this.handleUpdateCost(event)}
+          searchByParams={this.searchByParams.bind(this)}
         />
         <SearchList
           matches={this.state.topMatches}
