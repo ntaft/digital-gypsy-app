@@ -8,6 +8,7 @@ class App extends Component {
 
     this.state = {
       cities: [],
+      cityInfo: [],
       month: '',
       type: '',
       limit: '',
@@ -58,6 +59,24 @@ class App extends Component {
     .then((nomadData) => {
       this.setState({
         cities: nomadData,
+      });
+    })
+    .then(() => console.log(this.state.cities))
+    .catch(err => console.log(err));
+  }
+
+  searchCity() {
+    console.log('search city');
+    const cityData = [];
+    this.state.cities.forEach((city) => {
+      fetch(`/nomad/city/${city}`)
+      .then(r => r.json())
+      .then(data => cityData.push(data));
+    })
+    .then(console.log(cityData))
+    .then(() => {
+      this.setState({
+        cityInfo: cityData,
       });
     })
     .catch(err => console.log(err));
