@@ -3,6 +3,7 @@
 const loginRouter = require('express').Router();
 const { logIn } = require('../lib/auth');
 const { createUser } = require(../models/user);
+const { fetchAllCities } =require('../services/nomadlist')
 // const { authenticate } = require('../lib/auth');
 
 /**
