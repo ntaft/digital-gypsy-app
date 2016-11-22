@@ -1,13 +1,7 @@
 // adapted from user management code attributed to Rafa @ GA. Thanks!
-
-/* eslint no-multi-spaces: ["error", { exceptions: { "VariableDeclarator": true } }] */
-/* eslint no-param-reassign: ["error", { "props": false }] */
-
-const pgp = require('pg-promise');
-const { config }    = require('../lib/dbConnect.js');
-const bcrypt       = require('bcryptjs');
-
-const db = pgp(config);
+// originally using mongo, modified for psql
+const psql = require('../lib/psqlConnect.js');
+const bcrypt = require('bcryptjs');
 
 const SALTROUNDS = 10;
 
@@ -21,41 +15,43 @@ function createUser(req, res, next) {
     password: bcrypt.hashSync(req.body.user.password, SALTROUNDS)
   };
 
-  pgp().then((db) => {
-    db.collection('users')
-      .insert(userObject, (insertErr, dbUser) => {
-        if (insertErr) return next(insertErr);
-
-        res.user = dbUser;
-        db.close();
-        return next();
-      });
-  });
+  psql.none(`INSERT INTO users (username, password, email)
+    VALUES ($/username/, $/password/, $/email/);`, userObject)
+    .then((psqlUser) => {
+      res.user = psqlUser;
+      next();
+    })
+    .catch(error => next(error));
 }
 
 function getUserById(id) {
-  return getDB().then((db) => {
+  return getDB().then((psql) => {
     const promise = new Promise((resolve, reject) => {
-      db.collection('users')
-        .findOne({ _id: ObjectID(id) }, (findError, user) => {
-          if (findError) reject(findError);
-          db.close();
-          resolve(user);
-        });
+      psql.one(`SELECT *
+        FROM users
+        WHERE id = ${ObjectID(id)};`)
+      .then(user => resolve(user))
+      .catch((error) => {
+        reject(error);
+        resolve(user);
+      });
     });
     return promise;
   });
 }
 
+
 function getUserByUsername(username) {
-  return getDB().then((db) => {
+  return getDB().then((psql) => {
     const promise = new Promise((resolve, reject) => {
-      db.collection('users')
-        .findOne({ username }, (findError, user) => {
-          if (findError) reject(findError);
-          db.close();
-          resolve(user);
-        });
+      psql.one(`SELECT *
+        FROM users
+        WHERE username = ${username};`)
+      .then(user => resolve(user))
+      .catch((error) => {
+        reject(error);
+        resolve(user);
+      });
     });
     return promise;
   });
