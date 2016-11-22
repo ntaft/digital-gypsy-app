@@ -8,6 +8,7 @@ class App extends Component {
 
     this.state = {
       cities: [],
+      cityInfo: [],
       month: '',
       type: '',
       limit: '',
@@ -47,6 +48,40 @@ class App extends Component {
     }
   }
 
+  // This function will use the state set by user input to handle the
+  // route to our exteral API to searchByParameters.
+  // Cities that match search results will be returned in an array.
+  // Reset the state of cities to the array of cities matching the filers.
+  searchLocation() {
+    console.log('search locations');
+    fetch(`/nomad/${this.state.month}/${this.state.type}/${this.state.limit}/${this.state.temp}`)
+    .then(r => r.json())
+    .then((nomadData) => {
+      this.setState({
+        cities: nomadData,
+      });
+    })
+    .then(() => console.log(this.state.cities))
+    .catch(err => console.log(err));
+  }
+
+  searchCity() {
+    console.log('search city');
+    const cityData = [];
+    this.state.cities.forEach((city) => {
+      fetch(`/nomad/city/${city}`)
+      .then(r => r.json())
+      .then(data => cityData.push(data));
+    })
+    .then(console.log(cityData))
+    .then(() => {
+      this.setState({
+        cityInfo: cityData,
+      });
+    })
+    .catch(err => console.log(err));
+  }
+
   render() {
     return (
       <div className="App">
@@ -55,6 +90,7 @@ class App extends Component {
           month={this.state.month}
           handleUpdateMonth={event => this.handleUpdateMonth(event)}
           handleUpdateWeather={event => this.handleUpdateWeather(event)}
+          searchLocation={this.searchLocation.bind(this)}
         />
         <footer>Footer goes here</footer>
       </div>

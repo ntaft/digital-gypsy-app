@@ -10,7 +10,7 @@ function searchByParameters(req, res, next) {
   fetch(`https://nomadlist.com/api/v2/filter/city?c=2&f1_target=month&f1_type=em&f1_value=${req.params.month}&f2_target=temperatureF&f2_type=${req.params.type}&f2_${req.params.limit}=${req.params.temp}`)
   .then(r => r.json())
   .then((nomadData) => {
-    res.nomad = nomadData;
+    res.nomad = nomadData.slugs;
     next();
   })
   .catch(err => next(err));
