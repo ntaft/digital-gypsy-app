@@ -13,7 +13,7 @@ class SearchList extends Component {
   renderSearchResults() {
     console.log('render search results');
     if (this.props.matches.length > 0) {
-      console.log(this.props.matches[0]);
+      console.log(this.props.matches[1]);
 
       return this.props.matches.map((city, i) =>
         <SearchListItem
