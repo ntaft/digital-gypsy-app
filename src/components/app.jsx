@@ -14,6 +14,7 @@ class App extends Component {
       type: '',
       limit: '',
       temp: '',
+      cost: '',
     };
 
     // this.searchLocation = this.searchLocation.bind(this);
@@ -84,6 +85,12 @@ class App extends Component {
         temp: 86,
       });
     }
+  }
+
+  handleUpdateCost(e) {
+    this.setState({
+      cost: e.target.value,
+    });
   }
 
   // componentDidUpdate(prevProps, prevState) {
@@ -161,6 +168,7 @@ class App extends Component {
           month={this.state.month}
           handleUpdateMonth={event => this.handleUpdateMonth(event)}
           handleUpdateWeather={event => this.handleUpdateWeather(event)}
+          handleUpdateCost={event => this.handleUpdateCost(event)}
         />
         <SearchList
           matches={this.state.topMatches}
