@@ -13,6 +13,9 @@ const gypsyRouter = require('./routes/gypsy');
 // import router for our external API
 const nomadRouter = require('./routes/nomadlist');
 
+// import assets route
+const assetsRouter = require('./routes/assets');
+
 // set up some logging
 app.use(logger('dev'));
 
@@ -25,5 +28,6 @@ app.use(express.static(path.join(__dirname, 'dist')));
 // map our routes
 app.use('/gypsy', gypsyRouter);
 app.use('/nomad', nomadRouter);
+app.use('/assets/img/cities', assetsRouter);
 
 app.listen(PORT, () => { console.log('Wanderlust 🌍')});

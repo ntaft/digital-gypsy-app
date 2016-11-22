@@ -1,5 +1,10 @@
 const router = require('express').Router();
-const { searchByParameters, searchByCity } = require('../services/nomadlist.js');
+const { searchByParameters, searchByCity, fetchAllCities } = require('../services/nomadlist.js');
+
+// Get a list of all cities
+router.get('/cities', fetchAllCities, (req, res) => {
+  res.json(res.cities);
+});
 
 // Get a list of all cities that match user input
 router.get('/:month/:type/:limit/:temp', searchByParameters, (req, res) => {
