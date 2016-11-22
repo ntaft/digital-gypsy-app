@@ -1,7 +1,7 @@
 {
-  "name": "hw-w09-d05",
+  "name": "Digital-Gypsy",
   "version": "1.0.0",
-  "description": "![](https://media.giphy.com/media/kUgUnmqig0X3q/giphy.gif)",
+  "description": "An app for nomads.",
   "main": "server.js",
   "scripts": {
     "clean": "rm -rf dist && rm -rf node_modules",
