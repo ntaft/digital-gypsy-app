@@ -93,24 +93,20 @@ class App extends Component {
     });
   }
 
+  // This function will iterate through the cities array and find cities that
+  // match with the month that the user selected.
   searchByParams(arr) {
-    console.log('hi');
-    console.log(parseInt(this.state.month));
-    console.log(this.state.cities.result[0].info.monthsToVisit);
-    console.log(this.state.cities.result[0].info.monthsToVisit.includes(parseInt(this.state.month)))
-
-    let newMatches = [];
+    const monthMatches = [];
     this.state.cities.result.map((city) => {
-      if(city.info.monthsToVisit.includes(parseInt(this.state.month))) {
-        newMatches.push(city);
+      if (city.info.monthsToVisit.includes(parseInt(this.state.month))) {
+        monthMatches.push(city);
       }
-    })
-    console.log(newMatches)
-      // if (this.state.cities.result[i].info.monthsToVisit.includes(parseInt(this.state.month))) {
-        // newMatches.push(this.state.cities.result[i]);
-    // }
+    });
+    console.log('got some new matches by month!');
+    this.setState({
+      topMatches: monthMatches,
+    });
   }
-    // console.log(newMatches)
 
 
   // This function will use the state set by user input to handle the

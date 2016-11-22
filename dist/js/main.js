@@ -7523,11 +7523,9 @@
 	// month in the SearchForm component by grabbing the value stored in the button.
 	},{key:'handleUpdateMonth',value:function handleUpdateMonth(e){this.setState({month:e.target.value});}// This function will check the value stored in the weather button and reset
 	// the state of the weather parameters accordingly.
-	},{key:'handleUpdateWeather',value:function handleUpdateWeather(e){if(e.target.value==='cold'){this.setState({type:'lt',limit:'max',temp:50});}else if(e.target.value==='warm'){this.setState({type:'gt',limit:'min',temp:65});}else{this.setState({type:'gt',limit:'min',temp:86});}}},{key:'handleUpdateCost',value:function handleUpdateCost(e){this.setState({cost:e.target.value});}},{key:'searchByParams',value:function searchByParams(arr){var _this3=this;console.log('hi');console.log(parseInt(this.state.month));console.log(this.state.cities.result[0].info.monthsToVisit);console.log(this.state.cities.result[0].info.monthsToVisit.includes(parseInt(this.state.month)));var newMatches=[];this.state.cities.result.map(function(city){if(city.info.monthsToVisit.includes(parseInt(_this3.state.month))){newMatches.push(city);}});console.log(newMatches);// if (this.state.cities.result[i].info.monthsToVisit.includes(parseInt(this.state.month))) {
-	// newMatches.push(this.state.cities.result[i]);
-	// }
-	}// console.log(newMatches)
-	// This function will use the state set by user input to handle the
+	},{key:'handleUpdateWeather',value:function handleUpdateWeather(e){if(e.target.value==='cold'){this.setState({type:'lt',limit:'max',temp:50});}else if(e.target.value==='warm'){this.setState({type:'gt',limit:'min',temp:65});}else{this.setState({type:'gt',limit:'min',temp:86});}}},{key:'handleUpdateCost',value:function handleUpdateCost(e){this.setState({cost:e.target.value});}// This function will iterate through the cities array and find cities that
+	// match with the month that the user selected.
+	},{key:'searchByParams',value:function searchByParams(arr){var _this3=this;var monthMatches=[];this.state.cities.result.map(function(city){if(city.info.monthsToVisit.includes(parseInt(_this3.state.month))){monthMatches.push(city);}});console.log('got some new matches by month!');this.setState({topMatches:monthMatches});}// This function will use the state set by user input to handle the
 	// route to our exteral API to searchByParameters.
 	// Cities that match search results will be returned in an array.
 	// Reset the state of cities to the array of cities matching the filers.
