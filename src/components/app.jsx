@@ -68,33 +68,46 @@ class App extends Component {
     // .catch(err => console.log(err));
   }
 
+  // This function will check if the searchLocation function has run and
+  // reset the state of cities. Once the cities state has been reset, the searchCity
+  // function will fire.
   componentDidUpdate(prevProps, prevState) {
     if (prevState.cities !== this.state.cities) {
       this.searchCity();
     }
   }
 
+  // This function will iterate through the cities state and make another
+  // fetch request that will get information for each specific city.
+  // Each fetch request will return an object with information on that city
+  // which will be pushed into the cityData array.
+  // Each iteration will increment a count and check to see if it has reached the laat item.
+  // Then, the cityInfo state will be updated to match this array.
   searchCity() {
     console.log('search city');
-    let cityData = [];
+    const cityData = [];
+    let i = 0;
+    const count = this.state.cities.length;
+    console.log(count);
     this.state.cities.forEach((city) => {
       fetch(`/nomad/city/${city}`)
       .then(r => r.json())
       .then(data => cityData.push(data.result))
       .then(() => {
-        this.setState({
-          cityInfo: cityData,
-        });
+        console.log(i);
+        if (i+1 === count) {
+          console.log('last city');
+          this.setState({
+            cityInfo: cityData,
+          });
+        } else {
+          i+=1;
+        }
       })
       .catch(err => console.log(err));
-    })
-    console.log(cityData);
-    // .then(() => {
-    //   this.setState({
-    //     cityInfo: cityData,
-    //   });
-    // })
+    });
   }
+
 
   render() {
     return (
@@ -110,7 +123,6 @@ class App extends Component {
         <SearchList
           cities={this.state.cities}
           cityInfo={this.state.cityInfo}
-          searchCity={this.searchCity.bind(this)}
         />
         <footer>Footer goes here</footer>
       </div>
