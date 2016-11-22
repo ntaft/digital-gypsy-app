@@ -83,19 +83,19 @@ class App extends Component {
   // which will be pushed into the cityData array.
   // Each iteration will increment a count and check to see if it has reached the laat item.
   // Then, the cityInfo state will be updated to match this array.
+  // We limit the number of responses to 20 to increase speed and reduce the
+  // number of fetch calls
   searchCity() {
     console.log('search city');
     const cityData = [];
     let i = 0;
-    const count = this.state.cities.length;
-    console.log(count);
-    this.state.cities.forEach((city) => {
-      fetch(`/nomad/city/${city}`)
+    // const count = this.state.cities.length;
+    for (let j = 0; j < 20; j++) {
+      fetch(`/nomad/city/${this.state.cities[j]}`)
       .then(r => r.json())
       .then(data => cityData.push(data.result))
       .then(() => {
-        console.log(i);
-        if (i+1 === count) {
+        if (i === 19) {
           console.log('last city');
           this.setState({
             cityInfo: cityData,
@@ -105,7 +105,7 @@ class App extends Component {
         }
       })
       .catch(err => console.log(err));
-    });
+    }
   }
 
 
