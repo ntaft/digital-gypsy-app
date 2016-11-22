@@ -24,6 +24,13 @@ const SearchForm = props => (
       <button value="hot" onClick={props.handleUpdateWeather}>Hot</button>
     </div>
 
+    <div id="cost-container">
+      <button value="$" onClick={props.handleUpdateCost}>$</button>
+      <button value="$$" onClick={props.handleUpdateCost}>$$</button>
+      <button value="$$$" onClick={props.handleUpdateCost}>$$$</button>
+      <button value="$$$$" onClick={props.handleUpdateCost}>$$$$</button>
+    </div>
+
     <button
       id="search-button"
       onClick={() => props.searchLocation()}
