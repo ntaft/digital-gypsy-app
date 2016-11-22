@@ -16,9 +16,24 @@ function searchByParameters(req, res, next) {
   .catch(err => next(err));
 }
 
+
+function searchByCity(req, res, next) {
+  console.log(req.params.city);
+  fetch(`https://nomadlist.com/api/v2/list/cities/${req.params.city}`)
+  .then(r => r.json())
+  .then((cityData) => {
+    res.city = cityData;
+    next();
+  })
+  .catch(err => next(err));
+}
+
+
 module.exports = {
   searchByParameters,
+  searchByCity
 };
+
 
 
 
