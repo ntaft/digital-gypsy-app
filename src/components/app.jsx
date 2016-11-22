@@ -9,28 +9,49 @@ class App extends Component {
 
     this.state = {
       cities: [],
-      cityInfo: [],
+      topMatches: [],
       month: '',
       type: '',
       limit: '',
       temp: '',
     };
 
-    this.searchLocation = this.searchLocation.bind(this);
-    this.searchCity = this.searchCity.bind(this);
+    // this.searchLocation = this.searchLocation.bind(this);
+    // this.searchCity = this.searchCity.bind(this);
   }
 
   componentWillMount() {
     this.fetchAllCities();
   }
 
+  // This function will hit our API route to fetch all the cities listed
+  // in the nomadlist api. Then, set our cities state to this response object.
   fetchAllCities() {
-    fetch(`https://nomadlist.com/api/v2/list/cities`)
+    fetch('nomad/cities')
     .then(r => r.json())
-    .then(data => this.setState({
-      cities: data,
+    .then(cities => this.setState({
+      cities: cities,
     }))
-    .catch(err => console.log(err));
+  }
+
+  // This will check if the cities state is updated, it will fire the filterCities function
+  componentDidUpdate(prevProps, prevState) {
+    if (prevState.cities !== this.state.cities) {
+      this.filterCities();
+    }
+  }
+
+  // This function will push the top 20 cities from the cities object into a new array
+  // This reset the state of topMatches to this array of objects.
+  filterCities() {
+    console.log('filterCities');
+    const topCities = [];
+    for (let i = 0; i < 20; i++) {
+      topCities.push(this.state.cities.result[i]);
+    }
+    this.setState({
+      topMatches: topCities,
+    });
   }
 
   // This function will reset the state of month when a user selects a
@@ -65,30 +86,40 @@ class App extends Component {
     }
   }
 
+  // componentDidUpdate(prevProps, prevState) {
+  //   if (prevState.month !== this.state.month) {
+  //     this.filterByMonth();
+  //   }
+  // }
+  // filerByMonth() {
+
+  // }
+
   // This function will use the state set by user input to handle the
   // route to our exteral API to searchByParameters.
   // Cities that match search results will be returned in an array.
   // Reset the state of cities to the array of cities matching the filers.
-  searchLocation() {
-    console.log('search locations');
-    fetch(`/nomad/${this.state.month}/${this.state.type}/${this.state.limit}/${this.state.temp}`)
-    .then(r => r.json())
-    .then((nomadData) => {
-      this.setState({
-        cities: nomadData,
-      });
-    })
-    // .catch(err => console.log(err));
-  }
+  // searchLocation() {
+  //   console.log('search locations');
+  //   fetch(`/nomad/${this.state.month}/${this.state.type}/${this.state.limit}/${this.state.temp}`)
+  //   .then(r => r.json())
+  //   .then((nomadData) => {
+  //     this.setState({
+  //       cities: nomadData,
+  //     });
+  //   })
+  //   // .catch(err => console.log(err));
+  // }
+
 
   // This function will check if the searchLocation function has run and
   // reset the state of cities. Once the cities state has been reset, the searchCity
   // function will fire.
-  componentDidUpdate(prevProps, prevState) {
-    if (prevState.cities !== this.state.cities) {
-      this.searchCity();
-    }
-  }
+  // componentDidUpdate(prevProps, prevState) {
+  //   if (prevState.cities !== this.state.cities) {
+  //     this.searchCity();
+  //   }
+  // }
 
   // This function will iterate through the cities state and make another
   // fetch request that will get information for each specific city.
@@ -98,28 +129,28 @@ class App extends Component {
   // Then, the cityInfo state will be updated to match this array.
   // We limit the number of responses to 20 to increase speed and reduce the
   // number of fetch calls
-  searchCity() {
-    console.log('search city');
-    const cityData = [];
-    let i = 0;
-    // const count = this.state.cities.length;
-    for (let j = 0; j < 20; j++) {
-      fetch(`/nomad/city/${this.state.cities[j]}`)
-      .then(r => r.json())
-      .then(data => cityData.push(data.result))
-      .then(() => {
-        if (i === 19) {
-          console.log('last city');
-          this.setState({
-            cityInfo: cityData,
-          });
-        } else {
-          i+=1;
-        }
-      })
-      .catch(err => console.log(err));
-    }
-  }
+  // searchCity() {
+  //   console.log('search city');
+  //   const cityData = [];
+  //   let i = 0;
+  //   // const count = this.state.cities.length;
+  //   for (let j = 0; j < 20; j++) {
+  //     fetch(`/nomad/city/${this.state.cities[j]}`)
+  //     .then(r => r.json())
+  //     .then(data => cityData.push(data.result))
+  //     .then(() => {
+  //       if (i === 19) {
+  //         console.log('last city');
+  //         this.setState({
+  //           cityInfo: cityData,
+  //         });
+  //       } else {
+  //         i+=1;
+  //       }
+  //     })
+  //     .catch(err => console.log(err));
+  //   }
+  // }
 
 
   render() {
@@ -130,12 +161,9 @@ class App extends Component {
           month={this.state.month}
           handleUpdateMonth={event => this.handleUpdateMonth(event)}
           handleUpdateWeather={event => this.handleUpdateWeather(event)}
-          searchLocation={this.searchLocation.bind(this)}
-          searchCity={this.searchCity.bind(this)}
         />
         <SearchList
-          cities={this.state.cities}
-          cityInfo={this.state.cityInfo}
+          matches={this.state.topMatches}
         />
         <footer>Footer goes here</footer>
       </div>

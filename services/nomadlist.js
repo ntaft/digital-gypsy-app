@@ -2,12 +2,14 @@ const fetch = require('node-fetch');
 
 // This function will be called on pageload to fetch all data from the nomadlist api.
 // It will then reset the state of cities to this data object
-function fetchAllCities() {
-  fetch(`https://nomadlist.com/api/v2/list/cities`)
+function fetchAllCities(req, res, next) {
+  console.log('service: fetch all cities')
+  fetch('https://nomadlist.com/api/v2/list/cities')
   .then(r => r.json())
-  .then(data => this.setState({
-    cities: data,
-  }))
+  .then((data) => {
+    res.cities = data;
+    next();
+  })
   .catch(err => console.log(err));
 }
 
@@ -45,7 +47,3 @@ module.exports = {
   searchByCity,
   fetchAllCities,
 };
-
-
-
-
