@@ -1,8 +1,8 @@
 const router = require('express').Router();
-const nomadService = require('../services/nomadlist.js');
+const { searchByParameters } = require('../services/nomadlist.js');
 
-router.get('/', (req, res) => {
-  res.json('nomad');
+router.get('/:month/:type/:limit/:temp', searchByParameters, (req, res) => {
+  res.json(res.nomad);
 })
 
 module.exports = router;
