@@ -47,7 +47,7 @@
   \**********************/
 /***/ function(module, exports, __webpack_require__) {
 
-	'use strict';var _react=__webpack_require__(/*! react */ 1);var _react2=_interopRequireDefault(_react);var _reactDom=__webpack_require__(/*! react-dom */ 32);var _reactDom2=_interopRequireDefault(_reactDom);var _App=__webpack_require__(/*! ./components/App.jsx */ 178);var _App2=_interopRequireDefault(_App);__webpack_require__(/*! ./index.css */ 185);function _interopRequireDefault(obj){return obj&&obj.__esModule?obj:{default:obj};}// mount our App at #root-container
+	'use strict';var _react=__webpack_require__(/*! react */ 1);var _react2=_interopRequireDefault(_react);var _reactDom=__webpack_require__(/*! react-dom */ 32);var _reactDom2=_interopRequireDefault(_reactDom);var _App=__webpack_require__(/*! ./components/App.jsx */ 178);var _App2=_interopRequireDefault(_App);__webpack_require__(/*! ./index.css */ 186);function _interopRequireDefault(obj){return obj&&obj.__esModule?obj:{default:obj};}// mount our App at #root-container
 	_reactDom2.default.render(_react2.default.createElement(_App2.default,null),document.querySelector('#root-container'));
 
 /***/ },
@@ -7512,7 +7512,7 @@
   \********************************/
 /***/ function(module, exports, __webpack_require__) {
 
-	'use strict';Object.defineProperty(exports,"__esModule",{value:true});var _createClass=function(){function defineProperties(target,props){for(var i=0;i<props.length;i++){var descriptor=props[i];descriptor.enumerable=descriptor.enumerable||false;descriptor.configurable=true;if("value"in descriptor)descriptor.writable=true;Object.defineProperty(target,descriptor.key,descriptor);}}return function(Constructor,protoProps,staticProps){if(protoProps)defineProperties(Constructor.prototype,protoProps);if(staticProps)defineProperties(Constructor,staticProps);return Constructor;};}();var _react=__webpack_require__(/*! react */ 1);var _react2=_interopRequireDefault(_react);var _SearchForm=__webpack_require__(/*! ./SearchForm/SearchForm.jsx */ 179);var _SearchForm2=_interopRequireDefault(_SearchForm);var _SearchList=__webpack_require__(/*! ./SearchList/SearchList.jsx */ 181);var _SearchList2=_interopRequireDefault(_SearchList);var _App=__webpack_require__(/*! ./App.css */ 184);var _App2=_interopRequireDefault(_App);function _interopRequireDefault(obj){return obj&&obj.__esModule?obj:{default:obj};}function _classCallCheck(instance,Constructor){if(!(instance instanceof Constructor)){throw new TypeError("Cannot call a class as a function");}}function _possibleConstructorReturn(self,call){if(!self){throw new ReferenceError("this hasn't been initialised - super() hasn't been called");}return call&&(typeof call==="object"||typeof call==="function")?call:self;}function _inherits(subClass,superClass){if(typeof superClass!=="function"&&superClass!==null){throw new TypeError("Super expression must either be null or a function, not "+typeof superClass);}subClass.prototype=Object.create(superClass&&superClass.prototype,{constructor:{value:subClass,enumerable:false,writable:true,configurable:true}});if(superClass)Object.setPrototypeOf?Object.setPrototypeOf(subClass,superClass):subClass.__proto__=superClass;}var App=function(_Component){_inherits(App,_Component);function App(){_classCallCheck(this,App);var _this=_possibleConstructorReturn(this,(App.__proto__||Object.getPrototypeOf(App)).call(this));_this.state={cities:[],topMatches:[],month:'',type:'',limit:'',temp:'',cost:''};// this.searchLocation = this.searchLocation.bind(this);
+	'use strict';Object.defineProperty(exports,"__esModule",{value:true});var _createClass=function(){function defineProperties(target,props){for(var i=0;i<props.length;i++){var descriptor=props[i];descriptor.enumerable=descriptor.enumerable||false;descriptor.configurable=true;if("value"in descriptor)descriptor.writable=true;Object.defineProperty(target,descriptor.key,descriptor);}}return function(Constructor,protoProps,staticProps){if(protoProps)defineProperties(Constructor.prototype,protoProps);if(staticProps)defineProperties(Constructor,staticProps);return Constructor;};}();var _react=__webpack_require__(/*! react */ 1);var _react2=_interopRequireDefault(_react);var _SearchForm=__webpack_require__(/*! ./SearchForm/SearchForm.jsx */ 179);var _SearchForm2=_interopRequireDefault(_SearchForm);var _SearchList=__webpack_require__(/*! ./SearchList/SearchList.jsx */ 181);var _SearchList2=_interopRequireDefault(_SearchList);var _App=__webpack_require__(/*! ./App.css */ 185);var _App2=_interopRequireDefault(_App);function _interopRequireDefault(obj){return obj&&obj.__esModule?obj:{default:obj};}function _classCallCheck(instance,Constructor){if(!(instance instanceof Constructor)){throw new TypeError("Cannot call a class as a function");}}function _possibleConstructorReturn(self,call){if(!self){throw new ReferenceError("this hasn't been initialised - super() hasn't been called");}return call&&(typeof call==="object"||typeof call==="function")?call:self;}function _inherits(subClass,superClass){if(typeof superClass!=="function"&&superClass!==null){throw new TypeError("Super expression must either be null or a function, not "+typeof superClass);}subClass.prototype=Object.create(superClass&&superClass.prototype,{constructor:{value:subClass,enumerable:false,writable:true,configurable:true}});if(superClass)Object.setPrototypeOf?Object.setPrototypeOf(subClass,superClass):subClass.__proto__=superClass;}var App=function(_Component){_inherits(App,_Component);function App(){_classCallCheck(this,App);var _this=_possibleConstructorReturn(this,(App.__proto__||Object.getPrototypeOf(App)).call(this));_this.state={cities:[],topMatches:[],month:'',type:'',limit:'',temp:'',cost:''};// this.searchLocation = this.searchLocation.bind(this);
 	// this.searchCity = this.searchCity.bind(this);
 	return _this;}_createClass(App,[{key:'componentWillMount',value:function componentWillMount(){this.fetchAllCities();}// This function will hit our API route to fetch all the cities listed
 	// in the nomadlist api. Then, set our cities state to this response object.
@@ -7610,7 +7610,7 @@
   \**************************************************/
 /***/ function(module, exports, __webpack_require__) {
 
-	'use strict';Object.defineProperty(exports,"__esModule",{value:true});var _createClass=function(){function defineProperties(target,props){for(var i=0;i<props.length;i++){var descriptor=props[i];descriptor.enumerable=descriptor.enumerable||false;descriptor.configurable=true;if("value"in descriptor)descriptor.writable=true;Object.defineProperty(target,descriptor.key,descriptor);}}return function(Constructor,protoProps,staticProps){if(protoProps)defineProperties(Constructor.prototype,protoProps);if(staticProps)defineProperties(Constructor,staticProps);return Constructor;};}();var _react=__webpack_require__(/*! react */ 1);var _react2=_interopRequireDefault(_react);var _SearchListItem=__webpack_require__(/*! ../SearchListItem/SearchListItem.jsx */ 182);var _SearchListItem2=_interopRequireDefault(_SearchListItem);var _SearchList=__webpack_require__(/*! ./SearchList.css */ 183);var _SearchList2=_interopRequireDefault(_SearchList);function _interopRequireDefault(obj){return obj&&obj.__esModule?obj:{default:obj};}function _classCallCheck(instance,Constructor){if(!(instance instanceof Constructor)){throw new TypeError("Cannot call a class as a function");}}function _possibleConstructorReturn(self,call){if(!self){throw new ReferenceError("this hasn't been initialised - super() hasn't been called");}return call&&(typeof call==="object"||typeof call==="function")?call:self;}function _inherits(subClass,superClass){if(typeof superClass!=="function"&&superClass!==null){throw new TypeError("Super expression must either be null or a function, not "+typeof superClass);}subClass.prototype=Object.create(superClass&&superClass.prototype,{constructor:{value:subClass,enumerable:false,writable:true,configurable:true}});if(superClass)Object.setPrototypeOf?Object.setPrototypeOf(subClass,superClass):subClass.__proto__=superClass;}var SearchList=function(_Component){_inherits(SearchList,_Component);function SearchList(){_classCallCheck(this,SearchList);return _possibleConstructorReturn(this,(SearchList.__proto__||Object.getPrototypeOf(SearchList)).apply(this,arguments));}_createClass(SearchList,[{key:'componentDidUpdate',value:function componentDidUpdate(prevProps,prevState){if(prevProps.matches!==this.props.matches){this.renderSearchResults();}}},{key:'renderSearchResults',value:function renderSearchResults(){console.log('render search results');if(this.props.matches.length>0){console.log(this.props.matches[1]);return this.props.matches.map(function(city,i){return _react2.default.createElement(_SearchListItem2.default,{key:i,city:city.info.city.name,country:city.info.country.name,lat:city.info.location.latitude,lng:city.info.location.longitude,nomadScore:city.scores.nomadScore,wifi:city.scores.free_wifi_available,fun:city.scores.leisure,safety:city.scores.safety,forignerFriendly:city.scores.friendly_to_foreigners,cost:city.cost.longTerm.USD,img:city.media.image['250']});});}}},{key:'render',value:function render(){return _react2.default.createElement('div',null,'Search List',this.renderSearchResults());}}]);return SearchList;}(_react.Component);exports.default=SearchList;
+	'use strict';Object.defineProperty(exports,"__esModule",{value:true});var _createClass=function(){function defineProperties(target,props){for(var i=0;i<props.length;i++){var descriptor=props[i];descriptor.enumerable=descriptor.enumerable||false;descriptor.configurable=true;if("value"in descriptor)descriptor.writable=true;Object.defineProperty(target,descriptor.key,descriptor);}}return function(Constructor,protoProps,staticProps){if(protoProps)defineProperties(Constructor.prototype,protoProps);if(staticProps)defineProperties(Constructor,staticProps);return Constructor;};}();var _react=__webpack_require__(/*! react */ 1);var _react2=_interopRequireDefault(_react);var _SearchListItem=__webpack_require__(/*! ../SearchListItem/SearchListItem.jsx */ 182);var _SearchListItem2=_interopRequireDefault(_SearchListItem);var _SearchList=__webpack_require__(/*! ./SearchList.css */ 184);var _SearchList2=_interopRequireDefault(_SearchList);function _interopRequireDefault(obj){return obj&&obj.__esModule?obj:{default:obj};}function _classCallCheck(instance,Constructor){if(!(instance instanceof Constructor)){throw new TypeError("Cannot call a class as a function");}}function _possibleConstructorReturn(self,call){if(!self){throw new ReferenceError("this hasn't been initialised - super() hasn't been called");}return call&&(typeof call==="object"||typeof call==="function")?call:self;}function _inherits(subClass,superClass){if(typeof superClass!=="function"&&superClass!==null){throw new TypeError("Super expression must either be null or a function, not "+typeof superClass);}subClass.prototype=Object.create(superClass&&superClass.prototype,{constructor:{value:subClass,enumerable:false,writable:true,configurable:true}});if(superClass)Object.setPrototypeOf?Object.setPrototypeOf(subClass,superClass):subClass.__proto__=superClass;}var SearchList=function(_Component){_inherits(SearchList,_Component);function SearchList(){_classCallCheck(this,SearchList);return _possibleConstructorReturn(this,(SearchList.__proto__||Object.getPrototypeOf(SearchList)).apply(this,arguments));}_createClass(SearchList,[{key:'componentDidUpdate',value:function componentDidUpdate(prevProps,prevState){if(prevProps.matches!==this.props.matches){this.renderSearchResults();}}},{key:'renderSearchResults',value:function renderSearchResults(){console.log('render search results');if(this.props.matches.length>0){console.log(this.props.matches[1]);return this.props.matches.map(function(city,i){return _react2.default.createElement(_SearchListItem2.default,{key:i,city:city.info.city.name,country:city.info.country.name,lat:city.info.location.latitude,lng:city.info.location.longitude,nomadScore:city.scores.nomadScore,wifi:city.scores.free_wifi_available,fun:city.scores.leisure,safety:city.scores.safety,forignerFriendly:city.scores.friendly_to_foreigners,cost:city.cost.longTerm.USD,img:city.media.image['250']});});}}},{key:'render',value:function render(){return _react2.default.createElement('div',null,'Search List',this.renderSearchResults());}}]);return SearchList;}(_react.Component);exports.default=SearchList;
 
 /***/ },
 /* 182 */
@@ -7619,11 +7619,20 @@
   \**********************************************************/
 /***/ function(module, exports, __webpack_require__) {
 
-	'use strict';Object.defineProperty(exports,"__esModule",{value:true});var _react=__webpack_require__(/*! react */ 1);var _react2=_interopRequireDefault(_react);__webpack_require__(/*! ./SearchListItem.css */ 186);function _interopRequireDefault(obj){return obj&&obj.__esModule?obj:{default:obj};}// const imagePath = 'https://nomadlist.com';
+	'use strict';Object.defineProperty(exports,"__esModule",{value:true});var _react=__webpack_require__(/*! react */ 1);var _react2=_interopRequireDefault(_react);__webpack_require__(/*! ./SearchListItem.css */ 183);function _interopRequireDefault(obj){return obj&&obj.__esModule?obj:{default:obj};}// const imagePath = 'https://nomadlist.com';
 	var SearchListItem=function SearchListItem(props){return _react2.default.createElement('div',{className:'search-list-item'},_react2.default.createElement('h4',null,props.city,', ',props.country),_react2.default.createElement('div',{className:'image-holder'},_react2.default.createElement('img',{src:'https://nomadlist.com'+props.img,alt:''})),_react2.default.createElement('p',null,'Nomad Score: ',Math.round(props.nomadScore*100)/10,'/10'),_react2.default.createElement('p',null,'Wifi: ',Math.round(props.wifi*100)/10,'/10'),_react2.default.createElement('p',null,'Fun: ',Math.round(props.fun*100)/10,'/10'),_react2.default.createElement('p',null,'Safety: ',Math.round(props.safety*100)/10,'/10'),_react2.default.createElement('button',{className:'save'},'Save'));};exports.default=SearchListItem;
 
 /***/ },
 /* 183 */
+/*!**********************************************************!*\
+  !*** ./src/components/SearchListItem/SearchListItem.css ***!
+  \**********************************************************/
+/***/ function(module, exports) {
+
+	// removed by extract-text-webpack-plugin
+
+/***/ },
+/* 184 */
 /*!**************************************************!*\
   !*** ./src/components/SearchList/SearchList.css ***!
   \**************************************************/
@@ -7632,7 +7641,7 @@
 	// removed by extract-text-webpack-plugin
 
 /***/ },
-/* 184 */
+/* 185 */
 /*!********************************!*\
   !*** ./src/components/App.css ***!
   \********************************/
@@ -7641,19 +7650,10 @@
 	// removed by extract-text-webpack-plugin
 
 /***/ },
-/* 185 */
+/* 186 */
 /*!***********************!*\
   !*** ./src/index.css ***!
   \***********************/
-/***/ function(module, exports) {
-
-	// removed by extract-text-webpack-plugin
-
-/***/ },
-/* 186 */
-/*!**********************************************************!*\
-  !*** ./src/components/SearchListItem/SearchListItem.css ***!
-  \**********************************************************/
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
