@@ -17,6 +17,7 @@
   "author": "Krystyna Malewski, Janelle Rosario, Nick Taft",
   "license": "ISC",
   "dependencies": {
+    "bcryptjs": "^2.3.0",
     "body-parser": "^1.15.2",
     "dotenv": "^2.0.0",
     "eslint-plugin-jsx-a11y": "^2.2.3",
