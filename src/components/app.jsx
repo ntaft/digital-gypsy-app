@@ -98,7 +98,19 @@ class App extends Component {
     console.log(parseInt(this.state.month));
     console.log(this.state.cities.result[0].info.monthsToVisit);
     console.log(this.state.cities.result[0].info.monthsToVisit.includes(parseInt(this.state.month)))
+
+    let newMatches = [];
+    this.state.cities.result.map((city) => {
+      if(city.info.monthsToVisit.includes(parseInt(this.state.month))) {
+        newMatches.push(city);
+      }
+    })
+    console.log(newMatches)
+      // if (this.state.cities.result[i].info.monthsToVisit.includes(parseInt(this.state.month))) {
+        // newMatches.push(this.state.cities.result[i]);
+    // }
   }
+    // console.log(newMatches)
 
 
   // This function will use the state set by user input to handle the
