@@ -1,8 +1,9 @@
 DROP TABLE IF EXISTS users;
 
 CREATE TABLE users (
-  INT PRIMARY KEY,
-  username VARCHAR(128),
-  email VARCHAR(128),
-  password VARCHAR(255)
+  username VARCHAR(128) NOT NULL,
+  email VARCHAR(128) NOT NULL,
+  password VARCHAR(255) NOT NULL,
+  createDate TIMESTAMP,
+  accessedDate TIMESTAMP
 );
