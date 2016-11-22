@@ -65,7 +65,7 @@ class App extends Component {
         cities: nomadData,
       });
     })
-    .catch(err => console.log(err));
+    // .catch(err => console.log(err));
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -76,19 +76,24 @@ class App extends Component {
 
   searchCity() {
     console.log('search city');
-    console.log(this.state.cities)
-    // this.state.cities.map((city) => {
-    //   fetch(`/nomad/city/${city}`)
-    //   .then(r => r.json())
-    //   .then(data => console.log(data));
-    // })
-    // .then(console.log(cityData))
+    let cityData = [];
+    this.state.cities.forEach((city) => {
+      fetch(`/nomad/city/${city}`)
+      .then(r => r.json())
+      .then(data => cityData.push(data.result))
+      .then(() => {
+        this.setState({
+          cityInfo: cityData,
+        });
+      })
+      .catch(err => console.log(err));
+    })
+    console.log(cityData);
     // .then(() => {
     //   this.setState({
     //     cityInfo: cityData,
     //   });
     // })
-    // .catch(err => console.log(err));
   }
 
   render() {
