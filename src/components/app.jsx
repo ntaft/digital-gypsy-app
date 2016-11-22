@@ -20,6 +20,19 @@ class App extends Component {
     this.searchCity = this.searchCity.bind(this);
   }
 
+  componentWillMount() {
+    this.fetchAllCities();
+  }
+
+  fetchAllCities() {
+    fetch(`https://nomadlist.com/api/v2/list/cities`)
+    .then(r => r.json())
+    .then(data => this.setState({
+      cities: data,
+    }))
+    .catch(err => console.log(err));
+  }
+
   // This function will reset the state of month when a user selects a
   // month in the SearchForm component by grabbing the value stored in the button.
   handleUpdateMonth(e) {

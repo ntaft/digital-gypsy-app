@@ -1,5 +1,16 @@
 const fetch = require('node-fetch');
 
+// This function will be called on pageload to fetch all data from the nomadlist api.
+// It will then reset the state of cities to this data object
+function fetchAllCities() {
+  fetch(`https://nomadlist.com/api/v2/list/cities`)
+  .then(r => r.json())
+  .then(data => this.setState({
+    cities: data,
+  }))
+  .catch(err => console.log(err));
+}
+
 // This function will hit the nomad list API and search for cities that match the user input. The paramaters that the user can search by are month and weather (cold, mild, warm, or hot)
 // The month will be indicated by its numerical equivalent
 // Type, limit and temp are parameters dealing with the weather conditions
@@ -31,7 +42,8 @@ function searchByCity(req, res, next) {
 
 module.exports = {
   searchByParameters,
-  searchByCity
+  searchByCity,
+  fetchAllCities,
 };
 
 

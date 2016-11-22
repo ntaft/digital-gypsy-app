@@ -7,8 +7,8 @@ class SearchList extends Component {
   renderSearchResults() {
     console.log('render')
     if (this.props.cityInfo.length > 0 ) {
-      console.log(this.props.cityInfo[1][0].cost.longTerm.USD);
-      // console.log(this.props.cityInfo[1][0].media.'250');
+      // console.log(this.props.cityInfo[1][0].cost.longTerm.USD);
+      console.log(this.props.cityInfo[1][0].media.image['250']);
     }
 
     return this.props.cityInfo.map((city, i) =>
@@ -23,7 +23,7 @@ class SearchList extends Component {
         fun={city[0].scores.leisure}
         safety={city[0].scores.safety}
         cost={city[0].cost.longTerm.USD}
-
+        img={city[0].media.image['250']}
       />,
     );
   }
