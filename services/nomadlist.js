@@ -16,7 +16,7 @@ function searchByParameters(req, res, next) {
   .catch(err => next(err));
 }
 
-
+// This function will search for nomad data for a single city
 function searchByCity(req, res, next) {
   console.log(req.params.city);
   fetch(`https://nomadlist.com/api/v2/list/cities/${req.params.city}`)
