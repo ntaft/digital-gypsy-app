@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import SearchForm from './SearchForm/SearchForm.jsx';
+import SearchList from './SearchList/SearchList.jsx';
 import style from './App.css';
 
 class App extends Component {
@@ -14,6 +15,9 @@ class App extends Component {
       limit: '',
       temp: '',
     };
+
+    this.searchLocation = this.searchLocation.bind(this);
+    this.searchCity = this.searchCity.bind(this);
   }
 
   // This function will reset the state of month when a user selects a
@@ -61,25 +65,30 @@ class App extends Component {
         cities: nomadData,
       });
     })
-    .then(() => console.log(this.state.cities))
     .catch(err => console.log(err));
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    if (prevState.cities !== this.state.cities) {
+      this.searchCity();
+    }
   }
 
   searchCity() {
     console.log('search city');
-    const cityData = [];
-    this.state.cities.forEach((city) => {
-      fetch(`/nomad/city/${city}`)
-      .then(r => r.json())
-      .then(data => cityData.push(data));
-    })
-    .then(console.log(cityData))
-    .then(() => {
-      this.setState({
-        cityInfo: cityData,
-      });
-    })
-    .catch(err => console.log(err));
+    console.log(this.state.cities)
+    // this.state.cities.map((city) => {
+    //   fetch(`/nomad/city/${city}`)
+    //   .then(r => r.json())
+    //   .then(data => console.log(data));
+    // })
+    // .then(console.log(cityData))
+    // .then(() => {
+    //   this.setState({
+    //     cityInfo: cityData,
+    //   });
+    // })
+    // .catch(err => console.log(err));
   }
 
   render() {
@@ -91,6 +100,12 @@ class App extends Component {
           handleUpdateMonth={event => this.handleUpdateMonth(event)}
           handleUpdateWeather={event => this.handleUpdateWeather(event)}
           searchLocation={this.searchLocation.bind(this)}
+          searchCity={this.searchCity.bind(this)}
+        />
+        <SearchList
+          cities={this.state.cities}
+          cityInfo={this.state.cityInfo}
+          searchCity={this.searchCity.bind(this)}
         />
         <footer>Footer goes here</footer>
       </div>
