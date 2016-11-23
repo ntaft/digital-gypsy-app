@@ -1,6 +1,6 @@
 // adapted from user management code attributed to Rafa @ GA. Thanks!
 // originally using mongo, modified for psql
-const psql = require('../lib/psqlConnect.js');
+const psql = require('../lib/dbConnect.js');
 const bcrypt = require('bcryptjs');
 
 const SALTROUNDS = 10;
@@ -12,9 +12,10 @@ function createUser(req, res, next) {
     email: req.body.user.email,
 
     // Store hashed password
-    password: bcrypt.hashSync(req.body.user.password, SALTROUNDS)
+    password: bcrypt.hashSync(req.body.user.password, SALTROUNDS),
   };
 
+// insert a new user into the database
   psql.none(`INSERT INTO users (username, password, email)
     VALUES ($/username/, $/password/, $/email/);`, userObject)
     .then((psqlUser) => {
@@ -25,40 +26,34 @@ function createUser(req, res, next) {
 }
 
 function getUserById(id) {
-  return getDB().then((psql) => {
-    const promise = new Promise((resolve, reject) => {
-      psql.one(`SELECT *
-        FROM users
-        WHERE id = ${ObjectID(id)};`)
-      .then(user => resolve(user))
-      .catch((error) => {
-        reject(error);
-        resolve(user);
-      });
+  const promise = new Promise((resolve, reject) => {
+    psql.one(`SELECT *
+      FROM users
+      WHERE id = ${id};`)
+    .then(user => resolve(user))
+    .catch((error) => {
+      reject(error);
     });
-    return promise;
   });
+  return promise;
 }
 
 
 function getUserByUsername(username) {
-  return getDB().then((psql) => {
-    const promise = new Promise((resolve, reject) => {
-      psql.one(`SELECT *
-        FROM users
-        WHERE username = ${username};`)
-      .then(user => resolve(user))
-      .catch((error) => {
-        reject(error);
-        resolve(user);
-      });
+  const promise = new Promise((resolve, reject) => {
+    psql.one(`SELECT *
+      FROM users
+      WHERE username = ${username};`)
+    .then(user => resolve(user))
+    .catch((error) => {
+      reject(error);
     });
-    return promise;
   });
+  return promise;
 }
 
 module.exports = {
   createUser,
   getUserById,
-  getUserByUsername
+  getUserByUsername,
 };

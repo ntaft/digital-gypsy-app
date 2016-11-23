@@ -3,22 +3,26 @@ import 'SignUp.css'
 
 const SignUp = props => {
   return(
-    <div className="signup-box">
-      <form action="submit">
+    <div className="signup-box" >
+      <form action="/signup" method="POST" >
         <input type="text"
           value=""
-          name="username"
+          name="user[username]"
           placeholder="username"
         />
         <input type="text"
           value=""
-          name="email"
+          name="user[email]"
           placeholder="email address"
         />
         <input type="text"
           value=""
-          name="password"
+          name="user[password]"
           placeholder="password"
+        />
+        <input
+          type="submit"
+          name="Sign Up"
         />
       </form>
     </div>

@@ -6,17 +6,23 @@ const Login = props => {
 
     <div className="login-box">
       <form action="/signin" method="POST">
-        <input type="text"
+        <input
+          type="text"
           value=""
-          name="username"
+          name="user[username]"
           placeholder="username"
         />
-        <input type="text"
+        <input
+          type="text"
           value=""
-          name="password"
+          name="user[password]"
           placeholder="password"
+        />
+        <input
+          type="submit"
+          name="Login"
         />
       </form>
     </div>
-  )
+  );
 };

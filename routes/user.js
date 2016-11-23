@@ -2,9 +2,8 @@
 
 const loginRouter = require('express').Router();
 const { logIn } = require('../lib/auth');
-const { createUser } = require(../models/user);
-const { fetchAllCities } =require('../services/nomadlist')
-// const { authenticate } = require('../lib/auth');
+const { createUser } = require('../models/user');
+
 
 /**
  * Log In and if successful assign res.user._id to the session
@@ -13,14 +12,14 @@ const { fetchAllCities } =require('../services/nomadlist')
  */
 loginRouter.post('/login', logIn, (req, res) => {
   res.redirect('/');
-})
+});
 
 // assigns null to the session cookie userID
 // then redirects to the login page
-loginRouter.delete('/logout', (req, res) => {
+loginRouter.delete('/', (req, res) => {
   req.session.userId = null;
   res.redirect('/login');
-})
+});
 
 // if posting to newuser, collect form data
 // create a new user and redirect to homepage
