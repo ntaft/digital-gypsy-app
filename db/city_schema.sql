@@ -1,8 +1,8 @@
 BEGIN;
 
-DROP TABLE IF EXISTS savedCities;
+DROP TABLE IF EXISTS savedcities;
 
-CREATE TABLE savedCities (
+CREATE TABLE savedcities (
   id SERIAL PRIMARY KEY,
   user_id INT,
   city VARCHAR NOT NULL,
