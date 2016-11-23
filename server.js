@@ -14,7 +14,7 @@ const SECRET = 'superdupersecret';
 const gypsyRouter = require('./routes/gypsy');
 
 // user auth router for login
-const userRouter = require('./routes/gypsy');
+const userRouter = require('./routes/user');
 
 // import router for our external API
 const nomadRouter = require('./routes/nomadlist');
