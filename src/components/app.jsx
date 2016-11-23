@@ -106,6 +106,38 @@ class App extends Component {
     this.setState({
       topMatches: monthMatches,
     });
+
+    console.log(monthMatches[0]);
+    const costMatches = [];
+    if (this.state.cost === '$') {
+      monthMatches.map((city) => {
+        if (city.cost.longTerm.USD < 750) {
+          costMatches.push(city);
+        }
+      });
+    } else if (this.state.cost === '$$') {
+      monthMatches.map((city) => {
+        if (city.cost.longTerm.USD < 1250) {
+          costMatches.push(city);
+        }
+      });
+    } else if (this.state.cost === '$$$') {
+      monthMatches.map((city) => {
+        if (city.cost.longTerm.USD < 3000) {
+          costMatches.push(city);
+        }
+      });
+    } else if (this.state.cost === '$$$$') {
+      monthMatches.map((city) => {
+        if (city.cost.longTerm.USD > 3000) {
+          costMatches.push(city);
+        }
+      });
+    }
+    console.log('I got some new matches by month and cost!');
+    this.setState({
+      topMatches: costMatches,
+    });
   }
 
 
