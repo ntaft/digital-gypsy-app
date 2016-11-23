@@ -13,7 +13,7 @@ const SearchListItem = props => (
     <p>Wifi: {Math.round((props.wifi)*100)/10}/10</p>
     <p>Fun: {Math.round((props.fun)*100)/10}/10</p>
     <p>Safety: {Math.round((props.safety)*100)/10}/10</p>
-    <button className="save">Save</button>
+    <button className="save" onClick={() => props.changeSelection(props.id)}>Save</button>
   </div>
 );
 

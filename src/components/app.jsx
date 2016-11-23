@@ -10,6 +10,7 @@ class App extends Component {
     this.state = {
       cities: [],
       topMatches: [],
+      selected: '',
       month: '',
       type: '',
       limit: '',
@@ -147,26 +148,18 @@ class App extends Component {
     }
   }
 
-  formHandler() {
-    console.log('form');
-    const formData = {
-      user_id: 'some user until we figure this out'
-      city: this.
-    }
+  // Code attributed to nyc-firehouse lab
+  // https://git.generalassemb.ly/krmalewski/nyc-firehouses-1/blob/master/src/components/App.js
+  // Mutator function that will selected the location to save
+  // Takes in the parameter num which will point to a specific location's
+  // object in the array
+  changeSelection(num) {
+    console.log('change selection');
+    console.log(num);
+    this.setState({
+      selected: this.state.topMatches[num],
+    });
   }
-
-    user_id VARCHAR REFERENCES users(id),
-  city VARCHAR NOT NULL,
-  country VARCHAR NOT NULL,
-  nomadScore NUMERIC(3, 2),
-  wifi NUMERIC(3, 2),
-  fun NUMERIC(3, 2),
-  safety NUMERIC(3, 2),
-  lat NUMERIC(10, 7),
-  lng NUMERIC(10, 7),
-  cost INT,
-  img VARCHAR (64),
-
 
   // This function will use the state set by user input to handle the
   // route to our exteral API to searchByParameters.
@@ -239,6 +232,7 @@ class App extends Component {
         />
         <SearchList
           matches={this.state.topMatches}
+          changeSelection={this.changeSelection.bind(this)}
         />
         <footer>Footer goes here</footer>
       </div>

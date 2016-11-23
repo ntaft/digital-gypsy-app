@@ -17,6 +17,7 @@ class SearchList extends Component {
       return this.props.matches.map((city, i) =>
         <SearchListItem
           key={i}
+          id={i}
           city={city.info.city.name}
           country={city.info.country.name}
           lat={city.info.location.latitude}
@@ -28,6 +29,7 @@ class SearchList extends Component {
           forignerFriendly={city.scores.friendly_to_foreigners}
           cost={city.cost.longTerm.USD}
           img={city.media.image['250']}
+          changeSelection={this.props.changeSelection}
         />,
       );
     }
