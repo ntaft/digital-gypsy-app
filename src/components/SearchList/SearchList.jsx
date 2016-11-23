@@ -13,11 +13,11 @@ class SearchList extends Component {
   renderSearchResults() {
     console.log('render search results');
     if (this.props.matches.length > 0) {
-      console.log(this.props.matches[1]);
 
       return this.props.matches.map((city, i) =>
         <SearchListItem
           key={i}
+          id={i}
           city={city.info.city.name}
           country={city.info.country.name}
           lat={city.info.location.latitude}
@@ -29,6 +29,8 @@ class SearchList extends Component {
           forignerFriendly={city.scores.friendly_to_foreigners}
           cost={city.cost.longTerm.USD}
           img={city.media.image['250']}
+          changeSelection={this.props.changeSelection}
+          formHandler={this.props.formHandler}
         />,
       );
     }
@@ -36,7 +38,7 @@ class SearchList extends Component {
 
   render() {
     return (
-      <div>Search List
+      <div id="search-list">Search List
         {this.renderSearchResults()}
       </div>
     );
