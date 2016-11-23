@@ -93,52 +93,79 @@ class App extends Component {
     });
   }
 
-  // This function will iterate through the cities array and find cities that
+  // This function will check to see if state.month has been reset and
+  // will iterate through the cities array and find cities that
   // match with the month that the user selected.
-  searchByParams(arr) {
-    const monthMatches = [];
-    this.state.cities.result.map((city) => {
-      if (city.info.monthsToVisit.includes(parseInt(this.state.month))) {
-        monthMatches.push(city);
-      }
-    });
-    console.log('got some new matches by month!');
-    this.setState({
-      topMatches: monthMatches,
-    });
+  searchByParams() {
+    if (this.state.month !== '') {
+      const monthMatches = [];
+      this.state.cities.result.map((city) => {
+        if (city.info.monthsToVisit.includes(parseInt(this.state.month))) {
+          monthMatches.push(city);
+        }
+      });
+      console.log('got some new matches by month!');
+      this.setState({
+        topMatches: monthMatches,
+      });
 
-    console.log(monthMatches[0]);
-    const costMatches = [];
-    if (this.state.cost === '$') {
-      monthMatches.map((city) => {
-        if (city.cost.longTerm.USD < 750) {
-          costMatches.push(city);
+      // Then check to see if the state.cost has been updated
+      // If it has, iterate through the cities that match the month to see
+      // which results match this additional search parameter.
+      if (this.state.cost !== '') {
+        const costMatches = [];
+        if (this.state.cost === '$') {
+          monthMatches.map((city) => {
+            if (city.cost.longTerm.USD < 750) {
+              costMatches.push(city);
+            }
+          });
+        } else if (this.state.cost === '$$') {
+          monthMatches.map((city) => {
+            if (city.cost.longTerm.USD < 1250) {
+              costMatches.push(city);
+            }
+          });
+        } else if (this.state.cost === '$$$') {
+          monthMatches.map((city) => {
+            if (city.cost.longTerm.USD < 3000) {
+              costMatches.push(city);
+            }
+          });
+        } else if (this.state.cost === '$$$$') {
+          monthMatches.map((city) => {
+            if (city.cost.longTerm.USD > 3000) {
+              costMatches.push(city);
+            }
+          });
         }
-      });
-    } else if (this.state.cost === '$$') {
-      monthMatches.map((city) => {
-        if (city.cost.longTerm.USD < 1250) {
-          costMatches.push(city);
-        }
-      });
-    } else if (this.state.cost === '$$$') {
-      monthMatches.map((city) => {
-        if (city.cost.longTerm.USD < 3000) {
-          costMatches.push(city);
-        }
-      });
-    } else if (this.state.cost === '$$$$') {
-      monthMatches.map((city) => {
-        if (city.cost.longTerm.USD > 3000) {
-          costMatches.push(city);
-        }
-      });
+        console.log('I got some new matches by month and cost!');
+        this.setState({
+          topMatches: costMatches,
+        });
+      }
     }
-    console.log('I got some new matches by month and cost!');
-    this.setState({
-      topMatches: costMatches,
-    });
   }
+
+  formHandler() {
+    console.log('form');
+    const formData = {
+      user_id: 'some user until we figure this out'
+      city: this.
+    }
+  }
+
+    user_id VARCHAR REFERENCES users(id),
+  city VARCHAR NOT NULL,
+  country VARCHAR NOT NULL,
+  nomadScore NUMERIC(3, 2),
+  wifi NUMERIC(3, 2),
+  fun NUMERIC(3, 2),
+  safety NUMERIC(3, 2),
+  lat NUMERIC(10, 7),
+  lng NUMERIC(10, 7),
+  cost INT,
+  img VARCHAR (64),
 
 
   // This function will use the state set by user input to handle the
