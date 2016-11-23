@@ -1,8 +1,10 @@
-DROP TABLE IF EXISTS savedCities;
+BEGIN;
 
-CREATE TABLE savedCities (
+DROP TABLE IF EXISTS savedcities;
+
+CREATE TABLE savedcities (
   id SERIAL PRIMARY KEY,
-  user_id VARCHAR REFERENCES users(id),
+  user_id INT,
   city VARCHAR NOT NULL,
   country VARCHAR NOT NULL,
   nomadScore NUMERIC(3, 2),
@@ -12,5 +14,7 @@ CREATE TABLE savedCities (
   lat NUMERIC(10, 7),
   lng NUMERIC(10, 7),
   cost INT,
-  img VARCHAR (64),
+  img VARCHAR (64)
 );
+
+COMMIT;
