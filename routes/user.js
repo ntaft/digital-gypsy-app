@@ -10,15 +10,19 @@ const { createUser } = require('../models/user');
  * It uses the logIn middleware from the auth library to parse the form inputs
  * and save the user to the database
  */
-loginRouter.post('/login', logIn, (req, res) => {
-  res.redirect('/');
+loginRouter.get('/', (req, res) => {
+  res.status(204).end();
+});
+
+loginRouter.post('/', logIn, (req, res) => {
+  res.status(204).end();
 });
 
 // assigns null to the session cookie userID
 // then redirects to the login page
 loginRouter.delete('/', (req, res) => {
   req.session.userId = null;
-  res.redirect('/login');
+  res.status(204).end();
 });
 
 // if posting to newuser, collect form data

@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import SearchForm from './SearchForm/SearchForm.jsx';
 import SearchList from './SearchList/SearchList.jsx';
+import Login from './auth/Login/Login.jsx';
+import SignUp from './auth/SignUp/SignUp.jsx';
 import style from './App.css';
 
 class App extends Component {
@@ -164,6 +166,8 @@ class App extends Component {
     return (
       <div className="App">
         <header>Header goes here</header>
+        <Login />
+        <SignUp />
         <SearchForm
           month={this.state.month}
           handleUpdateMonth={event => this.handleUpdateMonth(event)}
