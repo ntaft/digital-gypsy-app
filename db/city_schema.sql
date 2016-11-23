@@ -4,7 +4,7 @@ DROP TABLE IF EXISTS savedCities;
 
 CREATE TABLE savedCities (
   id SERIAL PRIMARY KEY,
-  user_id INT REFERENCES users(id),
+  user_id INT,
   city VARCHAR NOT NULL,
   country VARCHAR NOT NULL,
   nomadScore NUMERIC(3, 2),
