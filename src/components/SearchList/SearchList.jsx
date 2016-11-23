@@ -30,6 +30,7 @@ class SearchList extends Component {
           cost={city.cost.longTerm.USD}
           img={city.media.image['250']}
           changeSelection={this.props.changeSelection}
+          formHandler={this.props.formHandler}
         />,
       );
     }

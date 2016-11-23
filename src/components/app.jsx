@@ -40,6 +40,8 @@ class App extends Component {
   componentDidUpdate(prevProps, prevState) {
     if (prevState.cities !== this.state.cities) {
       this.filterCities();
+    } else if (prevState.selected !== this.state.selected) {
+      this.formHandler();
     }
   }
 
@@ -154,11 +156,39 @@ class App extends Component {
   // Takes in the parameter num which will point to a specific location's
   // object in the array
   changeSelection(num) {
-    console.log('change selection');
-    console.log(num);
     this.setState({
       selected: this.state.topMatches[num],
     });
+  }
+
+  formHandler() {
+    console.log('form');
+    const formData = {
+      user_id: 1,
+      city: this.state.selected.info.city.name,
+      country: this.state.selected.info.country.name,
+      nomadScore: this.state.selected.scores.nomadScore,
+      wifi: this.state.selected.scores.free_wifi_available,
+      fun: this.state.selected.scores.leisure,
+      safety: this.state.selected.scores.safety,
+      lat: this.state.selected.info.location.latitude,
+      lng: this.state.selected.info.location.longitude,
+      cost: this.state.selected.cost.longTerm.USD,
+      img: this.state.selected.media.image['250'],
+    };
+    this.saveCity(formData);
+  }
+
+  saveCity(formInfo) {
+    console.log('save city');
+    fetch('/gypsy', {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      method: 'post',
+      body: JSON.stringify(formInfo),
+    })
+    .catch(err => console.log(err));
   }
 
   // This function will use the state set by user input to handle the
