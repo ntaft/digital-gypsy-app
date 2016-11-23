@@ -34,7 +34,7 @@ const SearchForm = props => (
     <h3>Get Your Options</h3>
     <button
       id="search-button"
-      onClick={() => props.searchLocation()}
+      onClick={() => props.searchByParams()}
     >Search Locations</button>
   </div>
 );

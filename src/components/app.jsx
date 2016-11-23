@@ -93,14 +93,53 @@ class App extends Component {
     });
   }
 
-  // componentDidUpdate(prevProps, prevState) {
-  //   if (prevState.month !== this.state.month) {
-  //     this.filterByMonth();
-  //   }
-  // }
-  // filerByMonth() {
+  // This function will iterate through the cities array and find cities that
+  // match with the month that the user selected.
+  searchByParams(arr) {
+    const monthMatches = [];
+    this.state.cities.result.map((city) => {
+      if (city.info.monthsToVisit.includes(parseInt(this.state.month))) {
+        monthMatches.push(city);
+      }
+    });
+    console.log('got some new matches by month!');
+    this.setState({
+      topMatches: monthMatches,
+    });
 
-  // }
+    console.log(monthMatches[0]);
+    const costMatches = [];
+    if (this.state.cost === '$') {
+      monthMatches.map((city) => {
+        if (city.cost.longTerm.USD < 750) {
+          costMatches.push(city);
+        }
+      });
+    } else if (this.state.cost === '$$') {
+      monthMatches.map((city) => {
+        if (city.cost.longTerm.USD < 1250) {
+          costMatches.push(city);
+        }
+      });
+    } else if (this.state.cost === '$$$') {
+      monthMatches.map((city) => {
+        if (city.cost.longTerm.USD < 3000) {
+          costMatches.push(city);
+        }
+      });
+    } else if (this.state.cost === '$$$$') {
+      monthMatches.map((city) => {
+        if (city.cost.longTerm.USD > 3000) {
+          costMatches.push(city);
+        }
+      });
+    }
+    console.log('I got some new matches by month and cost!');
+    this.setState({
+      topMatches: costMatches,
+    });
+  }
+
 
   // This function will use the state set by user input to handle the
   // route to our exteral API to searchByParameters.
@@ -169,6 +208,7 @@ class App extends Component {
           handleUpdateMonth={event => this.handleUpdateMonth(event)}
           handleUpdateWeather={event => this.handleUpdateWeather(event)}
           handleUpdateCost={event => this.handleUpdateCost(event)}
+          searchByParams={this.searchByParams.bind(this)}
         />
         <SearchList
           matches={this.state.topMatches}
