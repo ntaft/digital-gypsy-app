@@ -36,7 +36,7 @@ class SearchList extends Component {
 
   render() {
     return (
-      <div>Search List
+      <div id="search-list">Search List
         {this.renderSearchResults()}
       </div>
     );

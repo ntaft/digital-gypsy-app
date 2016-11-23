@@ -1,0 +1,5 @@
+#search-list {
+ height: 500px;
+ width: 500px;
+ overflow: auto;
+}
