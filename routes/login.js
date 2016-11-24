@@ -11,7 +11,7 @@ const { fetchAllCities } =require('../services/nomadlist')
  * It uses the logIn middleware from the auth library to parse the form inputs
  * and save the user to the database
  */
-loginRouter.post('/login', logIn, (req, res) => {
+loginRouter.post('/', logIn, (req, res) => {
   res.redirect('/');
 })
 
