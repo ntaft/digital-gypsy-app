@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import SearchForm from './SearchForm/SearchForm.jsx';
 import SearchList from './SearchList/SearchList.jsx';
+import SavedList from './SavedList/SavedList.jsx';
 import style from './App.css';
 
 class App extends Component {
@@ -10,11 +11,13 @@ class App extends Component {
     this.state = {
       cities: [],
       topMatches: [],
+      selected: '',
       month: '',
       type: '',
       limit: '',
       temp: '',
       cost: '',
+      saved: [],
     };
 
     // this.searchLocation = this.searchLocation.bind(this);
@@ -39,6 +42,8 @@ class App extends Component {
   componentDidUpdate(prevProps, prevState) {
     if (prevState.cities !== this.state.cities) {
       this.filterCities();
+    } else if (prevState.selected !== this.state.selected) {
+      this.formHandler();
     }
   }
 
@@ -93,53 +98,124 @@ class App extends Component {
     });
   }
 
-  // This function will iterate through the cities array and find cities that
+  // This function will check to see if state.month has been reset and
+  // will iterate through the cities array and find cities that
   // match with the month that the user selected.
-  searchByParams(arr) {
-    const monthMatches = [];
-    this.state.cities.result.map((city) => {
-      if (city.info.monthsToVisit.includes(parseInt(this.state.month))) {
-        monthMatches.push(city);
-      }
-    });
-    console.log('got some new matches by month!');
-    this.setState({
-      topMatches: monthMatches,
-    });
+  searchByParams() {
+    if (this.state.month !== '') {
+      const monthMatches = [];
+      this.state.cities.result.map((city) => {
+        if (city.info.monthsToVisit.includes(parseInt(this.state.month))) {
+          monthMatches.push(city);
+        }
+      });
+      console.log('got some new matches by month!');
+      this.setState({
+        topMatches: monthMatches,
+      });
 
-    console.log(monthMatches[0]);
-    const costMatches = [];
-    if (this.state.cost === '$') {
-      monthMatches.map((city) => {
-        if (city.cost.longTerm.USD < 750) {
-          costMatches.push(city);
+      // Then check to see if the state.cost has been updated
+      // If it has, iterate through the cities that match the month to see
+      // which results match this additional search parameter.
+      if (this.state.cost !== '') {
+        const costMatches = [];
+        if (this.state.cost === '$') {
+          monthMatches.map((city) => {
+            if (city.cost.longTerm.USD < 750) {
+              costMatches.push(city);
+            }
+          });
+        } else if (this.state.cost === '$$') {
+          monthMatches.map((city) => {
+            if (city.cost.longTerm.USD < 1250) {
+              costMatches.push(city);
+            }
+          });
+        } else if (this.state.cost === '$$$') {
+          monthMatches.map((city) => {
+            if (city.cost.longTerm.USD < 3000) {
+              costMatches.push(city);
+            }
+          });
+        } else if (this.state.cost === '$$$$') {
+          monthMatches.map((city) => {
+            if (city.cost.longTerm.USD > 3000) {
+              costMatches.push(city);
+            }
+          });
         }
-      });
-    } else if (this.state.cost === '$$') {
-      monthMatches.map((city) => {
-        if (city.cost.longTerm.USD < 1250) {
-          costMatches.push(city);
-        }
-      });
-    } else if (this.state.cost === '$$$') {
-      monthMatches.map((city) => {
-        if (city.cost.longTerm.USD < 3000) {
-          costMatches.push(city);
-        }
-      });
-    } else if (this.state.cost === '$$$$') {
-      monthMatches.map((city) => {
-        if (city.cost.longTerm.USD > 3000) {
-          costMatches.push(city);
-        }
-      });
+        console.log('I got some new matches by month and cost!');
+        this.setState({
+          topMatches: costMatches,
+        });
+      }
     }
-    console.log('I got some new matches by month and cost!');
+  }
+
+  // Code attributed to nyc-firehouse lab
+  // https://git.generalassemb.ly/krmalewski/nyc-firehouses-1/blob/master/src/components/App.js
+  // Mutator function that will selected the location to save
+  // Takes in the parameter num which will point to a specific location's
+  // object in the array
+  changeSelection(num) {
     this.setState({
-      topMatches: costMatches,
+      selected: this.state.topMatches[num],
     });
   }
 
+  formHandler() {
+    console.log('form');
+    const formData = {
+      user_id: 1,
+      city: this.state.selected.info.city.name,
+      country: this.state.selected.info.country.name,
+      nomadScore: this.state.selected.scores.nomadScore,
+      wifi: this.state.selected.scores.free_wifi_available,
+      fun: this.state.selected.scores.leisure,
+      safety: this.state.selected.scores.safety,
+      lat: this.state.selected.info.location.latitude,
+      lng: this.state.selected.info.location.longitude,
+      cost: this.state.selected.cost.longTerm.USD,
+      img: this.state.selected.media.image['250'],
+    };
+    this.saveCity(formData);
+  }
+
+  saveCity(formInfo) {
+    console.log('save city');
+    fetch('/gypsy', {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      method: 'post',
+      body: JSON.stringify(formInfo),
+    })
+    .catch(err => console.log(err));
+  }
+
+  deleteCity(id) {
+    console.log('deleting city #', id)
+    fetch('/gypsy', {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      method: 'post',
+      body: JSON.stringify(id),
+    })
+    .catch(err => console.log(err));
+  }
+
+  modifyCity(updatedData) {
+    console.log('modifying city #', id)
+    fetch('/gypsy', {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      method: 'put',
+      body: JSON.stringify(updatedData),
+    })
+    .catch(err => console.log(err));
+  }
 
   // This function will use the state set by user input to handle the
   // route to our exteral API to searchByParameters.
@@ -212,6 +288,12 @@ class App extends Component {
         />
         <SearchList
           matches={this.state.topMatches}
+          changeSelection={this.changeSelection.bind(this)}
+        />
+        <SavedList
+          savedCities={this.state.saved}
+          deleteSaved={this.deleteCity.bind(this)}
+          modifySaved={this.modifyCity.bind(this)}
         />
         <footer>Footer goes here</footer>
       </div>
