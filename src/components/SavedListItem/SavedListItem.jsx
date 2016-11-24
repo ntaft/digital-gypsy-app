@@ -12,7 +12,8 @@ const SavedListItem = props => (
     <p>Fun: {Math.round((props.fun)*10)}/10</p>
     <p>Safety: {Math.round((props.safety)*10)}/10</p>
     <button className="delete-button" onClick={() => props.deleteSaved(props.id)}>Remove</button>
+    <button className="modify-button" onClick={() => props.modifySaved(props.data)}>Modify</button>
   </div>
 );
 
-export default SearchListItem;
+export default SavedListItem;
