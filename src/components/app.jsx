@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import SearchForm from './SearchForm/SearchForm.jsx';
 import SearchList from './SearchList/SearchList.jsx';
+import SavedList from './SavedList/SavedList.jsx';
 import style from './App.css';
 
 class App extends Component {
@@ -16,6 +17,7 @@ class App extends Component {
       limit: '',
       temp: '',
       cost: '',
+      saved: [],
     };
 
     // this.searchLocation = this.searchLocation.bind(this);
@@ -191,6 +193,30 @@ class App extends Component {
     .catch(err => console.log(err));
   }
 
+  deleteCity(id) {
+    console.log('deleting city #', id)
+    fetch('/gypsy', {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      method: 'post',
+      body: JSON.stringify(id),
+    })
+    .catch(err => console.log(err));
+  }
+
+  modifyCity(updatedData) {
+    console.log('modifying city #', id)
+    fetch('/gypsy', {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      method: 'put',
+      body: JSON.stringify(updatedData),
+    })
+    .catch(err => console.log(err));
+  }
+
   // This function will use the state set by user input to handle the
   // route to our exteral API to searchByParameters.
   // Cities that match search results will be returned in an array.
@@ -263,6 +289,11 @@ class App extends Component {
         <SearchList
           matches={this.state.topMatches}
           changeSelection={this.changeSelection.bind(this)}
+        />
+        <SavedList
+          savedCities={this.state.saved}
+          deleteSaved={this.deleteCity.bind(this)}
+          modifySaved={this.modifyCity.bind(this)}
         />
         <footer>Footer goes here</footer>
       </div>
