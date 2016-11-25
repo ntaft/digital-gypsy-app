@@ -1,5 +1,14 @@
 const db = require('../db/db.js');
 
+function getSavedCities(req, res, next) {
+  db.any('SELECT * FROM savedcities;')
+  .then((saved) => {
+    res.saved = saved;
+    next();
+  })
+  .catch(error => next(error));
+}
+
 function saveCity(req, res, next) {
   console.log('save model');
   db.none(`INSERT INTO savedcities
@@ -14,5 +23,6 @@ function saveCity(req, res, next) {
 }
 
 module.exports = {
+  getSavedCities,
   saveCity,
 };

@@ -3,12 +3,17 @@ import SavedListItem from '../SavedListItem/SavedListItem.jsx';
 
 class SavedList extends Component {
 
+  componentWillMount() {
+    this.props.fetchSavedCities();
+  }
+
   // re-render saved list if the props change
   componentDidUpdate(prevProps, prevState) {
     if (prevProps.savedCities !== this.props.savedCities) {
       this.renderSavedList();
     }
   }
+
   // returns the saved list
   renderSavedList() {
     if (this.props.savedCities.length === 0) {
@@ -18,23 +23,24 @@ class SavedList extends Component {
         </div>
       );
     }
+
     return this.props.savedCities.map((eachCity, i) =>
       <SavedListItem
         key={i}
         id={eachCity.id}
-        city={eachCity.info.city.name}
-        country={eachCity.info.country.name}
-        lat={eachCity.info.location.latitude}
-        lng={eachCity.info.location.longitude}
-        nomadScore={eachCity.scores.nomadScore}
-        wifi={eachCity.scores.free_wifi_available}
-        fun={eachCity.scores.leisure}
-        safety={eachCity.scores.safety}
-        forignerFriendly={eachCity.scores.friendly_to_foreigners}
-        cost={eachCity.cost.longTerm.USD}
-        img={eachCity.media.image['250']}
+        city={eachCity.city}
+        country={eachCity.country}
+        lat={eachCity.lat}
+        lng={eachCity.lng}
+        nomadScore={eachCity.nomadScore}
+        wifi={eachCity.wifi}
+        fun={eachCity.fun}
+        safety={eachCity.safety}
+        // forignerFriendly={eachCity.scores.friendly_to_foreigners}
+        cost={eachCity.cost}
+        img={eachCity.img}
         data={this.props.savedCities}
-      />
+      />,
     );
   }
   render() {
