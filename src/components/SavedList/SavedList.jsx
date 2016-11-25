@@ -34,6 +34,9 @@ class SavedList extends Component {
         img={eachCity.img}
         data={this.props.savedCities}
         deleteCity={this.props.deleteCity}
+        notes={this.props.notes}
+        updateNotes={this.props.updateNotes}
+        updateFormHandler={this.props.updateFormHandler}
       />,
     );
   }

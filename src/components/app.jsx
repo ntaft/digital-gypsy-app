@@ -13,11 +13,10 @@ class App extends Component {
       topMatches: [],
       selected: '',
       month: '',
-      type: '',
-      limit: '',
       temp: '',
       cost: '',
       saved: [],
+      notes: '',
     };
   }
 
@@ -199,7 +198,6 @@ class App extends Component {
         { saved },
       );
     })
-    .catch(error => console.log(error));
   }
 
   // Save city to DB then fetchSavedCities to reset the state of saved and update the savedList
@@ -216,7 +214,7 @@ class App extends Component {
     .then(this.fetchSavedCities());
   }
 
-  //
+  // This function will delete a specific city from the savedcities DB
   deleteCity(id) {
     console.log('deleting city #', id);
     fetch(`/gypsy/${id}`, {
@@ -236,8 +234,14 @@ class App extends Component {
     this.setState({ saved });
   }
 
+  updateNotes(e) {
+    this.setState({
+      notes: e.target.value,
+    });
+  }
+
   modifyCity(updatedData) {
-    console.log('modifying city #', id)
+    console.log('modifying city');
     fetch('/gypsy', {
       headers: {
         'Content-Type': 'application/json',
@@ -248,62 +252,18 @@ class App extends Component {
     .catch(err => console.log(err));
   }
 
-  // This function will use the state set by user input to handle the
-  // route to our exteral API to searchByParameters.
-  // Cities that match search results will be returned in an array.
-  // Reset the state of cities to the array of cities matching the filers.
-  // searchLocation() {
-  //   console.log('search locations');
-  //   fetch(`/nomad/${this.state.month}/${this.state.type}/${this.state.limit}/${this.state.temp}`)
-  //   .then(r => r.json())
-  //   .then((nomadData) => {
-  //     this.setState({
-  //       cities: nomadData,
-  //     });
-  //   })
-  //   // .catch(err => console.log(err));
-  // }
-
-
-  // This function will check if the searchLocation function has run and
-  // reset the state of cities. Once the cities state has been reset, the searchCity
-  // function will fire.
-  // componentDidUpdate(prevProps, prevState) {
-  //   if (prevState.cities !== this.state.cities) {
-  //     this.searchCity();
-  //   }
-  // }
-
-  // This function will iterate through the cities state and make another
-  // fetch request that will get information for each specific city.
-  // Each fetch request will return an object with information on that city
-  // which will be pushed into the cityData array.
-  // Each iteration will increment a count and check to see if it has reached the laat item.
-  // Then, the cityInfo state will be updated to match this array.
-  // We limit the number of responses to 20 to increase speed and reduce the
-  // number of fetch calls
-  // searchCity() {
-  //   console.log('search city');
-  //   const cityData = [];
-  //   let i = 0;
-  //   // const count = this.state.cities.length;
-  //   for (let j = 0; j < 20; j++) {
-  //     fetch(`/nomad/city/${this.state.cities[j]}`)
-  //     .then(r => r.json())
-  //     .then(data => cityData.push(data.result))
-  //     .then(() => {
-  //       if (i === 19) {
-  //         console.log('last city');
-  //         this.setState({
-  //           cityInfo: cityData,
-  //         });
-  //       } else {
-  //         i+=1;
-  //       }
-  //     })
-  //     .catch(err => console.log(err));
-  //   }
-  // }
+  updateFormHandler(id) {
+    console.log('update form');
+    const updatedData = {
+      user_id: 1,
+      id: id,
+      notes: this.state.notes,
+    };
+    this.modifyCity(updatedData);
+    this.setState({
+      notes: '',
+    });
+  }
 
 
   render() {
@@ -325,7 +285,9 @@ class App extends Component {
           fetchSavedCities={this.fetchSavedCities.bind(this)}
           savedCities={this.state.saved}
           deleteCity={this.deleteCity.bind(this)}
-          modifySaved={this.modifyCity.bind(this)}
+          notes={this.state.notes}
+          updateNotes={event => this.updateNotes(event)}
+          updateFormHandler={this.updateFormHandler.bind(this)}
         />
         <footer>Footer goes here</footer>
       </div>

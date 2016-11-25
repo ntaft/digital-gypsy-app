@@ -12,7 +12,13 @@ const SavedListItem = props => (
     <p>Fun: {Math.round((props.fun)*10)}/10</p>
     <p>Safety: {Math.round((props.safety)*10)}/10</p>
     <button className="delete-button" onClick={() => props.deleteCity(props.id)}>Remove</button>
-    <button className="modify-button" onClick={() => props.modifySaved(props.data)}>Modify</button>
+    <input
+      type="text"
+      placeholder="Enter notes about this destination."
+      value={props.notes}
+      onChange={props.updateNotes}
+    />
+    <button className="modify-button" onClick={() => props.updateFormHandler(props.id)}>Modify</button>
   </div>
 );
 

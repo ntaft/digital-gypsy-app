@@ -31,8 +31,21 @@ function deleteCity(req, res, next) {
   .catch(err => next(err));
 }
 
+function updateCity(req, res, next) {
+  console.log(req.body.notes);
+  console.log(req.body.id);
+  db.none(`UPDATE savedcities
+           SET notes = $1
+           WHERE id = $2;`,
+           [req.body.notes, req.body.id])
+  .then(() => console.log('Update complete!'))
+  .then(next())
+  .catch(err => next(err));
+}
+
 module.exports = {
   getSavedCities,
   saveCity,
   deleteCity,
+  updateCity,
 };
