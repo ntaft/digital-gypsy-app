@@ -33,6 +33,7 @@ class SavedList extends Component {
         cost={eachCity.cost}
         img={eachCity.img}
         data={this.props.savedCities}
+        deleteCity={this.props.deleteCity}
       />,
     );
   }

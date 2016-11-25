@@ -47,7 +47,6 @@ class App extends Component {
   // This function will push the top 20 cities from the cities object into a new array
   // This reset the state of topMatches to this array of objects.
   filterCities() {
-    console.log('filterCities');
     const topCities = [];
     for (let i = 0; i < 20; i++) {
       topCities.push(this.state.cities.result[i]);
@@ -190,6 +189,20 @@ class App extends Component {
     this.saveCity(formData);
   }
 
+  // Get all saved cities from database and save then into the saved state.
+  fetchSavedCities() {
+    console.log('so fetch');
+    fetch('/gypsy')
+    .then(r => r.json())
+    .then((saved) => {
+      this.setState(
+        { saved },
+      );
+    })
+    .catch(error => console.log(error));
+  }
+
+  // Save city to DB then fetchSavedCities to reset the state of saved and update the savedList
   saveCity(formInfo) {
     console.log('save city');
     fetch('/gypsy', {
@@ -203,28 +216,24 @@ class App extends Component {
     .then(this.fetchSavedCities());
   }
 
-  fetchSavedCities() {
-    console.log('so fetch');
-    fetch('/gypsy')
-    .then(r => r.json())
-    .then((saved) => {
-      this.setState(
-        { saved },
-      );
-    })
-    .catch(error => console.log(error));
-  }
-
+  //
   deleteCity(id) {
     console.log('deleting city #', id);
-    fetch('/gypsy', {
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      method: 'post',
-      body: JSON.stringify(id),
+    fetch(`/gypsy/${id}`, {
+      method: 'delete',
     })
+    .then(this.filterSavedCities(id))
     .catch(err => console.log(err));
+  }
+
+  // Rather than refetching all saved cities from the DB, filter through
+  // the saved cities and keep all cities except for the one with the id
+  // matching the deleted city.
+  filterSavedCities(id) {
+    const saved = this.state.saved.filter((city) => {
+      return city.id !== id;
+    });
+    this.setState({ saved });
   }
 
   modifyCity(updatedData) {
@@ -315,7 +324,7 @@ class App extends Component {
         <SavedList
           fetchSavedCities={this.fetchSavedCities.bind(this)}
           savedCities={this.state.saved}
-          deleteSaved={this.deleteCity.bind(this)}
+          deleteCity={this.deleteCity.bind(this)}
           modifySaved={this.modifyCity.bind(this)}
         />
         <footer>Footer goes here</footer>
