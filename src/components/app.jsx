@@ -199,7 +199,8 @@ class App extends Component {
       method: 'post',
       body: JSON.stringify(formInfo),
     })
-    .catch(err => console.log(err));
+
+    .then(this.fetchSavedCities());
   }
 
   fetchSavedCities() {

@@ -7,13 +7,6 @@ class SavedList extends Component {
     this.props.fetchSavedCities();
   }
 
-  // re-render saved list if the props change
-  componentDidUpdate(prevProps, prevState) {
-    if (prevProps.savedCities !== this.props.savedCities) {
-      this.renderSavedList();
-    }
-  }
-
   // returns the saved list
   renderSavedList() {
     if (this.props.savedCities.length === 0) {
