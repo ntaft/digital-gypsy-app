@@ -19,9 +19,6 @@ class App extends Component {
       cost: '',
       saved: [],
     };
-
-    // this.searchLocation = this.searchLocation.bind(this);
-    // this.searchCity = this.searchCity.bind(this);
   }
 
   componentWillMount() {
@@ -50,7 +47,6 @@ class App extends Component {
   // This function will push the top 20 cities from the cities object into a new array
   // This reset the state of topMatches to this array of objects.
   filterCities() {
-    console.log('filterCities');
     const topCities = [];
     for (let i = 0; i < 20; i++) {
       topCities.push(this.state.cities.result[i]);
@@ -98,6 +94,43 @@ class App extends Component {
     });
   }
 
+  // Check to see if state.cost has been updated. If it has, iterate though
+  // an array of cities and push the cities that match this price range in
+  // to an array. Then, reset the state of topmatches.
+  filterByPrice(arr) {
+    const costMatches = [];
+    if (this.state.cost === '$') {
+      arr.map((city) => {
+        if (city.cost.longTerm.USD < 750) {
+          costMatches.push(city);
+        }
+      });
+    } else if (this.state.cost === '$$') {
+      arr.map((city) => {
+        if (city.cost.longTerm.USD < 1250) {
+          costMatches.push(city);
+        }
+      });
+    } else if (this.state.cost === '$$$') {
+      arr.map((city) => {
+        if (city.cost.longTerm.USD < 3000) {
+          costMatches.push(city);
+        }
+      });
+    } else if (this.state.cost === '$$$$') {
+      arr.map((city) => {
+        if (city.cost.longTerm.USD > 3000) {
+          costMatches.push(city);
+        }
+      });
+    }
+    console.log('I got some new matches by price!');
+    this.setState({
+      topMatches: costMatches,
+    });
+  }
+
+
   // This function will check to see if state.month has been reset and
   // will iterate through the cities array and find cities that
   // match with the month that the user selected.
@@ -118,37 +151,12 @@ class App extends Component {
       // If it has, iterate through the cities that match the month to see
       // which results match this additional search parameter.
       if (this.state.cost !== '') {
-        const costMatches = [];
-        if (this.state.cost === '$') {
-          monthMatches.map((city) => {
-            if (city.cost.longTerm.USD < 750) {
-              costMatches.push(city);
-            }
-          });
-        } else if (this.state.cost === '$$') {
-          monthMatches.map((city) => {
-            if (city.cost.longTerm.USD < 1250) {
-              costMatches.push(city);
-            }
-          });
-        } else if (this.state.cost === '$$$') {
-          monthMatches.map((city) => {
-            if (city.cost.longTerm.USD < 3000) {
-              costMatches.push(city);
-            }
-          });
-        } else if (this.state.cost === '$$$$') {
-          monthMatches.map((city) => {
-            if (city.cost.longTerm.USD > 3000) {
-              costMatches.push(city);
-            }
-          });
-        }
-        console.log('I got some new matches by month and cost!');
-        this.setState({
-          topMatches: costMatches,
-        });
+        this.filterByPrice(monthMatches);
       }
+    // If a user does not pick a month, this function will filter strictly
+    // by price.
+    } else if (this.state.cost !== '') {
+      this.filterByPrice(this.state.cities.result);
     }
   }
 
@@ -181,6 +189,20 @@ class App extends Component {
     this.saveCity(formData);
   }
 
+  // Get all saved cities from database and save then into the saved state.
+  fetchSavedCities() {
+    console.log('so fetch');
+    fetch('/gypsy')
+    .then(r => r.json())
+    .then((saved) => {
+      this.setState(
+        { saved },
+      );
+    })
+    .catch(error => console.log(error));
+  }
+
+  // Save city to DB then fetchSavedCities to reset the state of saved and update the savedList
   saveCity(formInfo) {
     console.log('save city');
     fetch('/gypsy', {
@@ -190,19 +212,28 @@ class App extends Component {
       method: 'post',
       body: JSON.stringify(formInfo),
     })
+
+    .then(this.fetchSavedCities());
+  }
+
+  //
+  deleteCity(id) {
+    console.log('deleting city #', id);
+    fetch(`/gypsy/${id}`, {
+      method: 'delete',
+    })
+    .then(this.filterSavedCities(id))
     .catch(err => console.log(err));
   }
 
-  deleteCity(id) {
-    console.log('deleting city #', id)
-    fetch('/gypsy', {
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      method: 'post',
-      body: JSON.stringify(id),
-    })
-    .catch(err => console.log(err));
+  // Rather than refetching all saved cities from the DB, filter through
+  // the saved cities and keep all cities except for the one with the id
+  // matching the deleted city.
+  filterSavedCities(id) {
+    const saved = this.state.saved.filter((city) => {
+      return city.id !== id;
+    });
+    this.setState({ saved });
   }
 
   modifyCity(updatedData) {
@@ -291,8 +322,9 @@ class App extends Component {
           changeSelection={this.changeSelection.bind(this)}
         />
         <SavedList
+          fetchSavedCities={this.fetchSavedCities.bind(this)}
           savedCities={this.state.saved}
-          deleteSaved={this.deleteCity.bind(this)}
+          deleteCity={this.deleteCity.bind(this)}
           modifySaved={this.modifyCity.bind(this)}
         />
         <footer>Footer goes here</footer>

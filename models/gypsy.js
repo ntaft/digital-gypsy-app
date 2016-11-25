@@ -1,5 +1,14 @@
 const db = require('../db/db.js');
 
+function getSavedCities(req, res, next) {
+  db.any('SELECT * FROM savedcities;')
+  .then((saved) => {
+    res.saved = saved;
+    next();
+  })
+  .catch(error => next(error));
+}
+
 function saveCity(req, res, next) {
   console.log('save model');
   db.none(`INSERT INTO savedcities
@@ -13,6 +22,17 @@ function saveCity(req, res, next) {
   .catch(err => next(err));
 }
 
+function deleteCity(req, res, next) {
+  console.log('delete city');
+  db.none(`DELETE FROM savedcities
+           WHERE id = $1;`,
+           [req.params.id])
+  .then(next())
+  .catch(err => next(err));
+}
+
 module.exports = {
+  getSavedCities,
   saveCity,
+  deleteCity,
 };
