@@ -278,7 +278,9 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <header>Header goes here</header>
+        <header>
+          <h1><span> DIGITAL GYPSY</span></h1>
+        </header>
         <SearchForm
           month={this.state.month}
           handleUpdateMonth={event => this.handleUpdateMonth(event)}
@@ -295,7 +297,7 @@ class App extends Component {
           deleteSaved={this.deleteCity.bind(this)}
           modifySaved={this.modifyCity.bind(this)}
         />
-        <footer>Footer goes here</footer>
+        <footer><p>© 2016 Digital Gypsy</p></footer>
       </div>
     );
   }

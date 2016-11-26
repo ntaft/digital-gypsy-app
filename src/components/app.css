@@ -1,0 +1,17 @@
+header,
+footer {
+  background-color: tomato;
+  padding: 2px;
+}
+
+header h1 {
+  text-align: left;
+}
+
+header h1 span,
+footer p {
+  color: black;
+}
+
+
+

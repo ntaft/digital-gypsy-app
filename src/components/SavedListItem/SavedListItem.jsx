@@ -5,7 +5,7 @@ const SavedListItem = props => (
   <div className="saved-list-item">
     <h4>{props.city}, {props.country}</h4>
     <div className="image-holder">
-      <img src={`https://nomadlist.com${props.img}`} alt=""/>
+      <img className="city-image" src={`https://nomadlist.com${props.img}`} alt=""/>
     </div>
     <p>Nomad Score: {Math.round((props.nomadScore)*10)}/10</p>
     <p>Wifi: {Math.round((props.wifi)*10)}/10</p>
