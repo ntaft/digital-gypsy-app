@@ -3,6 +3,7 @@
 const loginRouter = require('express').Router();
 const { logIn } = require('../lib/auth');
 const { createUser } = require(../models/user);
+const { fetchAllCities } =require('../services/nomadlist')
 // const { authenticate } = require('../lib/auth');
 
 /**
@@ -10,7 +11,7 @@ const { createUser } = require(../models/user);
  * It uses the logIn middleware from the auth library to parse the form inputs
  * and save the user to the database
  */
-loginRouter.post('/login', logIn, (req, res) => {
+loginRouter.post('/', logIn, (req, res) => {
   res.redirect('/');
 })
 

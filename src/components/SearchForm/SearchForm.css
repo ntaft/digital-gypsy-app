@@ -1,0 +1,74 @@
+body {
+ font-family: sans-serif;
+ text-align: center;
+ background-color: lightseagreen;
+ font-size: 18px;
+}
+#search-container {
+ text-align: center;
+}
+
+#month-container {
+ text-align: center;
+}
+
+#temperature-container {
+ text-align: center;
+}
+
+button {
+ letter-spacing: 0;
+ font-size: 12px;
+ height: 35px;
+ width: 90px;
+ background-color: tomato;
+ border: none;
+}
+
+button:hover,
+button:active {
+  letter-spacing: 2px;
+}
+
+button:after,
+button:before {
+  backface-visibility: hidden;
+  border: 1px solid snow;
+  bottom: 0px;
+  display: block;
+  margin: 0 auto;
+  position: relative;
+  transition: all 280ms ease-in-out;
+  width: 0;
+}
+
+button:hover:after,
+button:hover:before {
+  backface-visibility: hidden;
+  border-color: #fff;
+  transition: width 350ms ease-in-out;
+  width: 70%;
+}
+
+button:hover:before {
+  bottom: auto;
+  top: 0;
+  width: 70%;
+}
+
+button {
+
+}
+
+
+.cold-button:hover {
+  background-color: deepskyblue;
+}
+
+.warm-button:hover {
+  background-color: darkorange;
+}
+
+.hot-button:hover {
+  background-color: firebrick;
+}
