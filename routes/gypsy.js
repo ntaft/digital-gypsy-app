@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { getSavedCities, saveCity, deleteCity } = require('../models/gypsy.js');
+const { getSavedCities, saveCity, updateCity, deleteCity } = require('../models/gypsy.js');
 
 // Get all saved cities
 router.get('/', getSavedCities, (req, res) => {
@@ -10,6 +10,10 @@ router.get('/', getSavedCities, (req, res) => {
 // Save city to gypsy API
 router.post('/', saveCity, (req, res) => {
   console.log('City saved!');
+});
+
+router.put('/', updateCity, (req, res) => {
+  console.log('City updated');
 });
 
 // Delete city from API
