@@ -1,19 +1,21 @@
 body {
  font-family: sans-serif;
  text-align: center;
- background-color: lightseagreen;
- font-size: 18px;
+ background-color: teal;
+ font-size: 14px;
 }
 #search-container {
  text-align: center;
+ display: flex;
+ justify-content: center;
 }
 
 #month-container {
- text-align: center;
+
 }
 
 #temperature-container {
- text-align: center;
+
 }
 
 button {
@@ -21,8 +23,8 @@ button {
  font-size: 12px;
  height: 35px;
  width: 90px;
- background-color: tomato;
- border: none;
+ background-color: coral;
+ border: 1px solid teal;
 }
 
 button:hover,

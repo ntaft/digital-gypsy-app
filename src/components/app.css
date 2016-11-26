@@ -1,7 +1,8 @@
 header,
 footer {
-  background-color: tomato;
+  background-color: coral;
   padding: 2px;
+  display: flex;
 }
 
 header h1 {
@@ -11,6 +12,7 @@ header h1 {
 header h1 span,
 footer p {
   color: black;
+  margin: 0;
 }
 
 
