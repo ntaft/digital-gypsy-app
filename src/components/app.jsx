@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import SearchForm from './SearchForm/SearchForm.jsx';
 import SearchList from './SearchList/SearchList.jsx';
 import SavedList from './SavedList/SavedList.jsx';
+import WorkPlaces from './WorkPlaces/WorkPlaces.jsx';
 import style from './App.css';
 
 class App extends Component {
@@ -17,6 +18,7 @@ class App extends Component {
       cost: '',
       saved: [],
       notes: '',
+      work: [],
     };
   }
 
@@ -176,6 +178,7 @@ class App extends Component {
       user_id: 1,
       city: this.state.selected.info.city.name,
       country: this.state.selected.info.country.name,
+      slug: this.state.selected.info.city.slug,
       nomadScore: this.state.selected.scores.nomadScore,
       wifi: this.state.selected.scores.free_wifi_available,
       fun: this.state.selected.scores.leisure,
@@ -266,6 +269,15 @@ class App extends Component {
   }
 
 
+  getWorkPlaces(slug) {
+    console.log('get work places');
+    fetch(`/nomad/work/${slug}`)
+    .then(r => r.json())
+    .then(work => this.setState(
+      { work },
+    ));
+  }
+
   render() {
     return (
       <div className="App">
@@ -290,6 +302,10 @@ class App extends Component {
           notes={this.state.notes}
           updateNotes={event => this.updateNotes(event)}
           updateFormHandler={this.updateFormHandler.bind(this)}
+          getWorkPlaces={this.getWorkPlaces.bind(this)}
+        />
+        <WorkPlaces
+          work={this.state.work}
         />
         <footer><p>© 2016 Digital Gypsy</p></footer>
       </div>
