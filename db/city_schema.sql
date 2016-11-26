@@ -14,7 +14,8 @@ CREATE TABLE savedcities (
   lat NUMERIC(10, 7),
   lng NUMERIC(10, 7),
   cost INT,
-  img VARCHAR (64)
+  img VARCHAR (64),
+  notes TEXT
 );
 
 COMMIT;
