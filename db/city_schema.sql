@@ -7,6 +7,7 @@ CREATE TABLE savedcities (
   user_id INT,
   city VARCHAR NOT NULL,
   country VARCHAR NOT NULL,
+  slug VARCHAR NOT NULL,
   nomadScore NUMERIC(3, 2),
   wifi NUMERIC(3, 2),
   fun NUMERIC(3, 2),

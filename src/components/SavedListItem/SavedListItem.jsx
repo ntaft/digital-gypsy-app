@@ -7,7 +7,7 @@ const SavedListItem = props => (
     <div className="image-holder">
       <img className="city-image" src={`https://nomadlist.com${props.img}`} alt=""/>
     </div>
-    <p>Nomad Score: {Math.round((props.nomadScore)*10)}/10</p>
+    <p>Nomad Score: {props.nomadScore}</p>
     <p>Wifi: {Math.round((props.wifi)*10)}/10</p>
     <p>Fun: {Math.round((props.fun)*10)}/10</p>
     <p>Safety: {Math.round((props.safety)*10)}/10</p>
@@ -19,6 +19,7 @@ const SavedListItem = props => (
       onChange={props.updateNotes}
     />
     <button className="modify-button" onClick={() => props.updateFormHandler(props.id)}>Modify</button>
+    <button onClick={() => props.getWorkPlaces(props.slug)}>See a list of work places</button>
   </div>
 );
 
