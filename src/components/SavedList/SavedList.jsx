@@ -42,7 +42,9 @@ class SavedList extends Component {
   }
   render() {
     return (
-      <div className="saved-list">
+      <div className="saved-list">Saved List
+      <br />
+      <br />
         {this.renderSavedList()}
       </div>
     );

@@ -1,9 +1,11 @@
 .saved-list-item {
  height: 500px;
- width: 500px;
  text-align: center;
  font-size: 18px;
  font-family: sans-serif;
+ position: relative;
+ width: 30%;
+ border: 1px solid coral;
 }
 
 .city-image {
