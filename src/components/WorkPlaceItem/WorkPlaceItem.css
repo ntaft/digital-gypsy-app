@@ -4,6 +4,26 @@
  font-family: sans-serif;
  width: 400px;
  border-top: 1px solid black;
- border-bottom: 1px solid black;
  margin-bottom: 5px;
+}
+
+.workplace-item h4 {
+  font-size: 18px;
+  margin: 15px auto 5px auto;
+}
+
+.workplace-item p {
+  font-size: 15px;
+  margin: 3.5px;
+}
+
+.workplace-item a {
+  text-decoration: underline;
+  color: black;
+  font-size: 17px;
+  cursor: pointer;
+}
+
+.workplace-item a:hover {
+  color: white;
 }
