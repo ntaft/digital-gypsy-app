@@ -3,6 +3,8 @@ import SearchForm from './SearchForm/SearchForm.jsx';
 import SearchList from './SearchList/SearchList.jsx';
 import SavedList from './SavedList/SavedList.jsx';
 import WorkPlaces from './WorkPlaces/WorkPlaces.jsx';
+import SavedMap from './MapContainer/MapContainer.jsx';
+import SavedListMap from './SavedListMap/SavedListMap.jsx';
 import style from './App.css';
 
 class App extends Component {
@@ -279,7 +281,22 @@ class App extends Component {
   }
 
   render() {
+    const location = {
+      lat: 0,
+      lng: 0,
+    };
+
+    const markers = [
+      {
+        location: {
+          lat: 0,
+          lng: 0,
+        },
+      },
+    ];
+
     return (
+
       <div className="App">
         <header>
           <h1><span> DIGITAL GYPSY</span></h1>
@@ -307,6 +324,13 @@ class App extends Component {
         <WorkPlaces
           work={this.state.work}
         />
+        <div style={{ width: '300px', height: '300px', background: 'red' }}>
+          <SavedMap
+            center={location}
+            markers={markers}
+          />
+        </div>
+        <SavedListMap />
         <footer><p>© 2016 Digital Gypsy</p></footer>
       </div>
     );
