@@ -9,7 +9,7 @@ class WorkPlaces extends Component {
     if (this.props.work.length === 0) {
       return (
         <div className="no-saved">
-          <p>Save a city to view work places</p>
+            <p>Check out places to work in one of your saved destintations.</p>
         </div>
       );
     }
@@ -29,7 +29,7 @@ class WorkPlaces extends Component {
   }
   render() {
     return (
-      <div className="workplace-list"><p>workplace list</p>
+      <div className="workplace-list"><h2>Place to Work</h2>
         {this.renderWorkPlaces()}
       </div>
     );
