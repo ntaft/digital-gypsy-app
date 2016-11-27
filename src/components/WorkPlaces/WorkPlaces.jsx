@@ -19,6 +19,7 @@ class WorkPlaces extends Component {
         key={i}
         name={work.name}
         price={work.price_per_day_in_usd}
+        type={work.type}
         url={work.url}
       />,
     );
