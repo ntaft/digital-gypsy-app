@@ -17,10 +17,16 @@ class App extends Component {
       cost: '',
       saved: [],
       notes: '',
+      loginName: '',
+      loginPass: '',
+      loggedIn: false,
+      signupName: '',
+      signupPass: ''
     };
   }
 
   componentWillMount() {
+    //authenticate the user
     this.fetchAllCities();
   }
 
@@ -265,6 +271,64 @@ class App extends Component {
     });
   }
 
+  updateLoginForms(e) {
+    const value = e.target.value;
+    console.log(e.target.name, value);
+    switch (e.target.name) {
+      case 'loginName':
+        this.setState({ loginName: value });
+        break;
+      case 'loginPass':
+        this.setState({ loginPass: value });
+        break;
+      case 'signupName':
+        this.setState({ signupName: value });
+        break;
+      case 'signupPass':
+        this.setState({ signupPass: value });
+        break;
+    }
+  }
+
+  // passes the login data to the api
+  handleLogin() {
+    fetch('/login', {
+      headers:  {
+        'Content-Type': 'application/json'
+      },
+      method: 'POST',
+      body: JSON.stringify({
+        username: this.state.loginName
+        password: this.state.loginPass
+      })
+    })
+    .then(this.setState({
+      loginName: '',
+      loginPass: ''
+
+    }))
+    .then(console.log('login success'))
+    .catch(err => console.log(err));
+  }
+// sends the signup data to the api server
+handleSignup() {
+  fetch('/login/signup',  {
+    headers:  {
+      'Content-Type': 'application/json'
+    },
+    method: 'POST',
+    body: JSON.stringify({
+      username: this.state.loginName
+      password: this.state.loginPass
+    })
+  })
+  .then(this.setState({
+    signupName: '',
+    signupPass: ''
+  }))
+  .then(console.log('Signup success'))
+  .catch(err => console.log(err));
+}
 
   render() {
     return (

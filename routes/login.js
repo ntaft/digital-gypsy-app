@@ -6,12 +6,38 @@ const { createUser } = require(../models/user);
 const { fetchAllCities } =require('../services/nomadlist')
 // const { authenticate } = require('../lib/auth');
 
-/**
- * Log In and if successful assign res.user._id to the session
- * It uses the logIn middleware from the auth library to parse the form inputs
- * and save the user to the database
- */
-loginRouter.post('/', logIn, (req, res) => {
+
+
+function authToken () {
+  passport.authenticate('local', {
+    session: true, // prob needs to serialize/deserialize?
+    failureRedirect: '/login' // might be optional
+ }), (req, res) => {
+  // get private key from .env
+    var cert = process.env.JWT_SECRET;
+    // sign a new encrypted token that expires in 24h
+    var token = jwt.sign(req.user, cert, {
+      algorithm: 'RS256'
+      expiresIn: '24h'
+    }, (err, token) => {
+      // sends a json token
+      if err console.log err;
+      console.log(token)
+      res.json({token});
+    });
+  };
+}
+
+// decodes token
+var decoded = jwt.decode(token, {complete: true})
+
+ /**
+  * Log In and if successful assign res.user._id to the session
+  * It uses the logIn middleware from the auth library to parse the form inputs
+  * and save the user to the database
+  */
+
+loginRouter.post('/login', logIn, (req, res) => {
   res.redirect('/');
 })
 
@@ -19,7 +45,7 @@ loginRouter.post('/', logIn, (req, res) => {
 // then redirects to the login page
 loginRouter.delete('/logout', (req, res) => {
   req.session.userId = null;
-  res.redirect('/login');
+  res.redirect('/');
 })
 
 // if posting to newuser, collect form data
