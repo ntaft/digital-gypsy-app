@@ -27,7 +27,7 @@ class SavedList extends Component {
         slug={eachCity.slug}
         lat={eachCity.lat}
         lng={eachCity.lng}
-        nomadScore={eachCity.nomadScore}
+        nomadscore={eachCity.nomadscore}
         wifi={eachCity.wifi}
         fun={eachCity.fun}
         safety={eachCity.safety}

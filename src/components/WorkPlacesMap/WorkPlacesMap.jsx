@@ -42,7 +42,7 @@ class WorkPlacesMap extends Component {
         />
       );
     } else {
-      return <div>Map</div>;
+      return <div />;
     }
   }
 }
