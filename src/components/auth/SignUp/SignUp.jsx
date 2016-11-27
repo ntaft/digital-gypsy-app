@@ -8,18 +8,21 @@ const SignUp = props => (
           value={props.signupName}
           name="signupName"
           placeholder="username"
+          onChange={props.updateAuthForms}
         />
         <input
           type="text"
           value={props.signupPass}
           name="signupPass"
           placeholder="password"
-          onChange={() => props.updateAuthForms()}
+          onChange={props.updateAuthForms}
         />
         <button
           id="signup-button"
           onClick={props.handleSignup}
-        />
+        >
+          Sign up!
+        </button>
       </div>
 );
 
