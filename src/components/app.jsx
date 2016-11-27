@@ -3,7 +3,7 @@ import SearchForm from './SearchForm/SearchForm.jsx';
 import SearchList from './SearchList/SearchList.jsx';
 import SavedList from './SavedList/SavedList.jsx';
 import WorkPlaces from './WorkPlaces/WorkPlaces.jsx';
-import SavedListMap from './SavedListMap/SavedListMap.jsx';
+import SavedMap from './MapContainer/MapContainer.jsx';
 import style from './App.css';
 
 class App extends Component {
@@ -18,6 +18,7 @@ class App extends Component {
       temp: '',
       cost: '',
       saved: [],
+      markers: [],
       notes: '',
       work: [],
       map: '',
@@ -203,6 +204,9 @@ class App extends Component {
         { saved },
       );
     })
+    .then(this.state.saved.map((city, i) => {
+
+    }))
   }
 
   // Save city to DB then fetchSavedCities to reset the state of saved and update the savedList
@@ -271,6 +275,7 @@ class App extends Component {
   }
 
 
+  // This function will fetch places to work in a particular city from the nomadlist api
   getWorkPlaces(slug) {
     console.log('get work places');
     fetch(`/nomad/work/${slug}`)
@@ -281,7 +286,13 @@ class App extends Component {
   }
 
   render() {
+    const location = {
+      lat: 0,
+      lng: 0,
+    };
+
     return (
+
       <div className="App">
         <header>
           <h1>DIGITAL GYPSY</h1>
@@ -309,9 +320,12 @@ class App extends Component {
         <WorkPlaces
           work={this.state.work}
         />
-        <SavedListMap
-          map={this.state.map}
-        />
+        <div style={{ width: '300px', height: '300px', background: 'red' }}>
+          <SavedMap
+            center={location}
+            markers={this.state.saved}
+          />
+        </div>
         <footer><p>© 2016 Digital Gypsy</p></footer>
       </div>
     );
