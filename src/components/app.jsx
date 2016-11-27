@@ -21,7 +21,7 @@ class App extends Component {
       markers: [],
       notes: '',
       work: [],
-      map: '',
+      workCenter: '',
     };
   }
 
@@ -276,13 +276,23 @@ class App extends Component {
 
 
   // This function will fetch places to work in a particular city from the nomadlist api
-  getWorkPlaces(slug) {
+  getWorkPlaces(slug, lat, lng) {
     console.log('get work places');
     fetch(`/nomad/work/${slug}`)
     .then(r => r.json())
     .then(work => this.setState(
       { work },
-    ));
+    ))
+    .then(this.setMapCenter(lat, lng));
+  }
+
+  setMapCenter(lat, lng) {
+    this.setState({
+      workCenter: {
+        lat: parseFloat(lat),
+        lng: parseFloat(lng),
+      },
+    });
   }
 
   render() {
