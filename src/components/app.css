@@ -15,6 +15,7 @@ header {
 footer {
   width: 100%;
   background-color: coral;
+  margin-top: 10px;
 }
 
 header h1 {

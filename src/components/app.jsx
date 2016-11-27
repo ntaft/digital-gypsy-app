@@ -3,6 +3,7 @@ import SearchForm from './SearchForm/SearchForm.jsx';
 import SearchList from './SearchList/SearchList.jsx';
 import SavedList from './SavedList/SavedList.jsx';
 import WorkPlaces from './WorkPlaces/WorkPlaces.jsx';
+import SavedListMap from './SavedListMap/SavedListMap.jsx';
 import style from './App.css';
 
 class App extends Component {
@@ -19,6 +20,7 @@ class App extends Component {
       saved: [],
       notes: '',
       work: [],
+      map: '',
     };
   }
 
@@ -306,6 +308,9 @@ class App extends Component {
         />
         <WorkPlaces
           work={this.state.work}
+        />
+        <SavedListMap
+          map={this.state.map}
         />
         <footer><p>© 2016 Digital Gypsy</p></footer>
       </div>
