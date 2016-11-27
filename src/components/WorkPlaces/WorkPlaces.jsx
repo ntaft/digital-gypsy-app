@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import WorkPlaceItem from '../WorkPlaceItem/WorkPlaceItem.jsx';
+import './WorkPlaces.css';
 
 class WorkPlaces extends Component {
 
@@ -24,7 +25,7 @@ class WorkPlaces extends Component {
   }
   render() {
     return (
-      <div className="saved-list">
+      <div className="workplace-list"><p>workplace list</p>
         {this.renderWorkPlaces()}
       </div>
     );

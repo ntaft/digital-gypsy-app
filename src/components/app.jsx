@@ -282,7 +282,7 @@ class App extends Component {
     return (
       <div className="App">
         <header>
-          <h1><span> DIGITAL GYPSY</span></h1>
+          <h1>DIGITAL GYPSY</h1>
         </header>
         <SearchForm
           month={this.state.month}
