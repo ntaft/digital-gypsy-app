@@ -2,7 +2,7 @@ import React from 'react';
 import './SearchForm.css';
 
 const SearchForm = props => (
-  <div id="search-container">
+  <div className="search-container">
     <div id="month-container"><p>select month</p>
       <button value="1" onClick={props.handleUpdateMonth}>January</button>
       <button value="2" onClick={props.handleUpdateMonth}>February</button>
