@@ -4,6 +4,9 @@ import SearchList from './SearchList/SearchList.jsx';
 import SavedList from './SavedList/SavedList.jsx';
 import WorkPlaces from './WorkPlaces/WorkPlaces.jsx';
 import SavedMap from './MapContainer/MapContainer.jsx';
+import Login from './auth/Login/Login.jsx';
+import SignUp from './auth/SignUp/SignUp.jsx';
+import Logout from './auth/Logout/Logout.jsx';
 import style from './App.css';
 
 class App extends Component {
@@ -26,12 +29,13 @@ class App extends Component {
       loginPass: '',
       loggedIn: false,
       signupName: '',
-      signupPass: ''
+      signupPass: '',
+      userID: 1
     };
   }
 
   componentWillMount() {
-    //authenticate the user
+    // fetch call to authenticate the user here
     this.fetchAllCities();
   }
 
@@ -280,7 +284,8 @@ class App extends Component {
     });
   }
 
-  updateLoginForms(e) {
+  // updates all of the login/signup forms, filters by name.
+  updateAuthForms(e) {
     const value = e.target.value;
     console.log(e.target.name, value);
     switch (e.target.name) {
@@ -296,48 +301,79 @@ class App extends Component {
       case 'signupPass':
         this.setState({ signupPass: value });
         break;
+      default:
+        break;
     }
   }
 
   // passes the login data to the api
+  // authenticates data with server
+  // response with login and user ID
   handleLogin() {
-    fetch('/login', {
-      headers:  {
-        'Content-Type': 'application/json'
+    fetch('/auth/login', {
+      headers: {
+        'Content-Type': 'application/json',
       },
       method: 'POST',
       body: JSON.stringify({
-        username: this.state.loginName
-        password: this.state.loginPass
-      })
+        username: this.state.loginName,
+        password: this.state.loginPass,
+      }),
+    })
+    .then(r => r.json())
+    // note: check to see if encrypt/decrypt is needed
+    .then((loginObj) => {
+      if (loginObj.valid === true) {
+        this.setState({
+          loggedIn: true,
+          userID: loginObj.id,
+        });
+      }
     })
     .then(this.setState({
       loginName: '',
       loginPass: ''
-
     }))
-    .then(console.log('login success'))
+    .then(console.log('logging in...'))
     .catch(err => console.log(err));
   }
-// sends the signup data to the api server
-handleSignup() {
-  fetch('/login/signup',  {
-    headers:  {
-      'Content-Type': 'application/json'
-    },
-    method: 'POST',
-    body: JSON.stringify({
-      username: this.state.loginName
-      password: this.state.loginPass
+  // sends the signup data to the api server
+  // encrypts new user data and saves in db
+  // authenticates the response and returns the user id
+  handleSignup() {
+    fetch('/auth/signup', {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      method: 'POST',
+      body: JSON.stringify({
+        username: this.state.loginName,
+        password: this.state.loginPass,
+      }),
     })
-  })
-  .then(this.setState({
-    signupName: '',
-    signupPass: ''
-  }))
-  .then(console.log('Signup success'))
-  .catch(err => console.log(err));
-}
+    .then(r => r.json())
+    // check to see if decrypt is needed
+    .then((loginObj) => {
+      if (loginObj.valid === true) {
+        this.setState({
+          loggedIn: true,
+          userID: loginObj.id,
+        })
+      }
+    })
+    .then(this.setState({
+      signupName: '',
+      signupPass: '',
+    }))
+    .then(console.log('signup successful'))
+    .catch(err => console.log(err));
+  }
+  // handles logout of the user, will revert to login state
+  handleLogout() {
+    this.setState({ loggedIn: false });
+    console.log('logging out');
+    // ** need a fetch request here to server to destroy login cookie **
+  }
 
   // This function will fetch places to work in a particular city from the nomadlist api
   getWorkPlaces(slug) {
@@ -361,6 +397,21 @@ handleSignup() {
         <header>
           <h1>DIGITAL GYPSY</h1>
         </header>
+        <Login
+          updateAuthForms={event => this.updateAuthForms(event)}
+          handleLogin={this.handleLogin.bind(this)}
+          loginName={this.state.loginName}
+          loginPass={this.state.loginPass}
+        />
+        <SignUp
+          updateAuthForms={event => this.updateAuthForms(event)}
+          handleSignup={this.handleSignup.bind(this)}
+          signupName={this.state.signupName}
+          signupPass={this.state.signupPass}
+        />
+        <Logout
+          handleLogout={this.handleLogout.bind(this)}
+        />
         <SearchForm
           month={this.state.month}
           handleUpdateMonth={event => this.handleUpdateMonth(event)}

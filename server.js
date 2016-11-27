@@ -15,6 +15,9 @@ const gypsyRouter = require('./routes/gypsy');
 // import router for our external API
 const nomadRouter = require('./routes/nomadlist');
 
+// authorization router to validate users
+const authRouter = require('./routes/auth');
+
 // initialize passport, part of our validation middleware
 app.use(passport.initialize());
 
@@ -33,5 +36,6 @@ app.use(express.static(path.join(__dirname, 'dist')));
 // map our routes
 app.use('/gypsy', gypsyRouter);
 app.use('/nomad', nomadRouter);
+app.use('/auth', authRouter);
 
 app.listen(PORT, () => { console.log('Wanderlust 🌍')});
