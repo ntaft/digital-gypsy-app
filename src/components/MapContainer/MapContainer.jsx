@@ -7,6 +7,8 @@ class SavedMap extends Component {
   render() {
     const mapContainer = <div style={{height: '100%', width: '100%'}}></div>
 
+    // Iterate through the markers prop and return a marker with the lat and lng
+    // of each saved city to render to the world map
     const markers = this.props.markers.map((city, i) => {
 
       const marker = {

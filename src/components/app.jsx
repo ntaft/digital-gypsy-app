@@ -275,6 +275,7 @@ class App extends Component {
   }
 
 
+  // This function will fetch places to work in a particular city from the nomadlist api
   getWorkPlaces(slug) {
     console.log('get work places');
     fetch(`/nomad/work/${slug}`)
@@ -289,16 +290,6 @@ class App extends Component {
       lat: 0,
       lng: 0,
     };
-
-
-    const markers = [
-      {
-        location: {
-          lat: 0,
-          lng: 0,
-        },
-      },
-    ];
 
     return (
 
