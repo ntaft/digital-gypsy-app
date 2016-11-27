@@ -7,6 +7,7 @@ class WorkPlacesMap extends Component {
   render() {
     const mapContainer = <div style={{height: '100%', width: '100%'}}></div>
 
+    const labels = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz123456789';
     // Iterate through the markers prop and return a marker with the lat and lng
     // of each saved city to render to the world map
     const markers = this.props.markers.map((venue, i) => {
@@ -16,6 +17,7 @@ class WorkPlacesMap extends Component {
           lat: venue.location.latitude,
           lng: venue.location.longitude,
         },
+        label: labels[i],
       };
 
       return (
@@ -42,7 +44,7 @@ class WorkPlacesMap extends Component {
         />
       );
     } else {
-      return <div>Map</div>;
+      return <div />;
     }
   }
 }

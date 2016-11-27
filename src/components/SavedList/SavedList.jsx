@@ -27,13 +27,14 @@ class SavedList extends Component {
         slug={eachCity.slug}
         lat={eachCity.lat}
         lng={eachCity.lng}
-        nomadScore={eachCity.nomadScore}
+        nomadscore={eachCity.nomadscore}
         wifi={eachCity.wifi}
         fun={eachCity.fun}
         safety={eachCity.safety}
         // forignerFriendly={eachCity.scores.friendly_to_foreigners}
         cost={eachCity.cost}
         img={eachCity.img}
+        savednotes={eachCity.notes}
         data={this.props.savedCities}
         deleteCity={this.props.deleteCity}
         notes={this.props.notes}

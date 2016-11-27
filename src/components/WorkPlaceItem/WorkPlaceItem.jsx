@@ -3,8 +3,8 @@ import './WorkPlaceItem.css';
 
 const WorkPlaceItem = props => (
   <div className="workplace-item">
-    <h4>{props.name}</h4>
-    <p>Price Per Day in USD: {props.price}</p>
+    <h4>{props.label}. {props.name}</h4>
+    <p>Price Per Day in USD: ${props.price}</p>
     <p>Type: {props.type}</p>
     <a href={props.url}>More Info</a>
   </div>

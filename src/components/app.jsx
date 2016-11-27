@@ -199,17 +199,13 @@ class App extends Component {
 
   // Get all saved cities from database and save then into the saved state.
   fetchSavedCities() {
-    console.log('so fetch');
     fetch('/gypsy')
     .then(r => r.json())
     .then((saved) => {
       this.setState(
         { saved },
       );
-    })
-    .then(this.state.saved.map((city, i) => {
-
-    }))
+    });
   }
 
   // Save city to DB then fetchSavedCities to reset the state of saved and update the savedList
@@ -261,6 +257,7 @@ class App extends Component {
       method: 'put',
       body: JSON.stringify(updatedData),
     })
+    .then(this.fetchSavedCities())
     .catch(err => console.log(err));
   }
 

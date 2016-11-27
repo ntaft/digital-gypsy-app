@@ -7,10 +7,11 @@ const SavedListItem = props => (
     <div className="image-holder">
       <img className="city-image" src={`https://nomadlist.com${props.img}`} alt=""/>
     </div>
-    <p>Nomad Score: {props.nomadScore}</p>
+    <p>Nomad Score: {Math.round((props.nomadscore)*10)}/10</p>
     <p>Wifi: {Math.round((props.wifi)*10)}/10</p>
     <p>Fun: {Math.round((props.fun)*10)}/10</p>
     <p>Safety: {Math.round((props.safety)*10)}/10</p>
+    <p>Notes: {props.savednotes}</p>
     <button className="delete-button" onClick={() => props.deleteCity(props.id)}>Remove</button>
     <input
       type="text"
