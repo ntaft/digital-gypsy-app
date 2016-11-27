@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import Header from './Header/Header.jsx';
+import Footer from './Footer/Footer.jsx';
 import SearchForm from './SearchForm/SearchForm.jsx';
 import SearchList from './SearchList/SearchList.jsx';
 import SavedList from './SavedList/SavedList.jsx';
@@ -307,9 +309,7 @@ class App extends Component {
     return (
 
       <div className="App">
-        <header>
-          <h1>DIGITAL GYPSY</h1>
-        </header>
+        <Header />
         <SearchForm
           month={this.state.month}
           handleUpdateMonth={event => this.handleUpdateMonth(event)}
@@ -345,7 +345,7 @@ class App extends Component {
             markers={this.state.work}
           />
         </div>
-        <footer><p>© 2016 Digital Gypsy</p></footer>
+        <Footer />
       </div>
     );
   }

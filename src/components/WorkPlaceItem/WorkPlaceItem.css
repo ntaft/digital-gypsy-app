@@ -1,8 +1,9 @@
 .workplace-item {
- height: 110px;
+ height: 150px;
  font-size: 14px;
  font-family: sans-serif;
  width: 400px;
- border: 1px solid black;
+ border-top: 1px solid black;
+ border-bottom: 1px solid black;
  margin-bottom: 5px;
 }

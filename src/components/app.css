@@ -6,26 +6,6 @@
   flex-flow: row wrap;
 }
 
-header {
-  background-color: coral;
-  color: black;
-  width: 100%;
-}
-
-footer {
-  width: 100%;
-  background-color: coral;
-  margin-top: 10px;
-}
-
-header h1 {
-  text-align: left;
-}
-
-header span {
-  text-align: center;
-}
-
 
 
 
