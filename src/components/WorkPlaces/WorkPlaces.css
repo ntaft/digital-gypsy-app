@@ -1,7 +1,9 @@
-.search-list {
+.workplace-list {
  height: 350px;
  overflow: auto;
  width: 30%;
  margin: 10px;
  padding: 10px 0 45px 0;
+ justify-content: center;
+ text-align: center;
 }

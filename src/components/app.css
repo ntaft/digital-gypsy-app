@@ -1,17 +1,32 @@
-header,
+.App {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  align-items: center;
+  flex-flow: row wrap;
+}
+
+header {
+  background-color: coral;
+  color: black;
+  width: 100%;
+}
+
 footer {
-  background-color: tomato;
-  padding: 2px;
+  width: 100%;
+  background-color: coral;
+  margin-top: 10px;
 }
 
 header h1 {
   text-align: left;
 }
 
-header h1 span,
-footer p {
-  color: black;
+header span {
+  text-align: center;
 }
+
+
 
 
 

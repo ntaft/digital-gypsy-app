@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import SearchForm from './SearchForm/SearchForm.jsx';
 import SearchList from './SearchList/SearchList.jsx';
 import SavedList from './SavedList/SavedList.jsx';
+import WorkPlaces from './WorkPlaces/WorkPlaces.jsx';
+import SavedMap from './MapContainer/MapContainer.jsx';
 import style from './App.css';
 
 class App extends Component {
@@ -16,7 +18,10 @@ class App extends Component {
       temp: '',
       cost: '',
       saved: [],
+      markers: [],
       notes: '',
+      work: [],
+      map: '',
       loginName: '',
       loginPass: '',
       loggedIn: false,
@@ -182,6 +187,7 @@ class App extends Component {
       user_id: 1,
       city: this.state.selected.info.city.name,
       country: this.state.selected.info.country.name,
+      slug: this.state.selected.info.city.slug,
       nomadScore: this.state.selected.scores.nomadScore,
       wifi: this.state.selected.scores.free_wifi_available,
       fun: this.state.selected.scores.leisure,
@@ -204,6 +210,9 @@ class App extends Component {
         { saved },
       );
     })
+    .then(this.state.saved.map((city, i) => {
+
+    }))
   }
 
   // Save city to DB then fetchSavedCities to reset the state of saved and update the savedList
@@ -330,11 +339,27 @@ handleSignup() {
   .catch(err => console.log(err));
 }
 
+  // This function will fetch places to work in a particular city from the nomadlist api
+  getWorkPlaces(slug) {
+    console.log('get work places');
+    fetch(`/nomad/work/${slug}`)
+    .then(r => r.json())
+    .then(work => this.setState(
+      { work },
+    ));
+  }
+
   render() {
+    const location = {
+      lat: 0,
+      lng: 0,
+    };
+
     return (
+
       <div className="App">
         <header>
-          <h1><span> DIGITAL GYPSY</span></h1>
+          <h1>DIGITAL GYPSY</h1>
         </header>
         <SearchForm
           month={this.state.month}
@@ -354,7 +379,17 @@ handleSignup() {
           notes={this.state.notes}
           updateNotes={event => this.updateNotes(event)}
           updateFormHandler={this.updateFormHandler.bind(this)}
+          getWorkPlaces={this.getWorkPlaces.bind(this)}
         />
+        <WorkPlaces
+          work={this.state.work}
+        />
+        <div style={{ width: '300px', height: '300px', background: 'red' }}>
+          <SavedMap
+            center={location}
+            markers={this.state.saved}
+          />
+        </div>
         <footer><p>© 2016 Digital Gypsy</p></footer>
       </div>
     );

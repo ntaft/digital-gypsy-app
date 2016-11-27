@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import SavedListItem from '../SavedListItem/SavedListItem.jsx';
+import './SavedList.css';
 
 class SavedList extends Component {
 
@@ -23,6 +24,7 @@ class SavedList extends Component {
         id={eachCity.id}
         city={eachCity.city}
         country={eachCity.country}
+        slug={eachCity.slug}
         lat={eachCity.lat}
         lng={eachCity.lng}
         nomadScore={eachCity.nomadScore}
@@ -37,12 +39,13 @@ class SavedList extends Component {
         notes={this.props.notes}
         updateNotes={this.props.updateNotes}
         updateFormHandler={this.props.updateFormHandler}
+        getWorkPlaces={this.props.getWorkPlaces}
       />,
     );
   }
   render() {
     return (
-      <div className="saved-list">
+      <div className="saved-list"><p>saved cities</p>
         {this.renderSavedList()}
       </div>
     );

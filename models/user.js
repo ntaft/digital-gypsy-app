@@ -17,8 +17,8 @@ function createUser(req, res, next) {
 
   psql.none(`INSERT INTO users (username, password, email)
     VALUES ($/username/, $/password/, $/email/);`, userObject)
-    .then((psqlUser) => {
-      res.user = psqlUser;
+    .then((userData) => {
+      res.user = userData;
       next();
     })
     .catch(error => next(error));
