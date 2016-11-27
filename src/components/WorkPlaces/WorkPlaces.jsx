@@ -14,6 +14,8 @@ class WorkPlaces extends Component {
       );
     }
 
+    const labels = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz123456789';
+
     return this.props.work.map((work, i) =>
       <WorkPlaceItem
         key={i}
@@ -21,6 +23,7 @@ class WorkPlaces extends Component {
         price={work.price_per_day_in_usd}
         type={work.type}
         url={work.url}
+        label={labels[i]}
       />,
     );
   }

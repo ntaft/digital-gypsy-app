@@ -34,6 +34,7 @@ class SavedList extends Component {
         // forignerFriendly={eachCity.scores.friendly_to_foreigners}
         cost={eachCity.cost}
         img={eachCity.img}
+        savednotes={eachCity.notes}
         data={this.props.savedCities}
         deleteCity={this.props.deleteCity}
         notes={this.props.notes}

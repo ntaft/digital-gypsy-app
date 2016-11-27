@@ -11,7 +11,7 @@ const SavedListItem = props => (
     <p>Wifi: {Math.round((props.wifi)*10)}/10</p>
     <p>Fun: {Math.round((props.fun)*10)}/10</p>
     <p>Safety: {Math.round((props.safety)*10)}/10</p>
-    <p>Notes: {props.notes}</p>
+    <p>Notes: {props.savednotes}</p>
     <button className="delete-button" onClick={() => props.deleteCity(props.id)}>Remove</button>
     <input
       type="text"
