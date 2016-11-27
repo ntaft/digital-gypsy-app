@@ -7,19 +7,22 @@ const SavedListItem = props => (
     <div className="image-holder">
       <img className="city-image" src={`https://nomadlist.com${props.img}`} alt=""/>
     </div>
-    <p>Nomad Score: {props.nomadScore}</p>
+    <p>Nomad Score: {Math.round((props.nomadscore)*10)}/10</p>
     <p>Wifi: {Math.round((props.wifi)*10)}/10</p>
     <p>Fun: {Math.round((props.fun)*10)}/10</p>
     <p>Safety: {Math.round((props.safety)*10)}/10</p>
+    <p>Notes: {props.savednotes}</p>
+    <div className="modify-input">
+      <input
+        type="text"
+        placeholder="Enter notes about this destination."
+        value={props.notes}
+        onChange={props.updateNotes}
+      />
+      <button className="modify-button" onClick={() => props.updateFormHandler(props.id)}>Modify</button>
+    </div>
+    <button id="work-places-button" onClick={() => props.getWorkPlaces(props.slug, props.lat, props.lng)}>See a list of work places</button>
     <button className="delete-button" onClick={() => props.deleteCity(props.id)}>Remove</button>
-    <input
-      type="text"
-      placeholder="Enter notes about this destination."
-      value={props.notes}
-      onChange={props.updateNotes}
-    />
-    <button className="modify-button" onClick={() => props.updateFormHandler(props.id)}>Modify</button>
-    <button onClick={() => props.getWorkPlaces(props.slug)}>See a list of work places</button>
   </div>
 );
 

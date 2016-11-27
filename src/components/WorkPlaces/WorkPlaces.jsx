@@ -9,10 +9,12 @@ class WorkPlaces extends Component {
     if (this.props.work.length === 0) {
       return (
         <div className="no-saved">
-          <p>Save a city to view work places</p>
+            <p>Check out places to work in one of your saved destintations.</p>
         </div>
       );
     }
+
+    const labels = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz123456789';
 
     return this.props.work.map((work, i) =>
       <WorkPlaceItem
@@ -21,12 +23,13 @@ class WorkPlaces extends Component {
         price={work.price_per_day_in_usd}
         type={work.type}
         url={work.url}
+        label={labels[i]}
       />,
     );
   }
   render() {
     return (
-      <div className="workplace-list"><p>workplace list</p>
+      <div className="workplace-list"><h2>Place to Work</h2>
         {this.renderWorkPlaces()}
       </div>
     );

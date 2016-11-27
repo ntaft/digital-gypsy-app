@@ -1,12 +1,15 @@
 import React, { Component } from 'react';
+import Header from './Header/Header.jsx';
+import Footer from './Footer/Footer.jsx';
 import SearchForm from './SearchForm/SearchForm.jsx';
 import SearchList from './SearchList/SearchList.jsx';
 import SavedList from './SavedList/SavedList.jsx';
-import WorkPlaces from './WorkPlaces/WorkPlaces.jsx';
 import SavedMap from './MapContainer/MapContainer.jsx';
 import Login from './auth/Login/Login.jsx';
 import SignUp from './auth/SignUp/SignUp.jsx';
 import Logout from './auth/Logout/Logout.jsx';
+import WorkPlaces from './WorkPlaces/WorkPlaces.jsx';
+import WorkPlacesMap from './WorkPlacesMap/WorkPlacesMap.jsx';
 import style from './App.css';
 
 class App extends Component {
@@ -30,7 +33,8 @@ class App extends Component {
       loggedIn: false,
       signupName: '',
       signupPass: '',
-      userID: 1
+      userID: 1,
+      workCenter: '',
     };
   }
 
@@ -206,17 +210,13 @@ class App extends Component {
 
   // Get all saved cities from database and save then into the saved state.
   fetchSavedCities() {
-    console.log('so fetch');
     fetch('/gypsy')
     .then(r => r.json())
     .then((saved) => {
       this.setState(
         { saved },
       );
-    })
-    .then(this.state.saved.map((city, i) => {
-
-    }))
+    });
   }
 
   // Save city to DB then fetchSavedCities to reset the state of saved and update the savedList
@@ -268,6 +268,7 @@ class App extends Component {
       method: 'put',
       body: JSON.stringify(updatedData),
     })
+    .then(this.fetchSavedCities())
     .catch(err => console.log(err));
   }
 
@@ -376,13 +377,25 @@ class App extends Component {
   }
 
   // This function will fetch places to work in a particular city from the nomadlist api
-  getWorkPlaces(slug) {
+  // Then, reset the state of the workCenter to the lat and lng of the city selected
+  getWorkPlaces(slug, lat, lng) {
     console.log('get work places');
     fetch(`/nomad/work/${slug}`)
     .then(r => r.json())
     .then(work => this.setState(
       { work },
-    ));
+    ))
+    .then(this.setMapCenter(lat, lng));
+  }
+
+  // Reset the state of the workCenter to an object with lat and lng
+  setMapCenter(lat, lng) {
+    this.setState({
+      workCenter: {
+        lat: parseFloat(lat),
+        lng: parseFloat(lng),
+      },
+    });
   }
 
   render() {
@@ -394,9 +407,7 @@ class App extends Component {
     return (
 
       <div className="App">
-        <header>
-          <h1>DIGITAL GYPSY</h1>
-        </header>
+        <Header />
         <Login
           updateAuthForms={event => this.updateAuthForms(event)}
           handleLogin={this.handleLogin.bind(this)}
@@ -412,36 +423,50 @@ class App extends Component {
         <Logout
           handleLogout={this.handleLogout.bind(this)}
         />
-        <SearchForm
-          month={this.state.month}
-          handleUpdateMonth={event => this.handleUpdateMonth(event)}
-          handleUpdateWeather={event => this.handleUpdateWeather(event)}
-          handleUpdateCost={event => this.handleUpdateCost(event)}
-          searchByParams={this.searchByParams.bind(this)}
-        />
-        <SearchList
-          matches={this.state.topMatches}
-          changeSelection={this.changeSelection.bind(this)}
-        />
-        <SavedList
-          fetchSavedCities={this.fetchSavedCities.bind(this)}
-          savedCities={this.state.saved}
-          deleteCity={this.deleteCity.bind(this)}
-          notes={this.state.notes}
-          updateNotes={event => this.updateNotes(event)}
-          updateFormHandler={this.updateFormHandler.bind(this)}
-          getWorkPlaces={this.getWorkPlaces.bind(this)}
-        />
-        <WorkPlaces
-          work={this.state.work}
-        />
-        <div style={{ width: '300px', height: '300px', background: 'red' }}>
-          <SavedMap
-            center={location}
-            markers={this.state.saved}
+          <SearchForm
+            month={this.state.month}
+            handleUpdateMonth={event => this.handleUpdateMonth(event)}
+            handleUpdateWeather={event => this.handleUpdateWeather(event)}
+            handleUpdateCost={event => this.handleUpdateCost(event)}
+            searchByParams={this.searchByParams.bind(this)}
           />
-        </div>
-        <footer><p>© 2016 Digital Gypsy</p></footer>
+        <div className="main-container">
+          <div className="search-form-container">
+            <SearchList
+              matches={this.state.topMatches}
+              changeSelection={this.changeSelection.bind(this)}
+            />
+          </div>
+          <div className="saved-cities-container">
+            <SavedList
+              fetchSavedCities={this.fetchSavedCities.bind(this)}
+              savedCities={this.state.saved}
+              deleteCity={this.deleteCity.bind(this)}
+              notes={this.state.notes}
+              updateNotes={event => this.updateNotes(event)}
+              updateFormHandler={this.updateFormHandler.bind(this)}
+              getWorkPlaces={this.getWorkPlaces.bind(this)}
+            />
+            <div style={{ width: '100%', height: '46%' }}>
+            <SavedMap
+              center={location}
+              markers={this.state.saved}
+            />
+            </div>
+          </div>
+          <div className="workplaces-container">
+            <WorkPlaces
+              work={this.state.work}
+            />
+              <div style={{ width: '100%', height: '46%' }}>
+                <WorkPlacesMap
+                  center={this.state.workCenter}
+                  markers={this.state.work}
+                />
+              </div>
+            </div>
+          </div>
+         <Footer />
       </div>
     );
   }

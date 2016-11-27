@@ -1,24 +1,27 @@
-body {
- font-family: sans-serif;
- text-align: center;
- background-color: teal;
- font-size: 14px;
-}
 
 .search-container {
- text-align: center;
- display: inline-flex;
- justify-content: center;
+  width: 100%;
+  text-align: center;
+  display: inline-flex;
+  justify-content: space-around;
+  align-items: flex-start;
+  padding-bottom: 10px;
 }
 
+.search-container h2 {
+  font-size: 20px;
+}
 
 button {
  letter-spacing: 0;
- font-size: 12px;
+ font-size: 14px;
  height: 35px;
  width: 90px;
- background-color: coral;
- border: 1px solid teal;
+ background-color: #FF383F;
+ border: none;
+ border-radius: 5px;
+ margin: 2px;
+ color: #EFEFEF;
 }
 
 button:hover,
@@ -50,10 +53,6 @@ button:hover:before {
   bottom: auto;
   top: 0;
   width: 70%;
-}
-
-button {
-
 }
 
 
