@@ -2,8 +2,9 @@ import React, { Component } from 'react';
 import SearchForm from './SearchForm/SearchForm.jsx';
 import SearchList from './SearchList/SearchList.jsx';
 import SavedList from './SavedList/SavedList.jsx';
-import WorkPlaces from './WorkPlaces/WorkPlaces.jsx';
 import SavedMap from './MapContainer/MapContainer.jsx';
+import WorkPlaces from './WorkPlaces/WorkPlaces.jsx';
+import WorkPlacesMap from './WorkPlacesMap/WorkPlacesMap.jsx';
 import style from './App.css';
 
 class App extends Component {
@@ -276,6 +277,7 @@ class App extends Component {
 
 
   // This function will fetch places to work in a particular city from the nomadlist api
+  // Then, reset the state of the workCenter to the lat and lng of the city selected
   getWorkPlaces(slug, lat, lng) {
     console.log('get work places');
     fetch(`/nomad/work/${slug}`)
@@ -286,6 +288,7 @@ class App extends Component {
     .then(this.setMapCenter(lat, lng));
   }
 
+  // Reset the state of the workCenter to an object with lat and lng
   setMapCenter(lat, lng) {
     this.setState({
       workCenter: {
@@ -330,10 +333,16 @@ class App extends Component {
         <WorkPlaces
           work={this.state.work}
         />
-        <div style={{ width: '300px', height: '300px', background: 'red' }}>
+        <div style={{ width: '300px', height: '300px' }}>
           <SavedMap
             center={location}
             markers={this.state.saved}
+          />
+        </div>
+        <div style={{ width: '300px', height: '300px' }}>
+          <WorkPlacesMap
+            center={this.state.workCenter}
+            markers={this.state.work}
           />
         </div>
         <footer><p>© 2016 Digital Gypsy</p></footer>
