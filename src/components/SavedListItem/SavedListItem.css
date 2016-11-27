@@ -6,11 +6,53 @@
  height: 500px;
  width: 400px;
  border-top: 1px solid black;
- border-bottom: 1px solid black;
  margin-bottom: 5px;
+ display: flex;
+ flex-direction: column;
+ align-items: center;
+}
+
+.saved-list-item h4 {
+  font-size: 20px;
+  margin: 15px auto 5px auto;
+}
+
+.saved-list-item p {
+  font-size: 15px;
+  margin: 3.5px;
 }
 
 .city-image {
  height: 200px;
  width: 250px;
+}
+
+.saved-list-item button {
+  font-size: 15px;
+  border-radius: 5px;
+}
+
+.saved-list-item #work-places-button {
+  width: 80%;
+}
+
+.saved-list-item .delete-button {
+  background: none;
+  border-bottom: 2px solid black;
+  cursor: pointer;
+  padding: 5px 0;
+  border-radius: 0px;
+}
+
+.modify-input {
+  width: 80%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 0;
+}
+
+.modify-input input {
+  width: 60%;
+  padding: 5px;
 }

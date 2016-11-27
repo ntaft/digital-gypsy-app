@@ -3,6 +3,7 @@
   overflow: scroll;
 }
 
-.no-saved {
-
+.saved-list h2 {
+  font-size: 20px;
+  margin: 5px;
 }

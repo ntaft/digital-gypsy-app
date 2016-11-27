@@ -46,7 +46,7 @@ class SavedList extends Component {
   }
   render() {
     return (
-      <div className="saved-list"><p>saved cities</p>
+      <div className="saved-list"><h2>Saved Destinations</h2>
         {this.renderSavedList()}
       </div>
     );

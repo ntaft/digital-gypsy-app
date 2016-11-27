@@ -331,7 +331,7 @@ class App extends Component {
               updateFormHandler={this.updateFormHandler.bind(this)}
               getWorkPlaces={this.getWorkPlaces.bind(this)}
             />
-            <div style={{ width: '100%', height: '50%' }}>
+            <div style={{ width: '100%', height: '46%' }}>
             <SavedMap
               center={location}
               markers={this.state.saved}
@@ -342,7 +342,7 @@ class App extends Component {
             <WorkPlaces
               work={this.state.work}
             />
-              <div style={{ width: '100%', height: '50%' }}>
+              <div style={{ width: '100%', height: '46%' }}>
                 <WorkPlacesMap
                   center={this.state.workCenter}
                   markers={this.state.work}
