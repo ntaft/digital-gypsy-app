@@ -1,6 +1,7 @@
 .footer {
   width: 100%;
-  background-color: coral;
+  background-color: #75C9CF;;
+  color: dimgray;
   margin-top: 10px;
   padding: 5px;
 }

@@ -3,7 +3,7 @@ import './SearchForm.css';
 
 const SearchForm = props => (
   <div className="search-container">
-    <div id="month-container"><p>select month</p>
+    <div id="month-container"><h2>Travel Month?</h2>
       <button value="1" onClick={props.handleUpdateMonth}>January</button>
       <button value="2" onClick={props.handleUpdateMonth}>February</button>
       <button value="3" onClick={props.handleUpdateMonth}>March</button>
@@ -17,13 +17,13 @@ const SearchForm = props => (
       <button value="11" onClick={props.handleUpdateMonth}>November</button>
       <button value="12" onClick={props.handleUpdateMonth}>December</button>
     </div>
-    <div id="cost-container"><p>select budget</p>
+    <div id="cost-container"><h2>Budget?</h2>
       <button value="$" onClick={props.handleUpdateCost}>$</button>
       <button value="$$" onClick={props.handleUpdateCost}>$$</button>
       <button value="$$$" onClick={props.handleUpdateCost}>$$$</button>
       <button value="$$$$" onClick={props.handleUpdateCost}>$$$$</button>
     </div>
-    <div><p>get results</p>
+    <div><h2>Go!</h2>
     <button
       id="search-button"
       onClick={() => props.searchByParams()}
