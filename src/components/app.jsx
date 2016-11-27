@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import Header from './Header/Header.jsx';
+import Footer from './Footer/Footer.jsx';
 import SearchForm from './SearchForm/SearchForm.jsx';
 import SearchList from './SearchList/SearchList.jsx';
 import SavedList from './SavedList/SavedList.jsx';
@@ -307,45 +309,51 @@ class App extends Component {
     return (
 
       <div className="App">
-        <header>
-          <h1>DIGITAL GYPSY</h1>
-        </header>
-        <SearchForm
-          month={this.state.month}
-          handleUpdateMonth={event => this.handleUpdateMonth(event)}
-          handleUpdateWeather={event => this.handleUpdateWeather(event)}
-          handleUpdateCost={event => this.handleUpdateCost(event)}
-          searchByParams={this.searchByParams.bind(this)}
-        />
-        <SearchList
-          matches={this.state.topMatches}
-          changeSelection={this.changeSelection.bind(this)}
-        />
-        <SavedList
-          fetchSavedCities={this.fetchSavedCities.bind(this)}
-          savedCities={this.state.saved}
-          deleteCity={this.deleteCity.bind(this)}
-          notes={this.state.notes}
-          updateNotes={event => this.updateNotes(event)}
-          updateFormHandler={this.updateFormHandler.bind(this)}
-          getWorkPlaces={this.getWorkPlaces.bind(this)}
-        />
-        <WorkPlaces
-          work={this.state.work}
-        />
-        <div style={{ width: '300px', height: '300px' }}>
-          <SavedMap
-            center={location}
-            markers={this.state.saved}
+        <Header />
+          <SearchForm
+            month={this.state.month}
+            handleUpdateMonth={event => this.handleUpdateMonth(event)}
+            handleUpdateWeather={event => this.handleUpdateWeather(event)}
+            handleUpdateCost={event => this.handleUpdateCost(event)}
+            searchByParams={this.searchByParams.bind(this)}
           />
-        </div>
-        <div style={{ width: '300px', height: '300px' }}>
-          <WorkPlacesMap
-            center={this.state.workCenter}
-            markers={this.state.work}
-          />
-        </div>
-        <footer><p>© 2016 Digital Gypsy</p></footer>
+        <div className="main-container">
+          <div className="search-form-container">
+            <SearchList
+              matches={this.state.topMatches}
+              changeSelection={this.changeSelection.bind(this)}
+            />
+          </div>
+          <div className="saved-cities-container">
+            <SavedList
+              fetchSavedCities={this.fetchSavedCities.bind(this)}
+              savedCities={this.state.saved}
+              deleteCity={this.deleteCity.bind(this)}
+              notes={this.state.notes}
+              updateNotes={event => this.updateNotes(event)}
+              updateFormHandler={this.updateFormHandler.bind(this)}
+              getWorkPlaces={this.getWorkPlaces.bind(this)}
+            />
+            <div style={{ width: '300px', height: '300px' }}>
+            <SavedMap
+              center={location}
+              markers={this.state.saved}
+            />
+            </div>
+          </div>
+          <div className="workplaces-container">
+            <WorkPlaces
+              work={this.state.work}
+            />
+              <div style={{ width: '300px', height: '300px' }}>
+                <WorkPlacesMap
+                  center={this.state.workCenter}
+                  markers={this.state.work}
+                />
+              </div>
+            </div>
+          </div>
+         <Footer />
       </div>
     );
   }

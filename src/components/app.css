@@ -1,4 +1,10 @@
 .App {
+  justify-content: space-between;
+  height: 100vh;
+}
+
+.main-container {
+  height: 75vh;
   display: flex;
   justify-content: center;
   text-align: center;
@@ -6,24 +12,28 @@
   flex-flow: row wrap;
 }
 
-header {
-  background-color: coral;
-  color: black;
-  width: 100%;
+.search-form-container {
+ height: 80%;
+ overflow: scroll;
+ width: 30%;
+ margin: 10px;
+ padding: 10px 0 45px 0;
 }
 
-footer {
-  width: 100%;
-  background-color: coral;
-  margin-top: 10px;
+.saved-cities-container {
+ height: 80%;
+ overflow: scroll;
+ width: 30%;
+ margin: 10px;
+ padding: 10px 0 45px 0;
 }
 
-header h1 {
-  text-align: left;
-}
-
-header span {
-  text-align: center;
+.workplaces-container {
+ height: 80%;
+ overflow: scroll;
+ width: 30%;
+ margin: 10px;
+ padding: 10px 0 45px 0;
 }
 
 
