@@ -3,8 +3,8 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const path = require('path');
 const logger = require('morgan');
-const passport = require('passport');
 const cookieParser = require('cookie-parser');
+const passport = require('passport');
 
 const app = express();
 const PORT = process.argv[2] || process.env.port || 3000;
