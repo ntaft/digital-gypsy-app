@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import SavedListItem from '../SavedListItem/SavedListItem.jsx';
+import './SavedList.css';
 
 class SavedList extends Component {
 
@@ -44,9 +45,7 @@ class SavedList extends Component {
   }
   render() {
     return (
-      <div className="saved-list">Saved List
-      <br />
-      <br />
+      <div className="saved-list"><p>saved cities</p>
         {this.renderSavedList()}
       </div>
     );

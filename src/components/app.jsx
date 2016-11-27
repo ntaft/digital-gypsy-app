@@ -4,7 +4,6 @@ import SearchList from './SearchList/SearchList.jsx';
 import SavedList from './SavedList/SavedList.jsx';
 import WorkPlaces from './WorkPlaces/WorkPlaces.jsx';
 import SavedMap from './MapContainer/MapContainer.jsx';
-import SavedListMap from './SavedListMap/SavedListMap.jsx';
 import style from './App.css';
 
 class App extends Component {
@@ -22,6 +21,7 @@ class App extends Component {
       markers: [],
       notes: '',
       work: [],
+      map: '',
     };
   }
 
@@ -295,7 +295,7 @@ class App extends Component {
 
       <div className="App">
         <header>
-          <h1><span> DIGITAL GYPSY</span></h1>
+          <h1>DIGITAL GYPSY</h1>
         </header>
         <SearchForm
           month={this.state.month}

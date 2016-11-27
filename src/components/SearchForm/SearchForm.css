@@ -4,19 +4,13 @@ body {
  background-color: teal;
  font-size: 14px;
 }
-#search-container {
+
+.search-container {
  text-align: center;
- display: flex;
+ display: inline-flex;
  justify-content: center;
 }
 
-#month-container {
-
-}
-
-#temperature-container {
-
-}
 
 button {
  letter-spacing: 0;
