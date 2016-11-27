@@ -19,6 +19,7 @@ class App extends Component {
       temp: '',
       cost: '',
       saved: [],
+      markers: [],
       notes: '',
       work: [],
     };
@@ -203,6 +204,9 @@ class App extends Component {
         { saved },
       );
     })
+    .then(this.state.saved.map((city, i) => {
+
+    }))
   }
 
   // Save city to DB then fetchSavedCities to reset the state of saved and update the savedList
@@ -286,6 +290,7 @@ class App extends Component {
       lng: 0,
     };
 
+
     const markers = [
       {
         location: {
@@ -327,10 +332,9 @@ class App extends Component {
         <div style={{ width: '300px', height: '300px', background: 'red' }}>
           <SavedMap
             center={location}
-            markers={markers}
+            markers={this.state.saved}
           />
         </div>
-        <SavedListMap />
         <footer><p>© 2016 Digital Gypsy</p></footer>
       </div>
     );
