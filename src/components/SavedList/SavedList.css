@@ -1,5 +1,6 @@
 .saved-list {
-
+  height: 50%;
+  overflow: scroll;
 }
 
 .no-saved {

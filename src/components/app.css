@@ -6,30 +6,28 @@
 .main-container {
   height: 75vh;
   display: flex;
-  justify-content: center;
+  justify-content: space-around;
   text-align: center;
   align-items: center;
   flex-flow: row wrap;
 }
 
 .search-form-container {
- height: 80%;
+ height: 95%;
  overflow: scroll;
  width: 30%;
- margin: 10px;
- padding: 10px 0 45px 0;
+ padding: 10px;
 }
 
 .saved-cities-container {
- height: 80%;
+ height: 95%;
  overflow: scroll;
  width: 30%;
  margin: 10px;
- padding: 10px 0 45px 0;
 }
 
 .workplaces-container {
- height: 80%;
+ height: 95%;
  overflow: scroll;
  width: 30%;
  margin: 10px;
