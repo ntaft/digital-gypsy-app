@@ -21,7 +21,6 @@ class App extends Component {
       topMatches: [],
       selected: '',
       month: '',
-      temp: '',
       cost: '',
       saved: [],
       markers: [],
@@ -35,6 +34,7 @@ class App extends Component {
       signupEmail: '',
       userID: 0,
       workCenter: '',
+      class: '',
     };
   }
 
@@ -107,6 +107,7 @@ class App extends Component {
     }
   }
 
+  // This will change the state of cost when a user clicks one of the buttons in the form
   handleUpdateCost(e) {
     this.setState({
       cost: e.target.value,
@@ -190,6 +191,8 @@ class App extends Component {
     });
   }
 
+  // Collect the information from a specific city in the search cities list
+  // Then send it to the saveCity function.
   formHandler() {
     console.log('form');
     const formData = {
@@ -254,6 +257,7 @@ class App extends Component {
     this.setState({ saved });
   }
 
+  // This will update the state of notes when a user writes in the form
   updateNotes(e) {
     this.setState({
       notes: e.target.value,
@@ -273,6 +277,7 @@ class App extends Component {
     .catch(err => console.log(err));
   }
 
+  // Grab the state notes as well as the user id and update the item in the db
   updateFormHandler(id) {
     console.log('update form');
     const updatedData = {
@@ -286,6 +291,7 @@ class App extends Component {
     });
   }
 
+<<<<<<< HEAD
   // updates all of the login/signup forms, filters by name.
   updateAuthForms(e) {
     const value = e.target.value;
@@ -426,6 +432,8 @@ class App extends Component {
     .catch(err => console.log(err));
   }
 
+=======
+>>>>>>> master
   // This function will fetch places to work in a particular city from the nomadlist api
   // Then, reset the state of the workCenter to the lat and lng of the city selected
   getWorkPlaces(slug, lat, lng) {
@@ -446,6 +454,12 @@ class App extends Component {
         lng: parseFloat(lng),
       },
     });
+  }
+
+  focusMe(button) {
+    this.ref.selectedbutton =
+    document.getElementsByClassName("button-selected")[0].className = "";
+    button.className = "button-selected";
   }
 
   render() {
@@ -476,6 +490,7 @@ class App extends Component {
         />
           <SearchForm
             month={this.state.month}
+            class={this.state.class}
             handleUpdateMonth={event => this.handleUpdateMonth(event)}
             handleUpdateWeather={event => this.handleUpdateWeather(event)}
             handleUpdateCost={event => this.handleUpdateCost(event)}

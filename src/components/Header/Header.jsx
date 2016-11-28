@@ -5,7 +5,10 @@ class Header extends Component {
 render() {
     return (
       <div className="header">
-        <h1>Digital Gypsy</h1>
+        <div className="header-top">
+          <h1>Digital Gypsy</h1>
+          <button className="login">Login/Sign Up</button>
+        </div>
       </div>
     );
   }

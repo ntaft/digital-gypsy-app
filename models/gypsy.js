@@ -1,5 +1,6 @@
 const db = require('../db/db.js');
 
+// Go to the database and get all cities the user has saved
 function getSavedCities(req, res, next) {
   db.any('SELECT * FROM savedcities;')
   .then((saved) => {
@@ -9,6 +10,7 @@ function getSavedCities(req, res, next) {
   .catch(error => next(error));
 }
 
+// The user will saved a city to their collection
 function saveCity(req, res, next) {
   console.log('save model');
   db.none(`INSERT INTO savedcities
@@ -22,6 +24,7 @@ function saveCity(req, res, next) {
   .catch(err => next(err));
 }
 
+// The user can delete a city from their collection
 function deleteCity(req, res, next) {
   console.log('delete city');
   db.none(`DELETE FROM savedcities
@@ -31,6 +34,7 @@ function deleteCity(req, res, next) {
   .catch(err => next(err));
 }
 
+// The user can add notes to a city within their collection
 function updateCity(req, res, next) {
   console.log(req.body.notes);
   console.log(req.body.id);

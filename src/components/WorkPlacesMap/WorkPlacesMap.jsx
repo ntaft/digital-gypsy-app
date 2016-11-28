@@ -3,10 +3,11 @@ import { GoogleMapLoader, GoogleMap, Marker } from 'react-google-maps';
 
 class WorkPlacesMap extends Component {
 
-
   render() {
-    const mapContainer = <div style={{height: '100%', width: '100%'}}></div>
+    const mapContainer = <div style={{ height: '100%', width: '100%' }} />;
 
+    // These labels will show up on the markers to connect the marker with
+    // the work place it represents
     const labels = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz123456789';
     // Iterate through the markers prop and return a marker with the lat and lng
     // of each saved city to render to the world map
