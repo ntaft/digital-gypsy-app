@@ -4,7 +4,12 @@ import '../Header/Header.css';
 const Header = props => (
   <div className="header">
     <div className="header-top">
-      <h1>Digital Gypsy</h1>
+      <div id="logo-container">
+        <div id="plane">
+          <img src="http://i.imgur.com/gwGHVJE.png" alt=""/>
+        </div>
+        <h1>Digital Gypsy</h1>
+      </div>
       <div id="button-holder">
         <div id="dropdown">
           <ul>
