@@ -25,6 +25,7 @@
 .city-image {
  height: 200px;
  width: 250px;
+ box-shadow: 0px 2px 2px grey;
 }
 
 .saved-list-item button {
