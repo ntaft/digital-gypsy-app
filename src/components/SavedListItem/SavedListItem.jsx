@@ -15,7 +15,7 @@ const SavedListItem = props => (
     <div className="modify-input">
       <input
         type="text"
-        placeholder="Enter notes about this destination."
+        placeholder="Enter notes about destination."
         value={props.notes}
         onChange={props.updateNotes}
       />
