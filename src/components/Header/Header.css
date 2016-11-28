@@ -18,7 +18,104 @@ h1 {
   text-shadow: 1px 1px lightgray;
 }
 
-.header-top button {
-  margin-right: 20px;
+#dropdown {
+  border: none;
+  border: 0px;
+  margin: 0px;
+  padding: 0px;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 16px;
+  font-weight: bold;
+  background-color: #75C9CF;
+}
+
+#dropdown ul {
+  height: 35px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  background-color: #75C9CF;
+  width: 100%;
+}
+
+#dropdown li {
+  float: right;
+  padding: 0px;
+  width: 240px;
+}
+
+#dropdown li button {
   width: 120px;
 }
+
+/*#dropdown li a {
+  background: #333333;
+  display: block;
+  font-weight: normal;
+  line-height: 35px;
+  margin: 0px;
+  padding: 0px 25px;
+  text-align: center;
+  text-decoration: none;
+}
+
+#dropdown > ul > li > a {
+  color: #cccccc;
+}
+
+#dropdown ul ul a {
+  color: #cccccc;
+}*/
+
+/*#dropdown li > a:hover, #dropdown ul li:hover > a {
+  background: #8B3E2F;
+  text-decoration: none;
+}*/
+
+#dropdown li ul {
+  background-color: #75C9CF;
+  opacity: 0.8;
+  display: none;
+  height: auto;
+  padding: 0px;
+  margin: 0px;
+  border: 0px;
+  position: absolute;
+  width: 240px;
+  z-index: 200;
+}
+
+#dropdown li:hover ul {
+  display: block;
+}
+
+#dropdown li li {
+  background: ;
+  display: block;
+  float: none;
+  margin: 0px;
+  padding: 0px;
+  width: 240px;
+}
+
+#dropdown li:hover li button {
+  background: none;
+}
+
+#dropdown li ul button {
+  display: block;
+  height: 35px;
+  font-size: 12px;
+  font-style: normal;
+  margin: 0px;
+  padding: 0px 10px 0px 15px;
+  text-align: left;
+}
+
+#dropdown li ul button:hover, #dropdown li ul li:hover > button {
+  background: #8B3E2F;
+  color: #ffffff;
+  text-decoration: none;
+}
+
+

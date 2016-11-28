@@ -2,12 +2,23 @@ import React, { Component } from 'react';
 import '../Header/Header.css';
 
 class Header extends Component {
-render() {
+  render() {
     return (
       <div className="header">
         <div className="header-top">
           <h1>Digital Gypsy</h1>
-          <button className="login">Login/Sign Up</button>
+          <div id="dropdown">
+            <ul>
+              <li className="detail">
+                <button>Login/Sign Up</button>
+                <ul>
+                  <li><input type="text" placeholder="Username" /></li>
+                  <li><input type="password" placeholder="Password" /></li>
+                  <li><input type="submit" /></li>
+                </ul>
+              </li>
+            </ul>
+          </div>
         </div>
       </div>
     );
