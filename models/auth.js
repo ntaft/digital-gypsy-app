@@ -7,19 +7,6 @@ const passportLocal = require('passport-local');
 
 
 
- // logIn - Middleware to compare password from login form with password
- // from the user in the DB. If matches, the user Id is stored in the session.
-
-//  passport.authenticate('local', { session: false }), (req, res) => {
-//    const token = jwt.sign(req.user, process.env.JWT_SECRET, {
-//      expiresIn: 86400 // expires in 24 hours
-// }
-// passport.authenticate('local'),
-//   function(req, res) {
-//     // If this function gets called, authentication was successful.
-//     // `req.user` contains the authenticated user.
-//     res.redirect('/users/' + req.user.username);
-//   });
 
 function logIn(req, res, next) {
   loginData = {
@@ -72,26 +59,12 @@ var user = new User({
 //     userObj(null, user);
 //   });
 // });
-var token = req.body.token || req.query.token;
- if (!token) {
-  return res.status(401).json({message: ‘Must pass token’});
- }
-// Check token that was passed by decoding token using secret
-jwt.verify(token, process.env.JWT_SECRET, function(err, user) {
-   if (err) throw err;
-  //return user using the id from w/in JWTToken
-   User.findById({
-   ‘_id’: user._id
-   }, function(err, user) {
-      if (err) throw err;
-
-
 // authenticate - Middleware to protect routes
 function verifyToken(req, res, next) {
   const token = req.body.token
   if (token) {
     jwt.verify(token, process.env.JWT_SECRET, (err, user) => {
-      if err throw err;
+      if err next(err);
     // returns the user by fetching the id from the database
     })
     getUserById(user.id).then((dbUser) => {

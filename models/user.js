@@ -1,7 +1,7 @@
 // adapted from user management code attributed to Rafa @ GA. Thanks!
 // originally using mongo, modified for psql
 const psql = require('../lib/psqlConnect.js');
-
+const bcrypt = require('bcryptjs');
 
 function newUserToDB(userObject) {
 
@@ -10,10 +10,10 @@ function newUserToDB(userObject) {
   function createUser(req, res, next) {
     const SALTROUNDS = 10;
     const userObject = {
-      username: req.body.user.username,
-      email: req.body.user.email,
+      username: req.body.username,
+      email: req.body.email,
       // Store hashed password
-      password: bcrypt.hashSync(req.body.user.password, SALTROUNDS)
+      password: bcrypt.hashSync(req.body.password, SALTROUNDS)
     };
 
   psql.none(`INSERT INTO users (username, password, email)

@@ -33,7 +33,7 @@ class App extends Component {
       loggedIn: false,
       signupName: '',
       signupPass: '',
-      userID: 1,
+      userID: 0,
       workCenter: '',
     };
   }
@@ -41,6 +41,7 @@ class App extends Component {
   componentWillMount() {
     // fetch call to authenticate the user here
     this.fetchAllCities();
+    this.authenticateUser();
   }
 
   // This function will hit our API route to fetch all the cities listed
@@ -322,13 +323,14 @@ class App extends Component {
       }),
     })
     .then(r => r.json())
-    // note: check to see if encrypt/decrypt is needed
     .then((loginObj) => {
-      if (loginObj.valid === true) {
+      if (!(loginObj.error) ) {
         this.setState({
           loggedIn: true,
           userID: loginObj.id,
         });
+        // saves jwt token
+        window.localStorage.token = loginObj.token;
       }
     })
     .then(this.setState({
@@ -354,12 +356,15 @@ class App extends Component {
     })
     .then(r => r.json())
     // check to see if decrypt is needed
-    .then((loginObj) => {
-      if (loginObj.valid === true) {
+    .then((response) => {
+      console.log(response);
+      if (!(response.error)) {
         this.setState({
           loggedIn: true,
-          userID: loginObj.id,
+          userID: response.id,
         })
+      } else {
+        alert(response.message);
       }
     })
     .then(this.setState({
@@ -371,9 +376,49 @@ class App extends Component {
   }
   // handles logout of the user, will revert to login state
   handleLogout() {
+    fetch('/auth/logout', {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      method: 'DELETE',
+      body: JSON.stringify({
+        id: this.state.userID,
+      }),
+    });
     this.setState({ loggedIn: false });
     console.log('logging out');
-    // ** need a fetch request here to server to destroy login cookie **
+    window.localStorage.token = null;
+  }
+
+  authenticateUser() {
+    fetch('/auth/verify', {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      method: 'POST',
+      body: JSON.stringify({
+        id: this.state.id,
+        token: window.localStorage.getItem('token'),
+      }),
+    })
+    .then(r => r.json())
+    .then((loginObj) => {
+      if (!(loginObj.error)) {
+        this.setState({
+          loggedIn: true,
+          userID: loginObj.id,
+        });
+        // saves a new jwt token
+        window.localStorage.token = loginObj.token;
+      } else {
+        this.setState({
+          loggedIn: false,
+          userID: 0,
+        });
+        window.localStorage.token = null;
+      }
+    })
+    .catch(err => console.log(err));
   }
 
   // This function will fetch places to work in a particular city from the nomadlist api

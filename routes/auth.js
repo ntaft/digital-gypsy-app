@@ -38,7 +38,7 @@ loginRouter.post('/login', logIn, (req, res) => {
 // then redirects to the login page
 loginRouter.delete('/logout', (req, res) => {
   req.session.userId = null;
-  res.json('logged out')
+  res.json('logged out');
 })
 
 // if posting to newuser, collect form data
@@ -56,7 +56,7 @@ loginRouter.post('/signup', createUser, (req, res) => {
 
 loginRouter.get('/verify', verifyUser, (req, res) => {
   // if it is not a match, send back an error
-  if (res.user === false ) {
+  if (!(res.user)) {
    res.status(401)
     .json({
       error: true,
