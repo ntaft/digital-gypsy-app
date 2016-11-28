@@ -8,8 +8,6 @@
   "main": "server.js",
   "scripts": {
     "clean": "rm -rf dist && rm -rf node_modules",
-    "heroku-prebuild": "scripts/deployment_react.sh",
-    "heroku-postbuild": "scripts/deployment_cleanup.sh",
     "start": "node server.js",
     "rebuild": "webpack -d --progress --colors",
     "watch": "webpack -d --progress --watch",
