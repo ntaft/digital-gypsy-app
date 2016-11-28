@@ -21,7 +21,7 @@ const Header = props => (
                     type="text"
                     value={props.signupName}
                     name="signupName"
-                    placeholder="username"
+                    placeholder="Username"
                     onChange={props.updateAuthForms}
                   />
                 </li>
@@ -30,7 +30,7 @@ const Header = props => (
                     type="text"
                     value={props.signupPass}
                     name="signupPass"
-                    placeholder="password"
+                    placeholder="Password"
                     onChange={props.updateAuthForms}
                   />
                 </li>
@@ -63,7 +63,7 @@ const Header = props => (
                     type="text"
                     value={props.loginPass}
                     name="loginPass"
-                    placeholder="password"
+                    placeholder="Password"
                     onChange={props.updateAuthForms}
                   />
                 </li>
@@ -72,7 +72,7 @@ const Header = props => (
                     id="login-button"
                     onClick={props.handleLogin}
                   >
-                    Log in
+                    Log in!
                   </button>
                 </li>
               </ul>
