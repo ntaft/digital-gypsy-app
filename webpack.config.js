@@ -22,13 +22,14 @@ module.exports = {
     reasons: true,
   },
   plugins: [
-  //   new HtmlWebpackPlugin({
-  //     title: 'Digital Gypsy',
-  //     xhtml: true,
-  //     inject: false,
-  //     template: require('html-webpack-template'),
-  //     appMountId: 'root-container',
-  //   }),
+    new HtmlWebpackPlugin({
+      title: 'Digital Gypsy',
+      xhtml: true,
+      inject: false,
+      scripts: ['https://maps.googleapis.com/maps/api/js?libraries=visualization&key=AIzaSyDLO9BWFDxOz2rzAjvkDwel7aRz025PcgY'],
+      template: require('html-webpack-template'),
+      appMountId: 'root-container',
+    }),
     new ExtractTextPlugin('/css/[name].css', {
       allChunks: true,
     }),
