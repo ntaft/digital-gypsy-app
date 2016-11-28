@@ -10,6 +10,8 @@
 
 .search-container h2 {
   font-size: 20px;
+  margin-bottom: 6px;
+  text-shadow: 1px 1px white;
 }
 
 button {

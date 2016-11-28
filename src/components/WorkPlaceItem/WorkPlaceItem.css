@@ -19,11 +19,12 @@
 
 .workplace-item a {
   text-decoration: underline;
-  color: black;
+  color: dimgray;
   font-size: 17px;
   cursor: pointer;
 }
 
 .workplace-item a:hover {
-  color: white;
+  color: #FF383F;
+  text-decoration: bold;
 }

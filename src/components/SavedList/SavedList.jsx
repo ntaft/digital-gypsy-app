@@ -18,6 +18,8 @@ class SavedList extends Component {
       );
     }
 
+    const labels = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+
     return this.props.savedCities.map((eachCity, i) =>
       <SavedListItem
         key={i}
@@ -35,6 +37,7 @@ class SavedList extends Component {
         cost={eachCity.cost}
         img={eachCity.img}
         savednotes={eachCity.notes}
+        label={labels[i]}
         data={this.props.savedCities}
         deleteCity={this.props.deleteCity}
         notes={this.props.notes}
