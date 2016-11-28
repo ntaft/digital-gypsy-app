@@ -6,11 +6,15 @@
     "node": "6.6.0"
   },
   "main": "server.js",
+  "private": "true",
   "scripts": {
     "clean": "rm -rf dist && rm -rf node_modules",
+    "heroku-prebuild": "bash ./scripts/deployment_react.sh",
+    "heroku-postbuild": "bash ./scripts/deployment_cleanup.sh",
     "start": "node server.js",
     "rebuild": "webpack -d --progress --colors",
-    "watch": "webpack -d --progress --watch"
+    "watch": "webpack -d --progress --watch",
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git"
@@ -20,22 +24,12 @@
   "dependencies": {
     "bcryptjs": "^2.3.0",
     "body-parser": "^1.15.2",
-    "cookie-parser": "^1.4.3",
-    "dotenv": "^2.0.0",
-    "eslint-plugin-jsx-a11y": "^2.2.3",
     "express": "^4.14.0",
     "jsonwebtoken": "^7.1.9",
     "morgan": "^1.7.0",
     "node-fetch": "^1.6.3",
-    "passport": "^0.3.2",
-    "passport-jwt": "^2.2.1",
-    "passport-local": "^1.0.0",
     "path": "^0.12.7",
-    "pg-promise": "^5.3.5",
-    "react": "^15.4.1",
-    "react-dom": "^15.4.1",
-    "react-google-maps": "^4.11.0",
-    "react-icons": "^2.2.1"
+    "pg-promise": "^5.3.5"
   },
   "devDependencies": {
     "babel": "^6.5.2",
@@ -56,9 +50,10 @@
     "html-webpack-plugin": "^2.22.0",
     "html-webpack-template": "^5.0.0",
     "postcss-loader": "^1.1.1",
-    "react": "^15.3.0",
-    "react-dom": "^15.3.0",
-    "static-site-generator-webpack-plugin": "^3.1.0",
+    "react": "^15.4.1",
+    "react-dom": "^15.4.1",
+    "react-google-maps": "^4.11.0",
+    "react-icons": "^2.2.1",
     "style-loader": "^0.13.1",
     "url-loader": "^0.5.7",
     "webpack": "^1.13.1"
