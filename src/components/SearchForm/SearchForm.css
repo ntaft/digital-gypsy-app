@@ -28,7 +28,7 @@ button {
 
 button:hover,
 button:active {
-  letter-spacing: 2px;
+  letter-spacing: 1px;
 }
 
 button:after,
@@ -55,17 +55,4 @@ button:hover:before {
   bottom: auto;
   top: 0;
   width: 70%;
-}
-
-
-.cold-button:hover {
-  background-color: deepskyblue;
-}
-
-.warm-button:hover {
-  background-color: darkorange;
-}
-
-.hot-button:hover {
-  background-color: firebrick;
 }
