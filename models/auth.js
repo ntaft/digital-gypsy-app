@@ -1,7 +1,9 @@
-// bcrypt auth code adapted from example from Rafa @ GA. Thanks!
+// parts of bcrypt auth code adapted from example from Rafa @ GA. Thanks!
 const bcrypt = require('bcryptjs');
+const { createToken, comparePassword } = require('../lib/token.js');
 const { getUserByUsername, getUserById } = require('../models/user');
 const jwt = require('jsonwebtoken');
+const psql = require('../db/db.js');
 
 function logIn(req, res, next) {
   const loginData = {
@@ -11,7 +13,6 @@ function logIn(req, res, next) {
   console.log(loginData.username);
   getUserByUsername(loginData.username).then((userDB) => {
     const matches = bcrypt.compareSync(loginData.password, userDB.password);
-  // console.log(loginData.password, matches);
     if (matches) {
       console.log(userDB);
       res.user = userDB;
@@ -24,23 +25,28 @@ function logIn(req, res, next) {
   });
 }
 
-// authenticate - Middleware to protect routes
+// authenticates the user
 function verifyUser(req, res, next) {
   const token = req.body.token
+  console.log(req.body.token);
   if (token) {
-    const decoded = jwt.decode(token, { complete: true })
-    jwt.verify(decoded, process.env.JWT_SECRET, (err, user) => {
-      if (err) next(err);
+    // const decoded = jwt.decode(token, { complete: true });
     // returns the user by fetching the id from the database
-    })
-    getUserById(user.id).then((dbUser) => {
-      res.user = dbUser;
+    try {
+      const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    } catch(err) {
+      res.send(err)
+      next(err)
+    }
+      // res.user = getUserById(req.body.id)
+      res.token = createToken(req.body.id)
       next();
-    }).catch((err) => {
-      throw (err);
-    });
   } else {
-    res.user = false;
+    res.token = {
+      error: true,
+      message: 'Unauthenticated User',
+      }
+      next();
     // req.session.userID = null;
   }
 }

@@ -403,30 +403,31 @@ class App extends Component {
   // this authenticates the user on each page load
   // uses a token from local storage to verify access
   authenticateUser() {
+    let token;
+    if (!(localStorage.getItem('token'))) {
+      token = 'invalid';
+    } else {
+       token = localStorage.getItem('token')
+    }
+    console.log(token)
     fetch('/auth/verify', {
       headers: {
         'Content-Type': 'application/json',
       },
       method: 'POST',
       body: JSON.stringify({
-        id: this.state.id, // do we need to pass this? In localStorage...
-        token: window.localStorage.getItem('token'),
+        id: this.state.id,
+        token: token,
       }),
     })
     .then(r => r.json())
     .then((response) => {
-      if (!(response.error)) {
-        this.setState({
-          userID: response.user.id,
-        });
-        // saves a new jwt token
-        window.localStorage.token = response.token;
+      if (response.name === 'JsonWebTokenError') {
+        this.setState({ userID: 0 });
+        localStorage.setItem('token', null);
       } else {
-        this.setState({
-          userID: 0,
-        });
-        window.localStorage.token = null;
-        window.localStorage.id = null
+        this.setState({ userID: response.id });
+        localStorage.setItem('token', response.token)
       }
     })
     .catch(err => console.log(err));
