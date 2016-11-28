@@ -6,7 +6,7 @@ const Header = props => (
     <div className="header-top">
       <div id="logo-container">
         <div id="plane">
-          <img src="http://i.imgur.com/gwGHVJE.png" alt=""/>
+          <img className="plane-image" src="http://i.imgur.com/gwGHVJE.png" alt=""/>
         </div>
         <h1>Digital Gypsy</h1>
       </div>
