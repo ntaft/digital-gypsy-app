@@ -1,28 +1,91 @@
 import React, { Component } from 'react';
 import '../Header/Header.css';
 
-class Header extends Component {
-  render() {
-    return (
-      <div className="header">
-        <div className="header-top">
-          <h1>Digital Gypsy</h1>
-          <div id="dropdown">
-            <ul>
-              <li className="detail">
-                <button>Login/Sign Up</button>
-                <ul>
-                  <li><input type="text" placeholder="Username" /></li>
-                  <li><input type="password" placeholder="Password" /></li>
-                  <li><input type="submit" /></li>
-                </ul>
-              </li>
-            </ul>
-          </div>
+const Header = props => (
+  <div className="header">
+    <div className="header-top">
+      <h1>Digital Gypsy</h1>
+      <div id="button-holder">
+        <div id="dropdown">
+          <ul>
+            <li className="detail">
+              <button className="login-buttons">Sign Up</button>
+              <ul>
+                <li>
+                  <input
+                    type="text"
+                    value={props.signupName}
+                    name="signupName"
+                    placeholder="username"
+                    onChange={props.updateAuthForms}
+                  />
+                </li>
+                <li>
+                  <input
+                    type="text"
+                    value={props.signupPass}
+                    name="signupPass"
+                    placeholder="password"
+                    onChange={props.updateAuthForms}
+                  />
+                </li>
+                <button
+                  id="signup-button"
+                  onClick={props.handleSignup}
+                >
+                  Sign up!
+                </button>
+              </ul>
+            </li>
+          </ul>
+        </div>
+        <div id="dropdown">
+          <ul>
+            <li className="detail">
+              <button className="login-buttons">Login</button>
+              <ul>
+                <li>
+                  <input
+                      type="text"
+                      value={props.loginName}
+                      name="loginName"
+                      placeholder="Username"
+                      onChange={props.updateAuthForms}
+                    />
+                </li>
+                <li>
+                  <input
+                    type="text"
+                    value={props.loginPass}
+                    name="loginPass"
+                    placeholder="password"
+                    onChange={props.updateAuthForms}
+                  />
+                </li>
+                <li>
+                  <button
+                    id="login-button"
+                    onClick={props.handleLogin}
+                  >
+                    Log in
+                  </button>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+        <div id="dropdown">
+          <button className="login-buttons"
+            id="logout-button"
+            value="Log out"
+            onClick={props.handleLogout}
+          >
+            Log out
+          </button>
         </div>
       </div>
-    );
-  }
-}
+    </div>
+  </div>
+);
 
 export default Header;

@@ -291,7 +291,6 @@ class App extends Component {
     });
   }
 
-<<<<<<< HEAD
   // updates all of the login/signup forms, filters by name.
   updateAuthForms(e) {
     const value = e.target.value;
@@ -432,8 +431,6 @@ class App extends Component {
     .catch(err => console.log(err));
   }
 
-=======
->>>>>>> master
   // This function will fetch places to work in a particular city from the nomadlist api
   // Then, reset the state of the workCenter to the lat and lng of the city selected
   getWorkPlaces(slug, lat, lng) {
@@ -471,7 +468,15 @@ class App extends Component {
     return (
 
       <div className="App">
-        <Header />
+        <Header
+          updateAuthForms={event => this.updateAuthForms(event)}
+          handleLogin={this.handleLogin.bind(this)}
+          loginName={this.state.loginName}
+          loginPass={this.state.loginPass}
+          signupName={this.state.signupName}
+          signupPass={this.state.signupPass}
+          handleLogout={this.handleLogout.bind(this)}
+        />
         <Login
           updateAuthForms={event => this.updateAuthForms(event)}
           handleLogin={this.handleLogin.bind(this)}
