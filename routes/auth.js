@@ -5,7 +5,7 @@
 const loginRouter = require('express').Router();
 const { logIn, verifyUser } = require('../models/auth');
 const { createUser } = require('../models/user');
-const { createToken } = require('../lib/token');
+const createToken = require('../lib/token');
 // const { authenticate } = require('../lib/auth');
 
 // decodes token
@@ -33,7 +33,7 @@ loginRouter.post('/login', logIn, (req, res) => {
 // assigns null to the session cookie userID
 // then redirects to the login page
 loginRouter.delete('/logout', (req, res) => {
-  req.session.userId = null;
+  // req.session.userId = null;
   res.json('logged out');
 })
 
