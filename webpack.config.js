@@ -26,7 +26,7 @@ module.exports = {
       title: 'Digital Gypsy',
       xhtml: true,
       inject: false,
-      scripts: ['https://maps.googleapis.com/maps/api/js?libraries=visualization&key=AIzaSyDLO9BWFDxOz2rzAjvkDwel7aRz025PcgY'],
+      scripts: ['https://maps.googleapis.com/maps/api/js?libraries=visualization&key=AIzaSyDLO9BWFDxOz2rzAjvkDwel7aRz025PcgY', 'https://fonts.googleapis.com/css?family=Grand+Hotel|Pacifico'],
       template: require('html-webpack-template'),
       appMountId: 'root-container',
     }),
