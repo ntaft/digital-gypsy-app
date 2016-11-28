@@ -294,7 +294,7 @@ class App extends Component {
   // updates all of the login/signup forms, filters by name.
   updateAuthForms(e) {
     const value = e.target.value;
-    console.log(e.target.name, value);
+    // console.log(e.target.name, value);
     switch (e.target.name) {
       case 'loginName':
         this.setState({ loginName: value });
@@ -305,9 +305,9 @@ class App extends Component {
       case 'signupName':
         this.setState({ signupName: value });
         break;
-      case 'signupEmail':
-        this.setState({ signupEmail: value});
-        break;
+      // case 'signupEmail':
+      //   this.setState({ signupEmail: value});
+      //   break;
       case 'signupPass':
         this.setState({ signupPass: value });
         break;
@@ -358,8 +358,9 @@ class App extends Component {
       },
       method: 'POST',
       body: JSON.stringify({
-        username: this.state.loginName,
-        password: this.state.loginPass,
+        username: this.state.signupName,
+        // email: this.state.signupEmail,
+        password: this.state.signupPass,
       }),
     })
     .then(r => r.json())
@@ -377,7 +378,7 @@ class App extends Component {
     .then(this.setState({
       signupName: '',
       signupPass: '',
-      signupEmail: '',
+      // signupEmail: '',
     }))
     .then(console.log('signup successful'))
     .catch(err => console.log(err));
@@ -408,7 +409,7 @@ class App extends Component {
       },
       method: 'POST',
       body: JSON.stringify({
-        id: this.state.id, // do we need to pass this? In localStorage?
+        id: this.state.id, // do we need to pass this? In localStorage...
         token: window.localStorage.getItem('token'),
       }),
     })
