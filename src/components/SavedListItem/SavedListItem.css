@@ -43,6 +43,7 @@
   cursor: pointer;
   padding: 5px 0;
   border-radius: 0px;
+  box-shadow: none;
 }
 
 .saved-list-item .delete-button:hover {
