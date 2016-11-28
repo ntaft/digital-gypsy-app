@@ -15,8 +15,8 @@ const bcrypt = require('bcryptjs');
 
   psql.none(`INSERT INTO users (username, password, email)
     VALUES ($/username/, $/password/, $/email/);`, userObject)
-    .then((userData) => {
-      res.user = userData;
+    .then((psqlUser) => {
+      res.user = psqlUser;
       next();
     })
     .catch(error => next(error));
