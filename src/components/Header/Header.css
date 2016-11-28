@@ -11,11 +11,31 @@
   align-items: center;
 }
 
+#logo-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+#plane {
+  width: 7%;
+  height: 80%;
+  margin-left: 20px;
+}
+
+#plane img {
+  width: 100%;
+  height: 100%;
+}
+
 h1 {
   text-align: left;
   margin: 0;
-  padding: 10px 20px;
+  padding: 10px 5px;
   text-shadow: 1px 1px lightgray;
+/*  font-family: 'Pacifico', cursive;*/
+  font-family: 'Grand Hotel', cursive;
+  font-size: 43px;
 }
 
 #button-holder {
