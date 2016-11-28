@@ -29,7 +29,7 @@ class WorkPlaces extends Component {
   }
   render() {
     return (
-      <div className="workplace-list"><h2>Place to Work</h2>
+      <div className="workplace-list"><h2>Places to Work</h2>
         {this.renderWorkPlaces()}
       </div>
     );

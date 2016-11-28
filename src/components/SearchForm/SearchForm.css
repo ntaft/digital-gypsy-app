@@ -30,10 +30,7 @@ button {
 button:hover,
 button:active {
   letter-spacing: 1px;
-<<<<<<< HEAD
-=======
   background-color: #FF6A81;
->>>>>>> 2e53bd7af34770161dde4dba9d59286f253b290f
 }
 
 button:after,
