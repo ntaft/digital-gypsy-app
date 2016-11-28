@@ -30,9 +30,9 @@ class App extends Component {
       map: '',
       loginName: '',
       loginPass: '',
-      loggedIn: false,
       signupName: '',
       signupPass: '',
+      signupEmail: '',
       userID: 0,
       workCenter: '',
     };
@@ -300,6 +300,9 @@ class App extends Component {
       case 'signupName':
         this.setState({ signupName: value });
         break;
+      case 'signupEmail':
+        this.setState({ signupEmail: value});
+        break;
       case 'signupPass':
         this.setState({ signupPass: value });
         break;
@@ -323,14 +326,14 @@ class App extends Component {
       }),
     })
     .then(r => r.json())
-    .then((loginObj) => {
-      if (!(loginObj.error) ) {
+    .then((response) => {
+      if (!(response.user.error)) {
         this.setState({
-          loggedIn: true,
-          userID: loginObj.id,
+          userID: response.user.id,
         });
-        // saves jwt token
-        window.localStorage.token = loginObj.token;
+        // saves jwt token and ID
+        window.localStorage.token = response.user.token;
+        window.localStorage.id = response.user.id;
       }
     })
     .then(this.setState({
@@ -355,14 +358,13 @@ class App extends Component {
       }),
     })
     .then(r => r.json())
-    // check to see if decrypt is needed
     .then((response) => {
       console.log(response);
       if (!(response.error)) {
         this.setState({
-          loggedIn: true,
-          userID: response.id,
+          userID: response.user.id,
         })
+        window.localStorage.id = response.user.id
       } else {
         alert(response.message);
       }
@@ -370,6 +372,7 @@ class App extends Component {
     .then(this.setState({
       signupName: '',
       signupPass: '',
+      signupEmail: '',
     }))
     .then(console.log('signup successful'))
     .catch(err => console.log(err));
@@ -385,11 +388,14 @@ class App extends Component {
         id: this.state.userID,
       }),
     });
-    this.setState({ loggedIn: false });
+    this.setState({ userID: 0 });
     console.log('logging out');
     window.localStorage.token = null;
+    window.localStorage.id = null;
   }
 
+  // this authenticates the user on each page load
+  // uses a token from local storage to verify access
   authenticateUser() {
     fetch('/auth/verify', {
       headers: {
@@ -397,25 +403,24 @@ class App extends Component {
       },
       method: 'POST',
       body: JSON.stringify({
-        id: this.state.id,
+        id: this.state.id, // do we need to pass this? In localStorage?
         token: window.localStorage.getItem('token'),
       }),
     })
     .then(r => r.json())
-    .then((loginObj) => {
-      if (!(loginObj.error)) {
+    .then((response) => {
+      if (!(response.error)) {
         this.setState({
-          loggedIn: true,
-          userID: loginObj.id,
+          userID: response.user.id,
         });
         // saves a new jwt token
-        window.localStorage.token = loginObj.token;
+        window.localStorage.token = response.token;
       } else {
         this.setState({
-          loggedIn: false,
           userID: 0,
         });
         window.localStorage.token = null;
+        window.localStorage.id = null
       }
     })
     .catch(err => console.log(err));
@@ -463,6 +468,7 @@ class App extends Component {
           updateAuthForms={event => this.updateAuthForms(event)}
           handleSignup={this.handleSignup.bind(this)}
           signupName={this.state.signupName}
+          signupEmail={this.state.signupEmail}
           signupPass={this.state.signupPass}
         />
         <Logout

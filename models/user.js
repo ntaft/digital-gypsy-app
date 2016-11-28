@@ -3,9 +3,6 @@
 const psql = require('../lib/psqlConnect.js');
 const bcrypt = require('bcryptjs');
 
-function newUserToDB(userObject) {
-
-
   // creates a new user object using form input
   function createUser(req, res, next) {
     const SALTROUNDS = 10;
@@ -59,7 +56,7 @@ function getUserByUsername(username) {
 }
 
 module.exports = {
-  newUserToDB,
+  createUser,
   getUserById,
   getUserByUsername
 };

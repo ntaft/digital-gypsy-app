@@ -12,6 +12,13 @@ const SignUp = props => (
         />
         <input
           type="text"
+          value={props.signupEmail}
+          name="signupEmail"
+          placeholder="yourname@email.com"
+          onChange={props.updateAuthForms}
+        />
+        <input
+          type="text"
           value={props.signupPass}
           name="signupPass"
           placeholder="password"

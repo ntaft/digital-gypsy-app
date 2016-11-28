@@ -3,8 +3,8 @@
 // for auth techniques using jwt
 
 const loginRouter = require('express').Router();
-const { logIn } = require('../lib/auth');
-const { createUser, getUserByUsername, getUserById } = require('../models/user');
+const { logIn, verifyUser } = require('../models/auth');
+const { createUser } = require('../models/user');
 const { createToken } = require('../lib/token');
 // const { authenticate } = require('../lib/auth');
 
@@ -26,11 +26,7 @@ loginRouter.post('/login', logIn, (req, res) => {
       id: res.user.id
     }
     const token = createToken(user)
-    res.json({
-      user: user,
-      token: token,
-      error: false
-    })
+    res.json({ user, token, error: false });
   };
 });
 
@@ -46,13 +42,11 @@ loginRouter.delete('/logout', (req, res) => {
 loginRouter.post('/signup', createUser, (req, res) => {
   const user = {
     username: res.user.username,
-    id: res.user.id
-  }
-  const token = createToken(user)
-  res.json({
-    user: user,
-    token: token,
-  })
+    id: res.user.id,
+  };
+  const token = createToken(user);
+  res.json({ user, token });
+});
 
 loginRouter.get('/verify', verifyUser, (req, res) => {
   // if it is not a match, send back an error
@@ -60,7 +54,7 @@ loginRouter.get('/verify', verifyUser, (req, res) => {
    res.status(401)
     .json({
       error: true,
-      message: 'Unauthenticated User'
+      message: 'Unauthenticated User',
     });
   } else {
     const user = {
@@ -68,10 +62,7 @@ loginRouter.get('/verify', verifyUser, (req, res) => {
       id: res.user.id
     };
     const token = createToken(user)
-    res.json({
-      user: user,
-      token: token,
-    });
+    res.json({ user, token });
   };
 });
 
