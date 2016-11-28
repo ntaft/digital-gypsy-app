@@ -3,10 +3,10 @@ import { GoogleMapLoader, GoogleMap, Marker } from 'react-google-maps';
 
 class SavedMap extends Component {
 
-
   render() {
-    const mapContainer = <div style={{height: '100%', width: '100%'}}></div>
+    const mapContainer = <div style={{ height: '100%', width: '100%' }} />;
 
+    const labels = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
     // Iterate through the markers prop and return a marker with the lat and lng
     // of each saved city to render to the world map
     const markers = this.props.markers.map((city, i) => {
@@ -16,6 +16,7 @@ class SavedMap extends Component {
           lat: parseFloat(city.lat),
           lng: parseFloat(city.lng),
         },
+        label: labels[i],
       };
 
       return (

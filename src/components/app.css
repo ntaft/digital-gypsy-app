@@ -14,7 +14,6 @@
 
 .search-form-container {
   height: 95%;
-  overflow: scroll;
   width: 30%;
   padding: 10px;
   background-color: #D4D4D4;
@@ -23,7 +22,6 @@
 
 .saved-cities-container {
   height: 95%;
-  overflow: scroll;
   width: 30%;
   padding: 10px;
   display: flex;
@@ -36,7 +34,6 @@
 
 .workplaces-container {
   height: 95%;
-  overflow: scroll;
   width: 30%;
   padding: 10px;
   display: flex;

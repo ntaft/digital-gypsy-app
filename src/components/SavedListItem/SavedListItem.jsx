@@ -3,7 +3,7 @@ import './SavedListItem.css';
 
 const SavedListItem = props => (
   <div className="saved-list-item">
-    <h4>{props.city}, {props.country}</h4>
+    <h4>{props.label}. {props.city}, {props.country}</h4>
     <div className="image-holder">
       <img className="city-image" src={`https://nomadlist.com${props.img}`} alt=""/>
     </div>
