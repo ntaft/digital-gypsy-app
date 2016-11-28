@@ -38,10 +38,15 @@
 
 .saved-list-item .delete-button {
   background: none;
-  border-bottom: 2px solid black;
+  color: dimgray;
+  border-bottom: 2px solid dimgray;
   cursor: pointer;
   padding: 5px 0;
   border-radius: 0px;
+}
+
+.saved-list-item .delete-button:hover {
+  color: black;
 }
 
 .modify-input {
