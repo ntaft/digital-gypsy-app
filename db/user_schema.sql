@@ -7,4 +7,3 @@ CREATE TABLE users (
   createDate TIMESTAMP,
   accessedDate TIMESTAMP
 );
-

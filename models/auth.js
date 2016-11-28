@@ -13,8 +13,9 @@ function logIn(req, res, next) {
     const matches = bcrypt.compareSync(loginData.password, userDB.password);
   // console.log(loginData.password, matches);
     if (matches) {
-      res.user = userDB
-      res.session.userID = userDB.id;
+      console.log(userDB);
+      res.user = userDB;
+      // req.session.userID = userDB.id;
       next();
     } else {
       res.user = false;
@@ -40,7 +41,7 @@ function verifyUser(req, res, next) {
     });
   } else {
     res.user = false;
-    req.session.userID = null;
+    // req.session.userID = null;
   }
 }
 
