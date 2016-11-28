@@ -58,5 +58,5 @@ function getUserByUsername(username) {
 module.exports = {
   createUser,
   getUserById,
-  getUserByUsername
+  getUserByUsername,
 };
