@@ -1,8 +1,10 @@
-// bcrypt auth code adapted from itunes example from Rafa @ GA. Thanks!
+// bcrypt auth code adapted from example from Rafa @ GA. Thanks!
 const bcrypt = require('bcryptjs');
-const userModel = require('../models/user');
-const passport = require('passport');
+const { getUserByUsername } = require('../models/user');
 const passportLocal = require('passport-local');
+
+
+
 
 
  // logIn - Middleware to compare password from login form with password
@@ -20,24 +22,35 @@ const passportLocal = require('passport-local');
 //   });
 
 function logIn(req, res, next) {
-  const userPayload = req.body.user;
-  // token signed using secret in .env. token expires in 24 hours
-  const token = jwt.sign(req.user, process.env.JWT_SECRET, {
-    expiresIn: '24h'
-  });
-  console.log(userPayload.password);
-  userModel.getUserByUsername(userPayload.username).then((dbUser) => {
-    const matches = bcrypt.compareSync(userPayload.password, dbUser.password);
-
-  console.log(dbUser.password, matches);
+  loginData = {
+    username: req.body.username,
+    password: req.body.password,
+  }
+  console.log(loginData.password);
+  getUserByUsername(loginData.username).then((userDB) => {
+    const matches = bcrypt.compareSync(loginData.password, userDB.password);
+  console.log(loginData.password, matches);
     if (matches) {
-      req.session.userId = dbUser.id;
-      res.user = dbUser;
+      // req.session.userId = dbUser.id;
+      res.user = userDB
+      res.session.userID = userDB.id;
       next();
     } else {
-      res.redirect('/');
+      res.user = false;
     }
   });
+}
+
+function signupUser (req, res, next) {
+var hash = bcrypt.hashSync(body.password.trim(), 10);
+var user = new User({
+ name: body.name.trim(),
+ username: body.username.trim(),
+ email: body.email.trim(),
+ password: hash,
+ admin: false,
+ isEmailVerified: false
+});
 }
 
 //https://github.com/passport/express-4.x-local-example/blob/master/server.js
@@ -59,39 +72,37 @@ function logIn(req, res, next) {
 //     userObj(null, user);
 //   });
 // });
+var token = req.body.token || req.query.token;
+ if (!token) {
+  return res.status(401).json({message: ‘Must pass token’});
+ }
+// Check token that was passed by decoding token using secret
+jwt.verify(token, process.env.JWT_SECRET, function(err, user) {
+   if (err) throw err;
+  //return user using the id from w/in JWTToken
+   User.findById({
+   ‘_id’: user._id
+   }, function(err, user) {
+      if (err) throw err;
+
 
 // authenticate - Middleware to protect routes
-function authenticate(req, res, next) {
-  if (req.session.userId) {
-    userModel.getUserById(req.session.userId).then((dbUser) => {
+function verifyToken(req, res, next) {
+  const token = req.body.token
+  if (token) {
+    jwt.verify(token, process.env.JWT_SECRET, (err, user) => {
+      if err throw err;
+    // returns the user by fetching the id from the database
+    })
+    getUserById(user.id).then((dbUser) => {
       res.user = dbUser;
       next();
     }).catch((err) => {
-      console.log(err);
-      res.redirect('/login');
+      throw (err);
     });
   } else {
-    res.redirect('/login');
-  }
-}
-
-function authToken () {
-  passport.authenticate('local', {
-    session: true, // prob needs to serialize/deserialize?
-    failureRedirect: '/login' // might be optional
- }), (req, res) => {
-  // get private key from .env
-    var cert = process.env.JWT_SECRET;
-    // sign a new encrypted token that expires in 24h
-    var token = jwt.sign(req.user, cert, {
-      algorithm: 'RS256'
-      expiresIn: '24h'
-    }, (err, token) => {
-      // sends a json token
-      if err console.log err;
-      console.log(token)
-      res.json({token});
-    });
+    res.user = false;
+    req.session.userID = null;
   };
 }
 
