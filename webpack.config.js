@@ -25,8 +25,8 @@ module.exports = {
     new HtmlWebpackPlugin({
       title: 'Digital Gypsy',
       xhtml: true,
-      inject: false,
-      scripts: ['https://maps.googleapis.com/maps/api/js?libraries=visualization&key=AIzaSyDLO9BWFDxOz2rzAjvkDwel7aRz025PcgY', 'https://fonts.googleapis.com/css?family=Grand+Hotel|Pacifico'],
+      inject: true,
+      scripts: ['https://maps.googleapis.com/maps/api/js?libraries=visualization&key=AIzaSyDLO9BWFDxOz2rzAjvkDwel7aRz025PcgY'],
       template: require('html-webpack-template'),
       appMountId: 'root-container',
     }),
@@ -36,32 +36,26 @@ module.exports = {
   ],
 
   module: {
-    include: path.join(__dirname, 'src'),
     loaders: [
+      { test: /\.css$/, loader: ExtractTextPlugin.extract('style-loader', 'css-loader') },
+      { test: /\.(png|gif|jpg)$/, loader: 'file-loader?name=/images/[name].[ext]' },
+      { test: /\.ico$/, loader: 'file-loader?name=/[name].[ext]' },
+      { test: /\.jsx?$/, loader: 'babel' },
       {
-        test: /\.css$/, loader: ExtractTextPlugin.extract('style-loader', 'css-loader')
-      },
-      {
-        test: /\.svg$/,
-        loader: 'file-loader?name=/img/[name].[hash:base64:5].[ext]',
-      },
-      {
-        test: /\.gif$/,
-        loader: 'file-loader?name=/img/[name].[hash:base64:5].[ext]',
-      },
-      { test: /\.jpg$/,
-        loader: 'file-loader?name=/img/[name].[hash:base64:5].[ext]',
-      },
-      { test: /\.png$/,
-        loader: 'file-loader?name=/img/[name].[hash:base64:5].[ext]',
+        test:   /\.(woff|woff2)(\?v=\d+\.\d+\.\d+)?$/,
+        loader: 'url-loader?limit=100&mimetype=application/font-woff&name=/fonts/[name].[ext]',
       },
       {
-        test: /\.(js|jsx)$/,
-        loader: 'babel',
+        test:   /\.ttf(\?v=\d+\.\d+\.\d+)?$/,
+        loader: 'url-loader?limit=100&mimetype=application/octet-stream&name=/fonts/[name].[ext]',
       },
       {
-        test: /\.otf(\?v=\d+\.\d+\.\d+)?$/,
+        test:   /\.eot(\?v=\d+\.\d+\.\d+)?$/,
         loader: 'file-loader?name=/fonts/[name].[ext]',
+      },
+      {
+        test:   /\.svg(\?v=\d+\.\d+\.\d+)?$/,
+        loader: 'url-loader?limit=100&mimetype=image/svg+xml&name=/fonts/[name].[ext]',
       },
     ],
   },

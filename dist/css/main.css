@@ -28,6 +28,20 @@
   height: 100%;
 }
 
+/* grand-hotel-regular - latin */
+@font-face {
+  font-family: 'Grand Hotel';
+  font-style: normal;
+  font-weight: 400;
+  src: url(/fonts/grand-hotel-v4-latin-regular.eot);
+  src: local('Grand Hotel'), local('GrandHotel-Regular'),
+       url(/fonts/grand-hotel-v4-latin-regular.eot?#iefix) format('embedded-opentype'),
+       url(/fonts/grand-hotel-v4-latin-regular.woff2) format('woff2'),
+       url(/fonts/grand-hotel-v4-latin-regular.woff) format('woff'),
+       url(/fonts/grand-hotel-v4-latin-regular.ttf) format('truetype'),
+       url(/fonts/grand-hotel-v4-latin-regular.svg#GrandHotel) format('svg'); /* Legacy iOS */
+}
+
 h1 {
   text-align: left;
   margin: 0;
