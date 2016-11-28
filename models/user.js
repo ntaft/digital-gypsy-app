@@ -1,6 +1,6 @@
 // adapted from user management code attributed to Rafa @ GA. Thanks!
 // originally using mongo, modified for psql
-const psql = require('../lib/psqlConnect.js');
+const psql = require('../db/db.js');
 const bcrypt = require('bcryptjs');
 
   // creates a new user object using form input
