@@ -1,6 +1,7 @@
 .saved-list {
   height: 50%;
   overflow: scroll;
+  width: 100%;
 }
 
 .saved-list h2 {

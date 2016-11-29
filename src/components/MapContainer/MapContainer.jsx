@@ -6,6 +6,8 @@ class SavedMap extends Component {
   render() {
     const mapContainer = <div style={{ height: '100%', width: '100%' }} />;
 
+    const center = this.props.center;
+
     const labels = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
     // Iterate through the markers prop and return a marker with the lat and lng
     // of each saved city to render to the world map
@@ -33,7 +35,7 @@ class SavedMap extends Component {
         googleMapElement={
           <GoogleMap
             defaultZoom={1}
-            defaultCenter={this.props.center}
+            defaultCenter={center}
             options={{ streetViewControl: false, mapTypeContro: false }}
           >
             { markers }

@@ -478,37 +478,22 @@ class App extends Component {
       <div className="App">
         <Header
           updateAuthForms={event => this.updateAuthForms(event)}
-          handleLogin={this.handleLogin.bind(this)}
-          loginName={this.state.loginName}
-          loginPass={this.state.loginPass}
-          signupName={this.state.signupName}
-          signupPass={this.state.signupPass}
-          handleLogout={this.handleLogout.bind(this)}
-        />
-        <Login
-          updateAuthForms={event => this.updateAuthForms(event)}
-          handleLogin={this.handleLogin.bind(this)}
-          loginName={this.state.loginName}
-          loginPass={this.state.loginPass}
-        />
-        <SignUp
-          updateAuthForms={event => this.updateAuthForms(event)}
           handleSignup={this.handleSignup.bind(this)}
+          handleLogin={this.handleLogin.bind(this)}
+          loginName={this.state.loginName}
+          loginPass={this.state.loginPass}
           signupName={this.state.signupName}
-          signupEmail={this.state.signupEmail}
           signupPass={this.state.signupPass}
-        />
-        <Logout
           handleLogout={this.handleLogout.bind(this)}
         />
-          <SearchForm
-            month={this.state.month}
-            class={this.state.class}
-            handleUpdateMonth={event => this.handleUpdateMonth(event)}
-            handleUpdateWeather={event => this.handleUpdateWeather(event)}
-            handleUpdateCost={event => this.handleUpdateCost(event)}
-            searchByParams={this.searchByParams.bind(this)}
-          />
+        <SearchForm
+          month={this.state.month}
+          class={this.state.class}
+          handleUpdateMonth={event => this.handleUpdateMonth(event)}
+          handleUpdateWeather={event => this.handleUpdateWeather(event)}
+          handleUpdateCost={event => this.handleUpdateCost(event)}
+          searchByParams={this.searchByParams.bind(this)}
+        />
         <div className="main-container">
           <div className="search-form-container">
             <SearchList

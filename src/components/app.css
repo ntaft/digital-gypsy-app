@@ -4,7 +4,7 @@
 }
 
 .main-container {
-  height: 72vh;
+  height: 63vh;
   display: flex;
   justify-content: space-around;
   text-align: center;
@@ -42,6 +42,7 @@
   justify-content: space-between;
   background-color: #D4D4D4;
   box-shadow: 2px 2px 2px grey;
+
 }
 
 

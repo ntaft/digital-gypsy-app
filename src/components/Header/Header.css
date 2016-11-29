@@ -28,6 +28,20 @@
   height: 100%;
 }
 
+/* grand-hotel-regular - latin */
+@font-face {
+  font-family: 'Grand Hotel';
+  font-style: normal;
+  font-weight: 400;
+  src: url('./fonts/grand-hotel-v4-latin-regular.eot');
+  src: local('Grand Hotel'), local('GrandHotel-Regular'),
+       url('./fonts/grand-hotel-v4-latin-regular.eot?#iefix') format('embedded-opentype'),
+       url('./fonts/grand-hotel-v4-latin-regular.woff2') format('woff2'),
+       url('./fonts/grand-hotel-v4-latin-regular.woff') format('woff'),
+       url('./fonts/grand-hotel-v4-latin-regular.ttf') format('truetype'),
+       url('./fonts/grand-hotel-v4-latin-regular.svg#GrandHotel') format('svg'); /* Legacy iOS */
+}
+
 h1 {
   text-align: left;
   margin: 0;
@@ -77,6 +91,11 @@ h1 {
 
 #dropdown li button {
   width: 100px;
+  box-shadow: 0px 2px 2px grey;
+}
+
+#dropdown li button:hover {
+  background-color: #FF6A81;
 }
 
 
@@ -90,7 +109,7 @@ h1 {
   border: 0px;
   position: absolute;
   right: 0px;
-  top: 52px;
+  top: 60px;
   width: 30%;
 /*  z-index: 200;*/
 }
@@ -135,5 +154,26 @@ input[type=submit] {
 
 #logout-button {
   width: 100px;
+  box-shadow: 0px 2px 2px grey;
 }
 
+.plane-image {
+  -webkit-transition: all 0.5s ease;
+     -moz-transition: all 0.5s ease;
+       -o-transition: all 0.5s ease;
+      -ms-transition: all 0.5s ease;
+          transition: all 0.5s ease;
+}
+
+.plane-image:hover {
+  -webkit-transform: rotate(-10deg);
+     -moz-transform: rotate(-10deg);
+       -o-transform: rotate(-10deg);
+      -ms-transform: rotate(-10deg);
+          transform: rotate(-10deg);
+}
+
+=======
+#logout-button:hover {
+  background-color: #FF6A81;
+}
