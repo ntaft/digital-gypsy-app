@@ -41,12 +41,12 @@ function getUserById(id) {
     .catch((error) => console.log(error));
 }
 
-function getUserByUsername(name){
-  psql.one(`SELECT *
+function getUserByUsername(name) {
+  psql.any(`SELECT *
     FROM users
     WHERE username = '${name}';`)
-  .then(user => user )
-  .catch( error => console.log(error))
+    .then(user => user)
+    .catch((error) => console.log(error));
   }
 
 module.exports = {

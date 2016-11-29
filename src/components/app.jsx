@@ -32,7 +32,7 @@ class App extends Component {
       signupName: '',
       signupPass: '',
       signupEmail: '',
-      userID: 0,
+      userID: null,
       workCenter: '',
       class: '',
     };
@@ -196,7 +196,7 @@ class App extends Component {
   formHandler() {
     console.log('form');
     const formData = {
-      user_id: 1,
+      user_id: this.state.userID,
       city: this.state.selected.info.city.name,
       country: this.state.selected.info.country.name,
       slug: this.state.selected.info.city.slug,
@@ -394,7 +394,7 @@ class App extends Component {
         id: this.state.userID,
       }),
     });
-    this.setState({ userID: 0 });
+    this.setState({ userID: null });
     console.log('logging out');
     window.localStorage.token = null;
     window.localStorage.id = null;

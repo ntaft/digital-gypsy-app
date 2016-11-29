@@ -12,8 +12,12 @@ const { createToken } = require('../lib/token');
 // var decoded = jwt.decode(token, {complete: true})
 
 // authenticates the login, and if true send a json token
-loginRouter.post('/login', (req, res) => res.json({message: 'user logged in!'}));
-
+loginRouter.post('/login', logIn, (req, res) => {
+  res.json({
+    token: res.token,
+    id: res.id || 'invalid'
+  });
+});
 // assigns null to the session cookie userID
 // then redirects to the login page
 loginRouter.delete('/logout', (req, res) => {
@@ -31,7 +35,6 @@ loginRouter.post('/signup', createUser, (req, res) => {
 });
 
 loginRouter.post('/verify', verifyUser, (req, res) => {
-  // if it is not a match, send back an error
   res.json({
     token: res.token,
     id: res.id

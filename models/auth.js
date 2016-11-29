@@ -9,21 +9,30 @@ function logIn(req, res, next) {
   const loginData = {
     username: req.body.username,
     password: req.body.password,
+  };
+  console.log(loginData);
+    psql.any(`SELECT *
+      FROM users
+      WHERE username = '${loginData.username}';`)
+      .then(data => {
+        let dbUsers = data;
+        if (!(Array.isArray(data))) {
+          dbUsers = [data];
+        }
+        dbUsers.forEach((user) => {
+          const matches = bcrypt.compareSync(loginData.password, user.password);
+          if (matches) {
+            console.log(user);
+            res.id = user.id
+            res.token = createToken(user.id)
+            next();
+          }
+        })
+        res.token = 'invalid';
+        next();
+      })
+    .catch((error) => console.log(error));
   }
-  console.log(loginData.username);
-  getUserByUsername(loginData.username).then((userDB) => {
-    const matches = bcrypt.compareSync(loginData.password, userDB.password);
-    if (matches) {
-      console.log(userDB);
-      res.user = userDB;
-      // req.session.userID = userDB.id;
-      next();
-    } else {
-      res.user = false;
-      next();
-    }
-  });
-}
 
 // authenticates the user
 function verifyUser(req, res, next) {
