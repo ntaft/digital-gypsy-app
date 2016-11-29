@@ -2,8 +2,8 @@ const db = require('../db/db.js');
 
 // Go to the database and get all cities the user has saved
 function getSavedCities(req, res, next) {
-  db.any('SELECT * FROM savedcities
-  WHERE user_id = $/user_id/;', req.body)
+  db.any(`SELECT * FROM savedcities
+  WHERE user_id = $/user_id/;`, req.params)
   .then((saved) => {
     res.saved = saved;
     next();

@@ -32,7 +32,7 @@ class App extends Component {
       signupName: '',
       signupPass: '',
       signupEmail: '',
-      userID: null,
+      userID: 0,
       workCenter: '',
       class: '',
     };
@@ -60,6 +60,9 @@ class App extends Component {
       this.filterCities();
     } else if (prevState.selected !== this.state.selected) {
       this.formHandler();
+    }
+    if (prevState.userID !== this.state.userID) {
+      this.fetchSavedCities();
     }
   }
 
@@ -214,7 +217,7 @@ class App extends Component {
 
   // Get all saved cities from database and save then into the saved state.
   fetchSavedCities() {
-    fetch('/gypsy')
+    fetch(`/gypsy/${this.state.userID}`)
     .then(r => r.json())
     .then((saved) => {
       this.setState(
@@ -332,20 +335,23 @@ class App extends Component {
     })
     .then(r => r.json())
     .then((response) => {
-      if (!(response.user.error)) {
+      console.log('the response is:', response)
+      if (response.id !== 'invalid') {
         this.setState({
-          userID: response.user.id,
+          userID: response.id,
         });
         // saves jwt token and ID
-        window.localStorage.token = response.user.token;
-        window.localStorage.id = response.user.id;
+        localStorage.id = response.id;
+        localStorage.token = response.token;
+      } else {
+        alert('invalid login');
       }
     })
     .then(this.setState({
       loginName: '',
       loginPass: ''
     }))
-    .then(console.log('logging in...'))
+    .then(console.log('logging in', localStorage.id))
     .catch(err => console.log(err));
   }
   // sends the signup data to the api server
@@ -366,11 +372,11 @@ class App extends Component {
     .then(r => r.json())
     .then((response) => {
       console.log(response);
-      if (!(response.error)) {
+      if (response.id) {
         this.setState({
-          userID: response.user.id,
+          userID: response.id,
         })
-        window.localStorage.id = response.user.id
+        localStorage.id = response.id;
       } else {
         alert(response.message);
       }
@@ -394,7 +400,7 @@ class App extends Component {
         id: this.state.userID,
       }),
     });
-    this.setState({ userID: null });
+    this.setState({ userID: 0 });
     console.log('logging out');
     window.localStorage.token = null;
     window.localStorage.id = null;
@@ -404,7 +410,7 @@ class App extends Component {
   // uses a token from local storage to verify access
   authenticateUser() {
     let token;
-    if (!(localStorage.getItem('token'))) {
+    if ((localStorage.getItem('token') === null)) {
       token = 'invalid';
     } else {
        token = localStorage.getItem('token')

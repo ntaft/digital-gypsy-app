@@ -25,6 +25,7 @@ const { createToken } = require('../lib/token');
       WHERE username = $/username/
       AND password = $/password/;`, userObject)
       .then((result) => {
+        console.log(result);
         res.token = createToken(result);
         res.id = result.id;
         next();
